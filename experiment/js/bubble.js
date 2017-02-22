@@ -56,13 +56,6 @@ svg.append("text")
     .attr("transform", "rotate(-90)")
     .text("life expectancy (years)");
 
-// Add the year label; the value is set on transition.
-var label = svg.append("text")
-    .attr("class", "year label")
-    .attr("text-anchor", "end")
-    .attr("y", height - 24)
-    .attr("x", width)
-    .text(1800);
 
 // Load the data.
 d3.json("../data/nations.json", function(nations) {
@@ -85,23 +78,6 @@ d3.json("../data/nations.json", function(nations) {
     dot.append("title")
         .text(function(d) { return d.name; });
 
-    // Add an overlay for the year label.
-    var box = label.node().getBBox();
-
-    var overlay = svg.append("rect")
-        .attr("class", "overlay")
-        .attr("x", box.x)
-        .attr("y", box.y)
-        .attr("width", box.width)
-        .attr("height", box.height)
-        .on("mouseover", enableInteraction);
-
-    // Start a transition that interpolates the data based on year.
-    svg.transition()
-        .duration(30000)
-        .ease(d3.easeLinear)
-        .tween("year", tweenYear)
-        //.each("end", enableInteraction);
 
     // Positions the dots based on data.
     function position(dot) {
@@ -113,48 +89,6 @@ d3.json("../data/nations.json", function(nations) {
     // Defines a sort order so that the smallest dots are drawn on top.
     function order(a, b) {
         return radius(b) - radius(a);
-    }
-
-    // After the transition finishes, you can mouseover to change the year.
-    function enableInteraction() {
-        var yearScale = d3.scaleLinear()
-            .domain([1800, 2009])
-            .range([box.x + 10, box.x + box.width - 10])
-            .clamp(true);
-
-        // Cancel the current transition, if any.
-        svg.transition().duration(0);
-
-        overlay
-            .on("mouseover", mouseover)
-            .on("mouseout", mouseout)
-            .on("mousemove", mousemove)
-            .on("touchmove", mousemove);
-
-        function mouseover() {
-            label.classed("active", true);
-        }
-
-        function mouseout() {
-            label.classed("active", false);
-        }
-
-        function mousemove() {
-            displayYear(yearScale.invert(d3.mouse(this)[0]));
-        }
-    }
-
-    // Tweens the entire chart by first tweening the year, and then the data.
-    // For the interpolated data, the dots and label are redrawn.
-    function tweenYear() {
-        var year = d3.interpolateNumber(1800, 2009);
-        return function(t) { displayYear(year(t)); };
-    }
-
-    // Updates the display to show the specified year.
-    function displayYear(year) {
-        dot.data(interpolateData(year), key).call(position).sort(order);
-        label.text(Math.round(year));
     }
 
     // Interpolates the dataset for the given (fractional) year.
