@@ -46,8 +46,8 @@
           <file leaf-file-name="bubble.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/experiment/js/bubble.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.07317073">
-                  <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+                <state vertical-scroll-proportion="0.68292683">
+                  <caret line="157" column="49" selection-start-line="157" selection-start-column="49" selection-end-line="157" selection-end-column="49" />
                   <folding />
                 </state>
               </provider>
@@ -57,11 +57,21 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="food.csv" pinned="false" current-in-tab="true">
+          <file leaf-file-name="food.csv" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/experiment/data/food.csv">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="0" column="79" selection-start-line="0" selection-start-column="79" selection-end-line="0" selection-end-column="79" />
+                  <caret line="12" column="29" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="34" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="bubble.css" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/experiment/css/bubble.css">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.8292683">
+                  <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
                   <folding />
                 </state>
               </provider>
@@ -96,9 +106,9 @@
         <option value="$PROJECT_DIR$/experiment/html/sample/bubble.html" />
         <option value="$PROJECT_DIR$/experiment/html/sample/zoom/zoom.html" />
         <option value="$PROJECT_DIR$/experiment/html/sample/zoom/sp500.csv" />
-        <option value="$PROJECT_DIR$/experiment/css/bubble.css" />
         <option value="$PROJECT_DIR$/experiment/html/bubble.html" />
         <option value="$PROJECT_DIR$/experiment/data/food.csv" />
+        <option value="$PROJECT_DIR$/experiment/css/bubble.css" />
         <option value="$PROJECT_DIR$/experiment/js/bubble.js" />
       </list>
     </option>
@@ -390,14 +400,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiment/css/bubble.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/experiment/js/d3.v4.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3492334">
@@ -425,15 +427,23 @@
     <entry file="file://$PROJECT_DIR$/experiment/data/food.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="79" selection-start-line="0" selection-start-column="79" selection-end-line="0" selection-end-column="79" />
+          <caret line="12" column="29" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiment/css/bubble.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/experiment/js/bubble.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07317073">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.68292683">
+          <caret line="157" column="49" selection-start-line="157" selection-start-column="49" selection-end-line="157" selection-end-column="49" />
           <folding />
         </state>
       </provider>

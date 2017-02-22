@@ -1,10 +1,10 @@
 function createBubble(el) {
     // Axis definition
-    var keyField = 'Food',
-        xField = 'Fat (g)',
-        yField = 'Fat (g)',
-        radiusField = 'CO2 footprint',
-        colorField = 'Category';
+    var keyField = "Food",
+        xField = "Fat (g)",
+        yField = "Fat (g)",
+        radiusField = "CO2 footprint",
+        colorField = "Category";
 
     // Various accessors that specify the four dimensions of data to visualize.
     function x(d) { return +d[xField]; }
@@ -39,6 +39,25 @@ function createBubble(el) {
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+        // Define the div for the tooltip
+        var tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        // Dashed data reading
+        var hLine = svg.append("line")
+                .style("stroke-dasharray", "3, 3")
+                .attr("class", "h-line")
+                .style("stroke", "gray"),
+            vLine = svg.append("line")
+                .style("stroke-dasharray", "3, 3")
+                .attr("class", "v-line")
+                .style("stroke", "gray"),
+            xText = svg.append('text')
+                .style('font-weight', 'bold'),
+            yText = svg.append('text')
+                .style('font-weight', 'bold');
+
         // Add the x-axis.
         svg.append("g")
             .attr("class", "x axis")
@@ -67,9 +86,6 @@ function createBubble(el) {
             .attr("transform", "rotate(-90)")
             .text(yField);
 
-        // A bisector since many nation's data is sparsely-defined.
-        var bisect = d3.bisector(function(d) { return d[0]; });
-
         // Add a dot per nation. Initialize the data at 1800, and set the colors.
         var dot = svg.append("g")
             .attr("class", "dots")
@@ -78,13 +94,78 @@ function createBubble(el) {
             .enter().append("circle")
             .attr("class", "dot")
             .style("fill", function(d) { return colorScale(color(d)); })
+            .on("mouseenter", highlightDot)
+            .on("mousemove", moveTooltip)
+            .on("mouseleave", unhighlightDot)
             .call(position)
             .sort(order);
 
-        // Add a title.
-        dot.append("title")
-            .text(function(d) { return d.name; });
+        function highlightDot(d) {
+            dot
+                .attr("opacity", 0.3);
+            d3.select(this)
+                .attr("opacity", 1);
 
+            showDash(d);
+
+            tooltip.transition()
+                .duration(200)
+                .style("opacity", 0.9);
+            tooltip
+                .html(key(d));
+            moveTooltip(d);
+        }
+
+
+        function unhighlightDot(d) {
+            dot
+                .attr("opacity", 1);
+
+            hideDash(d);
+
+            tooltip.transition()
+                .duration(50)
+                .style("opacity", 0);
+        }
+
+
+        function moveTooltip(d) {
+            tooltip
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px")
+        }
+
+        function showDash(d) {
+            vLine.attr("visibility", "visible")
+                .attr("x1", xScale(x(d)))
+                .attr("y1", yScale.range()[0])
+                .attr("x2", xScale(x(d)))
+                .attr("y2", yScale(y(d)));
+
+            hLine.attr("visibility", "visible")
+                .attr("x1", xScale.range()[0])
+                .attr("y1", yScale(y(d)))
+                .attr("x2", xScale(x(d)))
+                .attr("y2", yScale(y(d)));
+
+            xText.attr('visibility', 'visible')
+                .attr('x', xScale.range()[0] - 20)
+                .attr('y', yScale(y(d)))
+                .text(y(d));
+
+            yText.attr('visibility', 'visible')
+                .attr('x', xScale(x(d)))
+                .attr('y', yScale.range()[0] + 16)
+                .text(x(d));
+        }
+
+        function hideDash(d) {
+            vLine.attr("visibility", "hidden");
+            hLine.attr("visibility", "hidden");
+
+            xText.attr("visibility", "hidden");
+            yText.attr("visibility", "hidden");
+        }
 
         // Positions the dots based on data.
         function position(dot) {
@@ -99,4 +180,4 @@ function createBubble(el) {
         }
     });
 }
-createBubble(d3.select("#chart"))
+createBubble(d3.select("#chart"));
