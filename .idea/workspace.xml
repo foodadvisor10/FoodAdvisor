@@ -47,7 +47,7 @@
             <entry file="file://$PROJECT_DIR$/experiment/js/bubble.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.07317073">
-                  <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="34" />
+                  <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
                   <folding />
                 </state>
               </provider>
@@ -61,7 +61,7 @@
             <entry file="file://$PROJECT_DIR$/experiment/data/food.csv">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="0" column="53" selection-start-line="0" selection-start-column="42" selection-end-line="0" selection-end-column="53" />
+                  <caret line="0" column="79" selection-start-line="0" selection-start-column="79" selection-end-line="0" selection-end-column="79" />
                   <folding />
                 </state>
               </provider>
@@ -425,7 +425,7 @@
     <entry file="file://$PROJECT_DIR$/experiment/data/food.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="53" selection-start-line="0" selection-start-column="42" selection-end-line="0" selection-end-column="53" />
+          <caret line="0" column="79" selection-start-line="0" selection-start-column="79" selection-end-line="0" selection-end-column="79" />
           <folding />
         </state>
       </provider>
@@ -433,7 +433,7 @@
     <entry file="file://$PROJECT_DIR$/experiment/js/bubble.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.07317073">
-          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="34" />
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
           <folding />
         </state>
       </provider>
