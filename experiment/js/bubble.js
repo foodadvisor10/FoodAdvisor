@@ -99,9 +99,9 @@ d3.json("../data/nations.json", function(nations) {
     // Start a transition that interpolates the data based on year.
     svg.transition()
         .duration(30000)
-        .ease("linear")
+        .ease(d3.easeLinear)
         .tween("year", tweenYear)
-        .each("end", enableInteraction);
+        //.each("end", enableInteraction);
 
     // Positions the dots based on data.
     function position(dot) {
@@ -117,7 +117,7 @@ d3.json("../data/nations.json", function(nations) {
 
     // After the transition finishes, you can mouseover to change the year.
     function enableInteraction() {
-        var yearScale = d3.scale.linear()
+        var yearScale = d3.scaleLinear()
             .domain([1800, 2009])
             .range([box.x + 10, box.x + box.width - 10])
             .clamp(true);
