@@ -1,10 +1,19 @@
 function createBubble(el) {
+    // axis definition
+    var keyField = 'Food',
+        xField = 'Carbohydrate (g)',
+        yField = 'Fat (g)',
+        radiusField = 'CO2 footprint',
+        colorField = 'Category';
+
     // Various accessors that specify the four dimensions of data to visualize.
-    function x(d) { return d.income; }
-    function y(d) { return d.lifeExpectancy; }
-    function radius(d) { return d.population; }
-    function color(d) { return d.region; }
-    function key(d) { return d.name; }
+    function x(d) { return +d[xField]; }
+    function y(d) { return +d[yField]; }
+    function radius(d) { return +d[radiusField]; }
+    function color(d) { return d[colorField]; }
+    function key(d) { return d[keyField]; }
+
+
 
     // Chart dimensions.
     var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
@@ -12,9 +21,9 @@ function createBubble(el) {
         height = 500 - margin.top - margin.bottom;
 
     // Various scales. These domains make assumptions of data, naturally.
-    var xScale = d3.scaleLog().domain([300, 1e5]).range([0, width]),
-        yScale = d3.scaleLinear().domain([10, 85]).range([height, 0]),
-        radiusScale = d3.scaleSqrt().domain([0, 5e8]).range([0, 40]),
+    var xScale = d3.scaleLinear().domain([0, 100]).range([0, width]),
+        yScale = d3.scaleLinear().domain([0, 100]).range([height, 0]),
+        radiusScale = d3.scaleSqrt().domain([0, 20]).range([0, 40]),
         colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
     // The x & y axes.
@@ -58,7 +67,8 @@ function createBubble(el) {
 
 
     // Load the data.
-    d3.json("../data/nations.json", function(nations) {
+    d3.csv("../data/food.csv", function(data) {
+        console.log(data);
 
         // A bisector since many nation's data is sparsely-defined.
         var bisect = d3.bisector(function(d) { return d[0]; });
@@ -67,7 +77,7 @@ function createBubble(el) {
         var dot = svg.append("g")
             .attr("class", "dots")
             .selectAll(".dot")
-            .data(interpolateData(1800))
+            .data(data)
             .enter().append("circle")
             .attr("class", "dot")
             .style("fill", function(d) { return colorScale(color(d)); })
@@ -89,31 +99,6 @@ function createBubble(el) {
         // Defines a sort order so that the smallest dots are drawn on top.
         function order(a, b) {
             return radius(b) - radius(a);
-        }
-
-        // Interpolates the dataset for the given (fractional) year.
-        function interpolateData(year) {
-            return nations.map(function(d) {
-                return {
-                    name: d.name,
-                    region: d.region,
-                    income: interpolateValues(d.income, year),
-                    population: interpolateValues(d.population, year),
-                    lifeExpectancy: interpolateValues(d.lifeExpectancy, year)
-                };
-            });
-        }
-
-        // Finds (and possibly interpolates) the value for the specified year.
-        function interpolateValues(values, year) {
-            var i = bisect.left(values, year, 0, values.length - 1),
-                a = values[i];
-            if (i > 0) {
-                var b = values[i - 1],
-                    t = (year - a[0]) / (b[0] - a[0]);
-                return a[1] * (1 - t) + b[1] * t;
-            }
-            return a[1];
         }
     });
 }
