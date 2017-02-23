@@ -175,7 +175,7 @@ function createBubble(data, el, options, filter, groups) {
 
     function onZoom() {
         //if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return; // ignore zoom-by-brush
-        console.log("zooming");
+        //console.log("zooming");
         var t = d3.event.transform;
         xScale.domain(t.rescaleX(xScaleB).domain());
         yScale.domain(t.rescaleY(yScaleL).domain());
