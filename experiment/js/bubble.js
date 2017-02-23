@@ -147,6 +147,10 @@ function createBubble(data, el, options) {
         .on("mouseenter", highlightDot)
         .on("mousemove", moveTooltip)
         .on("mouseleave", unhighlightDot)
+        .on("click", function(d){
+            //Todo add donut
+            loadDonut(d.Food);
+        })
         .call(position)
         .sort(order);
 
@@ -188,6 +192,7 @@ function createBubble(data, el, options) {
             .duration(50)
             .style("opacity", 0);
     }
+
 
 
     function moveTooltip(d) {
@@ -279,3 +284,8 @@ d3.csv("../data/food.csv", function(data) {
 
     createBubble(data, d3.select("#chart"), options);
 });
+
+
+function loadDonut(){
+    
+}
