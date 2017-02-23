@@ -10,7 +10,7 @@ function createBubble(data, el, options, filter, groups) {
     var filterField = filter.field,
         filterValue = filter.value;
 
-    // Various accessors that specify the four dimensions of data to visualize.
+    // Various accessors that specify the dimensions of data to visualize.
     function x(d) {
         return +d[xField];
     }
@@ -74,35 +74,42 @@ function createBubble(data, el, options, filter, groups) {
     var svg = el.append("svg")
         .attr('class', 'container')
         .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
+        .attr("height", height + margin.top + margin.bottom);
+
+    var focus = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
     // Create z-brush
-    svg.append("g")
-        .attr("transform", "translate(" + zBrushX + ",0)")
+
+    var rightPanel =  svg.append("g")
+        .attr("transform", "translate(" + zBrushX + ",0)");
+
+    rightPanel.append("g")
         .call(zAxis);
 
 
-    var zBrush = d3.brushY()
-        .extent([[zBrushX - zBrushWidth / 2, 0], [zBrushX + zBrushWidth / 2, zBrushHeight]])
+    var zBrushOption = d3.brushY()
+        .extent([[-zBrushWidth / 2, 0], [zBrushWidth / 2, zBrushHeight]])
         .on("start brush end", zBrushMove);
 
 
     // Add an z-axis label.
-    svg.append("text")
+
+
+    rightPanel.append("text")
         .attr("class", "z label")
         .attr("text-anchor", "end")
         .attr("y", 20)
         .attr("dy", ".75em")
-        .attr("transform", "translate(" + (zBrushX - zBrushWidth - 5) + ", 0) rotate(-90)")
+        .attr("transform", "translate(" + (-zBrushWidth - 5) + ", 0) rotate(-90)")
         .text(zField);
 
 
-    var gBrush = svg.append("g")
+
+    var zBrush = rightPanel.append("g")
         .attr("class", "brush")
-        .call(zBrush);
+        .call(zBrushOption);
 
     // Define the div for the tooltip
     var tooltip = d3.select("body").append("div")
@@ -110,32 +117,32 @@ function createBubble(data, el, options, filter, groups) {
         .style("opacity", 0);
 
     // Dashed data reading
-    var hLine = svg.append("line")
+    var hLine = focus.append("line")
             .style("stroke-dasharray", "3, 3")
             .attr("class", "h-line")
             .style("stroke", "gray"),
-        vLine = svg.append("line")
+        vLine = focus.append("line")
             .style("stroke-dasharray", "3, 3")
             .attr("class", "v-line")
             .style("stroke", "gray"),
-        xText = svg.append('text')
+        xText = focus.append('text')
             .style('font-weight', 'bold'),
-        yText = svg.append('text')
+        yText = focus.append('text')
             .style('font-weight', 'bold');
 
     // Add the x-axis.
-    svg.append("g")
+    focus.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
 
     // Add the y-axis.
-    svg.append("g")
+    focus.append("g")
         .attr("class", "y axis")
         .call(yAxis);
 
     // Add an x-axis label.
-    svg.append("text")
+    focus.append("text")
         .attr("class", "x label")
         .attr("text-anchor", "end")
         .attr("x", width)
@@ -143,7 +150,7 @@ function createBubble(data, el, options, filter, groups) {
         .text(xField);
 
     // Add a y-axis label.
-    svg.append("text")
+    focus.append("text")
         .attr("class", "y label")
         .attr("text-anchor", "end")
         .attr("y", 6)
@@ -152,7 +159,7 @@ function createBubble(data, el, options, filter, groups) {
         .text(yField);
 
     // Add a dot per nation. Initialize the data at 1800, and set the colors.
-    var dot = svg.append("g")
+    var dot = focus.append("g")
         .attr("class", "dots")
         .selectAll(".dot")
         .data(data)
