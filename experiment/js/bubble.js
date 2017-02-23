@@ -283,11 +283,11 @@ function createBubble(data, el, options, filter, groups) {
 
 
     function zBrushMove() {
-        var s = d3.event.selection;
+        var s = d3.event.selection || zScale.range();
         if (s) {
             var sz = s.map(zScale.invert);
             dot.attr('visibility', function (d) {
-                return sz[1] <= z(d) && z(d) <= sz[0] ? 'visible' : 'hidden';
+                return d3.min(sz) <= z(d) && z(d) <= d3.max(sz) ? 'visible' : 'hidden';
             })
         }
     }
