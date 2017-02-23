@@ -60,7 +60,7 @@ function createBubble(data, el, options, filter, groups) {
         yScale = d3.scaleLinear().domain(scaler(data, y)).range([height, 0]),
         zScale = d3.scaleLinear().domain(scaler(data, z)).range([zBrushHeight, 0]),
         radiusScale = d3.scaleSqrt().domain(scaler(data, radius)).range([0, 40]);
-        colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(groups);
+        colorScale = d3.scaleOrdinal(d3.schemeCategory20).domain(groups);
 
 
 
