@@ -1,85 +1,115 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../css/normalize.css">
-<link rel="stylesheet" href="../css/stylesheet.css">
-<link rel="stylesheet" type="text/css" href="../css/bubble.css"/>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="../css/bubble.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
 
 <style>
-  #chart {
-    height: 420px;
-/*    margin-left: 150px;
-    margin-top: 0px;*/
-    position: absolute;
-    text-align:center;
-    width: 420px;
-  }
-  .tooltip {
-    background: #eee;
-    box-shadow: 0 0 5px #999999;
-    color: #333;
-    display: none;
-    font-size: 12px;
-    left: 130px;
-    padding: 10px;
-    position: absolute;
-    text-align: center;
-    top: 95px;
-    width: 80px;
-    z-index: 10;
-  }
-  .legend {
-    font-size: 13px;
-    /*margin-left: 100px */
-  }
-  .legend rect {
-    cursor: pointer;
-    stroke-width: 2;
-  }
-  rect.disabled {
-    fill: transparent !important;
-  }
-  .chart {
-    font-size: 14px;
-    text-align: center;
-  }
+    * {
+        font-family: Roboto, sans-serif;
+    }
 
-  #headerimg img {
-      padding-top: 80px;
-      display: block;
-      margin: auto;
-      max-width:50%;
-      max-height:50%;
-      text-align: center;
+    #chart {
+        height: 420px;
+        /*    margin-left: 150px;
+            margin-top: 0px;*/
+        position: absolute;
+        text-align: center;
+        width: 420px;
+    }
 
-  }
+    .tooltip {
+        background: #eee;
+        box-shadow: 0 0 5px #999999;
+        color: #333;
+        display: none;
+        font-size: 12px;
+        left: 130px;
+        padding: 10px;
+        position: absolute;
+        text-align: center;
+        top: 95px;
+        width: 80px;
+        z-index: 10;
+    }
+
+    .legend {
+        font-size: 13px;
+        /*margin-left: 100px */
+    }
+
+    .legend rect {
+        cursor: pointer;
+        stroke-width: 2;
+    }
+
+    rect.disabled {
+        fill: transparent !important;
+    }
+
+    .chart {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    #headerimg img {
+        padding-top: 80px;
+        display: block;
+        margin: auto;
+        max-width: 50%;
+        max-height: 50%;
+        text-align: center;
+
+    }
+
     #control {
-        width:50%;
-        float: right;
+        position: absolute;
+        padding: 20px;
+        width: 400px;
+        left: 700px;
+    }
+
+    #control-table {
+        width:400px;
+    }
+
+    #control-table tr {
+        height: 40px;
+    }
+
+    #control-table select{
+        width:300px;
     }
 
 </style>
 <body onload="pieChart()">
-  <div id='headerimg'>
-    <img src="../img/headerimg.png" alt="Food Advisor - for a healthier life &amp; a healthier planet" class="floatRight">
-  </div>
+<div id='headerimg'>
+    <img src="../img/headerimg.png" alt="Food Advisor - for a healthier life &amp; a healthier planet"
+         class="floatRight">
+</div>
 <!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
 
 <div id="bubble">
 
 </div>
-<div id="control">
-  <div>
-      <label>Filter</label>
-      <select id="select-filter">
-          <option value="ALL">All</option>
-      </select>
-  </div>
-</div>
 <div id="chart"><b id="titlehead"></b></div>
+<div id="control">
+    <table id="control-table">
+        <tr>
+            <td>Filter</td>
+            <td>
+                <select id="select-filter">
+                    <option value="ALL">All</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>
 
 </body>
 <script src="../js/d3.v4.min.js" charset="utf-8"></script>

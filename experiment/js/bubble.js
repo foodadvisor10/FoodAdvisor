@@ -49,10 +49,10 @@ function createBubble(data, el, options, filter, groups) {
     });
 
     // Chart dimensions.
-    var margin = {top: 19.5, right: 19.5, bottom: 30, left: 29.5},
+    var margin = {top: 19.5, right: 19.5, bottom: 30, left: 39.5},
         marginL = {top: 19.5, right: 19.5, bottom: 120, left: 29.5},
         marginB = {top: 430, right: 19.5, bottom: 30, left: 79.5},
-        width = 960 - margin.right,
+        width = 1100 - margin.right,
         height = 500 - margin.top - margin.bottom,
         heightB = 500 - marginB.top - marginB.bottom,
         heightL = 500 - marginL.top - marginL.bottom;
@@ -420,7 +420,7 @@ d3.csv("../data/food.csv", function(data) {
     });
 
     customAxis.forEach(function(axis) {
-        $("#control").append("<div><label>" + axis + " axis</label> <select class='select-field' id='" + axis + "'></select></div>");
+        $("#control-table").append("<tr><td>" + axis + " axis</td> <td><select class='select-field' id='" + axis + "'></select></td></tr>");
         cols.forEach(function(col) {
             $("#" + axis).append("<option " + (options[axis] === col ? "selected" : "") + " value='" + col + "'>" + col + "</option");
         })
