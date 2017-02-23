@@ -1,4 +1,4 @@
-function createBubble(data, el, options, filter) {
+function createBubble(data, el, options, filter, groups) {
     // Axis definition
     var keyField = options.key,
         xField = options.x,
@@ -39,10 +39,14 @@ function createBubble(data, el, options, filter) {
         return d[filterField];
     }
 
+    function scaler(data, accessor) {
+        return data.length === 1 ? [0, 2 * d3.max(data, accessor)] : [0, 1.1 * d3.max(data, accessor)];
+    }
+
+
     data = data.filter(function(d) {
         return filterValue === 'ALL' || f(d) === filterValue;
     });
-
 
     // Chart dimensions.
     var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
@@ -52,11 +56,13 @@ function createBubble(data, el, options, filter) {
         zBrushWidth = 30,
         zBrushX = 30 + width;
     // Various scales. These domains make assumptions of data, naturally.
-    var xScale = d3.scaleLinear().domain(d3.extent(data, x)).range([0, width]),
-        yScale = d3.scaleLinear().domain(d3.extent(data, y)).range([height, 0]),
-        zScale = d3.scaleLinear().domain(d3.extent(data, z)).range([zBrushHeight, 0]),
-        radiusScale = d3.scaleSqrt().domain(d3.extent(data, radius)).range([0, 40]),
-        colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+    var xScale = d3.scaleLinear().domain(scaler(data, x)).range([0, width]),
+        yScale = d3.scaleLinear().domain(scaler(data, y)).range([height, 0]),
+        zScale = d3.scaleLinear().domain(scaler(data, z)).range([zBrushHeight, 0]),
+        radiusScale = d3.scaleSqrt().domain(scaler(data, radius)).range([0, 40]);
+        colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(groups);
+
+
 
     // The x & y axes.
     var xAxis = d3.axisBottom(xScale),//.scale(xScale).ticks(12, d3.format(",d")),
@@ -276,19 +282,17 @@ var options = {
 d3.csv("../data/food.csv", function(data) {
 
     // Create filter selection
-    var filters = _.uniqBy(data.map(function(datum) { return datum[filter.field]}));
+    var groups = _.uniqBy(data.map(function(datum) { return datum[filter.field]}));
 
-    console.log(filters);
-    filters.forEach(function(filter) {
+    groups.forEach(function(filter) {
         $("#select-filter").append("<option value='" + filter + "'>" + filter + "</option>");
     });
-    $("#select-filter").val(filter.value);
-    $("#select-filter").on("change", function() {
-        filter.value = $(this).val();
-        $("#chart").empty();
-
-        createBubble(data, d3.select("#chart"), options, filter);
-    });
+    $("#select-filter")
+        .val(filter.value)
+        .on("change", function() {
+            filter.value = $(this).val();
+            render();
+        });
 
     // Create axis definition
 
@@ -307,10 +311,13 @@ d3.csv("../data/food.csv", function(data) {
 
     $("select.select-field").on('change', function() {
         options[$(this).attr('id')] = $(this).val();
+        render();
+    });
+    render();
+
+    function render() {
         $("#chart").empty();
 
-        createBubble(data, d3.select("#chart"), options, filter);
-    });
-
-    createBubble(data, d3.select("#chart"), options, filter);
+        createBubble(data, d3.select("#chart"), options, filter, groups);
+    }
 });
