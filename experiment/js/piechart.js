@@ -11,7 +11,7 @@ function pieChart(){
         var legendSpacing = 3;
 
 
-        var color = d3.scale.category20();
+        var color = d3.scaleOrdinal(d3.schemeCategory20);
         var svg = d3.select('#chart')
           .append('svg')
           .attr('width', width)
@@ -21,11 +21,11 @@ function pieChart(){
           .attr('transform', 'translate(' + (width / 4) + 
             ',' + (height / 4) + ')');
 
-        var arc = d3.svg.arc()
+        var arc = d3.arc()
           .innerRadius(radius - donutWidth)
           .outerRadius(radius);
 
-        var pie = d3.layout.pie()
+        var pie = d3.pie()
           .value(function(d) { return d.count; })
           .sort(null);
 

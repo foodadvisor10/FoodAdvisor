@@ -435,9 +435,9 @@ d3.csv("../data/food.csv", function(data) {
     render();
 
     function render() {
-        $("#chart").empty();
+        $("#bubble").empty();
 
-        createBubble(data, d3.select("#chart"), options, filter, groups);
+        createBubble(data, d3.select("#bubble"), options, filter, groups);
     }
 });
 
