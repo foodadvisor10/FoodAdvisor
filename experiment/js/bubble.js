@@ -3,12 +3,14 @@ function createBubble(el) {
     var keyField = "Food",
         xField = "Fat (g)",
         yField = "Fat (g)",
+        zField = "Fat (g)",
         radiusField = "CO2 footprint",
         colorField = "Category";
 
     // Various accessors that specify the four dimensions of data to visualize.
     function x(d) { return +d[xField]; }
     function y(d) { return +d[yField]; }
+    function z(d) { return +d[zField]; }
     function radius(d) { return +d[radiusField]; }
     function color(d) { return d[colorField]; }
     function key(d) { return d[keyField]; }
@@ -18,26 +20,59 @@ function createBubble(el) {
     // Chart dimensions.
     var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
         width = 960 - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        height = 500 - margin.top - margin.bottom,
+        zBrushHeight = height / 2,
+        zBrushWidth = 30,
+        zBrushX = 30 + width;
 
     // Load the data.
     d3.csv("../data/food.csv", function(data) {
         // Various scales. These domains make assumptions of data, naturally.
         var xScale = d3.scaleLinear().domain(d3.extent(data, x)).range([0, width]),
             yScale = d3.scaleLinear().domain(d3.extent(data, y)).range([height, 0]),
+            zScale = d3.scaleLinear().domain(d3.extent(data, z)).range([zBrushHeight, 0]),
             radiusScale = d3.scaleSqrt().domain(d3.extent(data, radius)).range([0, 40]),
             colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
         // The x & y axes.
         var xAxis = d3.axisBottom(xScale),//.scale(xScale).ticks(12, d3.format(",d")),
-            yAxis = d3.axisLeft(yScale)//.orient("left");
+            yAxis = d3.axisLeft(yScale),//.orient("left");
+            zAxis = d3.axisRight(zScale);
+
 
         // Create the SVG container and set the origin.
         var svg = el.append("svg")
+            .attr('class', 'container')
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+        // Create z-brush
+        svg.append("g")
+            .attr("transform", "translate(" + zBrushX + ",0)")
+            .call(zAxis);
+
+
+        var zBrush = d3.brushY()
+            .extent([[zBrushX - zBrushWidth / 2, 0], [zBrushX + zBrushWidth / 2, zBrushHeight]])
+            .on("start brush end", zBrushMove);
+
+
+        // Add an z-axis label.
+        svg.append("text")
+            .attr("class", "z label")
+            .attr("text-anchor", "end")
+            .attr("y", 20)
+            .attr("dy", ".75em")
+            .attr("transform", "translate(" + (zBrushX - zBrushWidth - 5) + ", 0) rotate(-90)")
+            .text(zField);
+
+
+        var gBrush = svg.append("g")
+            .attr("class", "brush")
+            .call(zBrush);
 
         // Define the div for the tooltip
         var tooltip = d3.select("body").append("div")
@@ -100,6 +135,18 @@ function createBubble(el) {
             .call(position)
             .sort(order);
 
+
+
+        function zBrushMove() {
+            var s = d3.event.selection;
+            if (s) {
+                var sz = s.map(zScale.invert);
+                dot.attr('visibility', function(d) {
+                    return sz[1] <= z(d) && z(d) <= sz[0] ? 'visible' : 'hidden';
+                })
+            }
+        }
+
         function highlightDot(d) {
             dot
                 .attr("opacity", 0.3);
@@ -131,7 +178,7 @@ function createBubble(el) {
 
         function moveTooltip(d) {
             tooltip
-                .style("left", (d3.event.pageX) + "px")
+                .style("left", (d3.event.pageX - 110) + "px")
                 .style("top", (d3.event.pageY - 28) + "px")
         }
 

@@ -4,6 +4,11 @@
     height: 506px;
 }
 
+.container {
+
+    overflow: visible;
+}
+
 text {
     font: 10px sans-serif;
 }
@@ -31,21 +36,16 @@ text {
     fill: #aaa;
 }
 
-.overlay {
-    fill: none;
-    pointer-events: all;
-    cursor: ew-resize;
-}
-
 div.tooltip {
     position: absolute;
     text-align: center;
     width: 100px;
-    height: 24px;
+    height: 20px;
     padding: 2px;
     font: 14px sans-serif;
-    background: lightsteelblue;
+    background: #d8d5e4;
     border: 0px;
     border-radius: 8px;
+    box-shadow: 0 1px 2px 0 #656565;
     pointer-events: none;
 }
