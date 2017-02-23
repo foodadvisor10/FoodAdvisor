@@ -99,7 +99,7 @@ function pieChart(){
               var height = legendRectSize + legendSpacing;
               var offset =  height * color.domain().length / 2;
               var horz = -2 * legendRectSize + 300;
-              var vert = i * height - offset;
+              var vert = i * height - offset + 100; 
               return 'translate(' + horz + ',' + vert + ')';
             });
 
