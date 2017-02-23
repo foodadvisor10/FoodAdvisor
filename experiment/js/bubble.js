@@ -1,11 +1,11 @@
-function createBubble(data, el) {
+function createBubble(data, el, options) {
     // Axis definition
-    var keyField = "Food",
-        xField = "Fat (g)",
-        yField = "Fat (g)",
-        zField = "Fat (g)",
-        radiusField = "CO2 footprint",
-        colorField = "Category";
+    var keyField = options.key,
+        xField = options.x,
+        yField = options.y,
+        zField = options.z,
+        radiusField = options.r,
+        colorField = options.color;
 
     // Various accessors that specify the four dimensions of data to visualize.
     function x(d) {
@@ -247,10 +247,35 @@ function createBubble(data, el) {
     }
 }
 
-
+var customAxis = ["x", "y", "z", "r"];
+var options = {
+    key: "Food",
+    x: "Fat (g)",
+    y: "Fat (g)",
+    z: "Fat (g)",
+    r: "CO2 footprint",
+    color: "Category"
+};
 
 // Load the data.
 d3.csv("../data/food.csv", function(data) {
+    var cols = data.columns.filter(function(col) {
+        return !isNaN(data[0][col]);
+    });
 
-    createBubble(data, d3.select("#chart"));
+    customAxis.forEach(function(axis) {
+        $("#control").append("<div><label>" + axis + " axis</label> <select class='select-field' id='" + axis + "'></select></div>");
+        cols.forEach(function(col) {
+            $("#" + axis).append("<option " + (options[axis] === col ? "selected" : "") + " value='" + col + "'>" + col + "</option");
+        })
+    });
+
+    $("select.select-field").on('change', function() {
+        options[$(this).attr('id')] = $(this).val();
+        $("#chart").empty();
+
+        createBubble(data, d3.select("#chart"), options);
+    });
+
+    createBubble(data, d3.select("#chart"), options);
 });
