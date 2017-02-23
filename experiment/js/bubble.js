@@ -49,7 +49,7 @@ function createBubble(data, el, options, filter, groups) {
     });
 
     // Chart dimensions.
-    var margin = {top: 19.5, right: 19.5, bottom: 30, left: 2git 9.5},
+    var margin = {top: 19.5, right: 19.5, bottom: 30, left: 19.5},
         marginL = {top: 19.5, right: 19.5, bottom: 120, left: 29.5},
         marginB = {top: 430, right: 19.5, bottom: 30, left: 79.5},
         width = 960 - margin.right,
@@ -60,7 +60,7 @@ function createBubble(data, el, options, filter, groups) {
     // Brush dimensions
     var zBrushHeight = height / 2,
         zBrushWidth = 30,
-        zBrushX = 1000,
+        zBrushX = width + 10,
         zBrushY = 30,
         xBrushWidth = 30,
         yBrushWidth = 30;
