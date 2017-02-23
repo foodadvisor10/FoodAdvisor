@@ -49,25 +49,32 @@ function createBubble(data, el, options, filter, groups) {
     });
 
     // Chart dimensions.
-    var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
+    var margin = {top: 19.5, right: 19.5, bottom: 120, left: 39.5},
+        margin2 = {top: 450, right: 19.5, bottom: 30, left: 39.5},
         width = 960 - margin.right,
         height = 500 - margin.top - margin.bottom,
-        zBrushHeight = height / 2,
+        height2 = 500 - margin2.top - margin2.bottom;
+
+    // Brush dimensions
+    var zBrushHeight = height / 2,
         zBrushWidth = 30,
-        zBrushX = 30 + width;
+        zBrushX = 30 + width,
+        xBrushWidth = 30;
+
     // Various scales. These domains make assumptions of data, naturally.
     var xScale = d3.scaleLinear().domain(scaler(data, x)).range([0, width]),
+        xScale2 = d3.scaleLinear().domain(scaler(data, x)).range([0, width]),
         yScale = d3.scaleLinear().domain(scaler(data, y)).range([height, 0]),
+        yScale2 = d3.scaleLinear().domain(scaler(data, y)).range([height2, 0]),
         zScale = d3.scaleLinear().domain(scaler(data, z)).range([zBrushHeight, 0]),
         radiusScale = d3.scaleSqrt().domain(scaler(data, radius)).range([0, 40]);
         colorScale = d3.scaleOrdinal(d3.schemeCategory20).domain(groups);
 
-
-
     // The x & y axes.
     var xAxis = d3.axisBottom(xScale),//.scale(xScale).ticks(12, d3.format(",d")),
         yAxis = d3.axisLeft(yScale),//.orient("left");
-        zAxis = d3.axisRight(zScale);
+        zAxis = d3.axisRight(zScale),
+        xAxis2 = d3.axisBottom(xScale2);
 
 
     // Create the SVG container and set the origin.
@@ -76,15 +83,74 @@ function createBubble(data, el, options, filter, groups) {
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom);
 
+    // Create zoom
+
+    var xZoomOption = d3.zoom()
+        .scaleExtent([1, Infinity])
+        .translateExtent([[0, 0], [width, height]])
+        .extent([[0, 0], [width, height]])
+        .on("zoom", onXZoom);
+
+
+    svg.append("rect")
+        .attr("class", "zoom")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .call(xZoomOption);
+
     var focus = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-    // Create z-brush
-
     var rightPanel =  svg.append("g")
         .attr("transform", "translate(" + zBrushX + ",0)");
 
+    var bottomPanel = svg.append("g")
+        .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+
+
+
+    // Create x-brush
+    bottomPanel.append("g")
+        .call(xAxis2);
+
+    var xBrushOption = d3.brushX()
+        .extent([[0, -xBrushWidth / 2], [width, xBrushWidth / 2]])
+        .on("start brush end", xBrushMove);
+
+    var xBrush = bottomPanel.append("g")
+        .attr("class", "brush")
+        .call(xBrushOption)
+        .call(xBrushOption.move, xScale.range());
+
+
+    function xBrushMove() {
+        if (d3.event.sourceEvent && d3.event.sourceEvent.type === "zoom") return; // ignore brush-by-zoom
+        var s = d3.event.selection || xScale2.range();
+        xScale.domain(s.map(xScale2.invert, xScale2));
+        focus.select(".axis--x").call(xAxis);
+        svg.select(".zoom").call(xZoomOption.transform, d3.zoomIdentity
+            .scale(width / (s[1] - s[0]))
+            .translate(-s[0], 0));
+
+    }
+
+    function onXZoom() {
+        //if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return; // ignore zoom-by-brush
+        console.log("x zooming");
+        var t = d3.event.transform;
+        xScale.domain(t.rescaleX(xScale2).domain());
+        svg.selectAll(".dot")
+            .attr("cx", function(d) {return xScale(x(d))})
+            .attr("cy", function(d) {return yScale(y(d))});
+        focus.select(".axis--x").call(xAxis);
+        bottomPanel.select(".brush").call(xBrushOption.move, xScale.range().map(t.invertX, t));
+
+    }
+
+
+    // Create z-brush
     rightPanel.append("g")
         .call(zAxis);
 
@@ -93,10 +159,7 @@ function createBubble(data, el, options, filter, groups) {
         .extent([[-zBrushWidth / 2, 0], [zBrushWidth / 2, zBrushHeight]])
         .on("start brush end", zBrushMove);
 
-
     // Add an z-axis label.
-
-
     rightPanel.append("text")
         .attr("class", "z label")
         .attr("text-anchor", "end")
@@ -132,7 +195,7 @@ function createBubble(data, el, options, filter, groups) {
 
     // Add the x-axis.
     focus.append("g")
-        .attr("class", "x axis")
+        .attr("class", "x axis--x")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
 
