@@ -4,9 +4,9 @@
     height: 506px;
 }
 
-.container {
+svg {
+    overflow: hidden;
 
-    overflow: visible;
 }
 
 text {
@@ -39,13 +39,19 @@ text {
 div.tooltip {
     position: absolute;
     text-align: center;
-    width: 100px;
+    width: 110px;
     height: 20px;
     padding: 2px;
-    font: 14px sans-serif;
+    font: 13px sans-serif;
     background: #d8d5e4;
     border: 0px;
     border-radius: 8px;
     box-shadow: 0 1px 2px 0 #656565;
     pointer-events: none;
+}
+
+.zoom {
+    cursor: move;
+    fill: none;
+    pointer-events: all;
 }
