@@ -1,6 +1,6 @@
 
 
-#chart {
+#bubble {
     height: 506px;
 }
 
@@ -36,7 +36,7 @@ text {
     fill: #aaa;
 }
 
-div.tooltip {
+div.bubble-tooltip {
     position: absolute;
     text-align: center;
     width: 110px;
@@ -51,7 +51,7 @@ div.tooltip {
 }
 
 .zoom {
-    cursor: move;
+    cursor: default;
     fill: none;
     pointer-events: all;
 }

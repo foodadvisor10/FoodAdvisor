@@ -220,7 +220,7 @@ function createBubble(data, el, options, filter, groups) {
 
     // Define the div for the tooltip
     var tooltip = d3.select("body").append("div")
-        .attr("class", "tooltip")
+        .attr("class", "bubble-tooltip")
         .style("opacity", 0);
 
     // Dashed data reading
