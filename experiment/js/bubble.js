@@ -1,4 +1,4 @@
-function createBubble(data, el, options) {
+function createBubble(data, el, options, filter) {
     // Axis definition
     var keyField = options.key,
         xField = options.x,
@@ -6,6 +6,9 @@ function createBubble(data, el, options) {
         zField = options.z,
         radiusField = options.r,
         colorField = options.color;
+
+    var filterField = filter.field,
+        filterValue = filter.value;
 
     // Various accessors that specify the four dimensions of data to visualize.
     function x(d) {
@@ -31,6 +34,14 @@ function createBubble(data, el, options) {
     function key(d) {
         return d[keyField];
     }
+
+    function f(d) {
+        return d[filterField];
+    }
+
+    data = data.filter(function(d) {
+        return filterValue === 'ALL' || f(d) === filterValue;
+    });
 
 
     // Chart dimensions.
@@ -248,6 +259,10 @@ function createBubble(data, el, options) {
 }
 
 var customAxis = ["x", "y", "z", "r"];
+var filter = {
+    field: 'Category',
+    value: 'ALL'
+};
 var options = {
     key: "Food",
     x: "Fat (g)",
@@ -259,6 +274,24 @@ var options = {
 
 // Load the data.
 d3.csv("../data/food.csv", function(data) {
+
+    // Create filter selection
+    var filters = _.uniqBy(data.map(function(datum) { return datum[filter.field]}));
+
+    console.log(filters);
+    filters.forEach(function(filter) {
+        $("#select-filter").append("<option value='" + filter + "'>" + filter + "</option>");
+    });
+    $("#select-filter").val(filter.value);
+    $("#select-filter").on("change", function() {
+        filter.value = $(this).val();
+        $("#chart").empty();
+
+        createBubble(data, d3.select("#chart"), options, filter);
+    });
+
+    // Create axis definition
+
     var cols = data.columns.filter(function(col) {
         return !isNaN(data[0][col]);
     });
@@ -270,12 +303,14 @@ d3.csv("../data/food.csv", function(data) {
         })
     });
 
+
+
     $("select.select-field").on('change', function() {
         options[$(this).attr('id')] = $(this).val();
         $("#chart").empty();
 
-        createBubble(data, d3.select("#chart"), options);
+        createBubble(data, d3.select("#chart"), options, filter);
     });
 
-    createBubble(data, d3.select("#chart"), options);
+    createBubble(data, d3.select("#chart"), options, filter);
 });
