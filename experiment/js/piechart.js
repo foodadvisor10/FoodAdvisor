@@ -49,6 +49,7 @@ function pieChart(){
           if(error){
             document.getElementById("chart").innerHTML = "<b id=\"titlehead\">" + country + " " + yearStr[yearSelected] + ": " + tempT + "</b><br>\nThere is unfortunately no data for this category!";
           } else {
+            $("#titlehead").text(currentlySelectedPieChart);
           dataset.forEach(function(d) {
             d.count = +d.count;
             d.enabled = true;                                         
