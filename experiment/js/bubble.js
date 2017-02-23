@@ -279,8 +279,8 @@ function createBubble(data, el, options, filter, groups) {
         .on("mousemove", moveTooltip)
         .on("mouseleave", unhighlightDot)
         .on("click", function(d){
-            //Todo add donut
-            loadDonut(d.Food);
+            currentlySelectedPieChart = key(d);
+            pieChart();
         })
         .call(position)
         .sort(order);

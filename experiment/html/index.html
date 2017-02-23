@@ -56,6 +56,11 @@
       text-align: center;
 
   }
+    #control {
+        width:50%;
+        float: right;
+    }
+
 </style>
 <body onload="pieChart()">
   <div id='headerimg'>
@@ -65,6 +70,14 @@
 
 <div id="bubble">
 
+</div>
+<div id="control">
+  <div>
+      <label>Filter</label>
+      <select id="select-filter">
+          <option value="ALL">All</option>
+      </select>
+  </div>
 </div>
 <div id="chart"><b id="titlehead"></b></div>
 

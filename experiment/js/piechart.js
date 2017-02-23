@@ -1,5 +1,6 @@
 var currentlySelectedPieChart = 'rice';
 function pieChart(){
+  $("#chart").find("svg").remove();
 	   (function(d3) {
         'use strict';
 
@@ -44,6 +45,7 @@ function pieChart(){
 
         // try {
         d3.csv('../data/food/' + currentlySelectedPieChart + '.csv', function(error, dataset) {
+          //console.log(dataset);
           if(error){
             document.getElementById("chart").innerHTML = "<b id=\"titlehead\">" + country + " " + yearStr[yearSelected] + ": " + tempT + "</b><br>\nThere is unfortunately no data for this category!";
           } else {
