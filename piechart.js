@@ -1,11 +1,11 @@
-var currentlySelectedPieChart = 'test';
+var currentlySelectedPieChart = 'rice';
 function pieChart(){
 	   (function(d3) {
         'use strict';
 
-        var width = 420;
-        var height = 420;
-        var radius = Math.min(width, height) / 2;
+        var width = 840;
+        var height = 840;
+        var radius = Math.min(width, 420) / 2;
         var donutWidth = 75;
         var legendRectSize = 18;
         var legendSpacing = 3;
@@ -17,8 +17,9 @@ function pieChart(){
           .attr('width', width)
           .attr('height', height)
           .append('g')
-          .attr('transform', 'translate(' + (width / 2) + 
-            ',' + (height / 2) + ')');
+          // .style('margin-left', '500px');
+          .attr('transform', 'translate(' + (width / 4) + 
+            ',' + (height / 4) + ')');
 
         var arc = d3.svg.arc()
           .innerRadius(radius - donutWidth)
@@ -42,7 +43,7 @@ function pieChart(){
           .attr('class', 'percent');
 
         // try {
-        d3.csv(currentlySelectedPieChart + '.csv', function(error, dataset) {
+        d3.csv('data/' + currentlySelectedPieChart + '.csv', function(error, dataset) {
           if(error){
             document.getElementById("chart").innerHTML = "<b id=\"titlehead\">" + country + " " + yearStr[yearSelected] + ": " + tempT + "</b><br>\nThere is unfortunately no data for this category!";
           } else {
@@ -90,13 +91,14 @@ function pieChart(){
             .append('g')
             // .style('overflow', 'auto')
             .attr('class', 'legend')
+            // .attr('transform', 'translate(500,500)')
             // .style('float', 'left')
             // .attr('width', 100)
             // .style('width', 100)
             .attr('transform', function(d, i) {
               var height = legendRectSize + legendSpacing;
-              var offset =  height * color.domain().length / 2 + 100;
-              var horz = -2 * legendRectSize +200;
+              var offset =  height * color.domain().length / 2;
+              var horz = -2 * legendRectSize + 300;
               var vert = i * height - offset;
               return 'translate(' + horz + ',' + vert + ')';
             });
@@ -151,5 +153,7 @@ function pieChart(){
         });
       })(window.d3);
 }
+
+
 
 
