@@ -59,7 +59,7 @@ function pieChart() {
                 dataset = dataset.filter(function (d) {
                     return d.count !== 0;
                 }).sort(function (a, b) {
-                    return b - a;
+                    return b.count - a.count;
                 });
 
 
