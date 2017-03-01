@@ -424,11 +424,11 @@ d3.csv("../data/food.csv", function(data) {
     customAxis.forEach(function(axis) {
         $("#control-table").append("<tr><td>" + axis + " axis</td> <td><select class='select-field' id='" + axis + "'></select></td></tr>");
         cols.forEach(function(col) {
-            $("#" + axis).append("<option " + (options[axis] === col ? "selected" : "") + " value='" + col + "'>" + col + "</option");
+            $("#" + axis).append("<option " + (options[axis] === col ? "selected" : "") + " value='" + col + "'>" + col + "</option>");
         })
     });
 
-
+    addFilterButtonListener();
 
     $("select.select-field").on('change', function() {
         options[$(this).attr('id')] = $(this).val();
