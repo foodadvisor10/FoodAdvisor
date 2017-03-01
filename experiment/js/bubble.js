@@ -296,6 +296,30 @@ function createBubble(data, el, options, filter, groups) {
         .sort(order);
 
 
+    // Setup search box
+    var searchBox = d3.select("#search-box")
+        .on("input", function() {
+            search(this.value)
+        });
+    search(d3.select("#search-box").attr("value"));
+
+    function search(query) {
+        dot.each(function(d) {
+            var pattern = new RegExp(query, "i");
+            var filtered = pattern.exec(key(d));
+            if (!filtered) {
+                d3.select(this)
+                    .attr("opacity", 0.3);
+            } else {
+
+                d3.select(this)
+                    .attr("opacity", 1);
+            }
+        })
+
+    }
+
+
     function zBrushMove() {
         var s = d3.event.selection || zScale.range();
         if (s) {
@@ -396,7 +420,7 @@ var idMap = {
     "select-x-axis": "x",
     "select-y-axis": "y",
     "select-filter": "z",
-    "select-r-axis": "r",
+    "select-r-axis": "r"
 
 };
 
