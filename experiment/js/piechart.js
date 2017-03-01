@@ -63,6 +63,11 @@ function pieChart() {
                     return b.count - a.count;
                 });
 
+                donut.append("text")
+                    .style("text-anchor", "middle")
+                    .style("font-size", "20px")
+                    .text(currentlySelectedPieChart);
+
                 //return;
 
                 var path = donut.selectAll('path')
