@@ -32,11 +32,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="filter.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="filter.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/experiment/js/filter.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="242">
-                  <caret line="13" column="6" lean-forward="true" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+                <state relative-caret-position="448">
+                  <caret line="53" column="26" lean-forward="false" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
                   <folding>
                     <element signature="e#0#42#0" expanded="false" />
                   </folding>
@@ -44,11 +44,21 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="slider.css" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/experiment/css/slider.css">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="544">
+                  <caret line="32" column="1" lean-forward="false" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="bubble.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/experiment/js/bubble.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="420">
-                  <caret line="430" column="30" lean-forward="false" selection-start-line="430" selection-start-column="30" selection-end-line="430" selection-end-column="30" />
+                <state relative-caret-position="462">
+                  <caret line="432" column="19" lean-forward="false" selection-start-line="432" selection-start-column="19" selection-end-line="432" selection-end-column="19" />
                   <folding>
                     <element signature="n#!!block;n#createBubble#0" expanded="false" />
                     <element signature="n#!!block;n#loadDonut#0" expanded="false" />
@@ -64,8 +74,8 @@
           <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/experiment/html/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="480">
-                  <caret line="124" column="49" lean-forward="false" selection-start-line="124" selection-start-column="49" selection-end-line="124" selection-end-column="49" />
+                <state relative-caret-position="100">
+                  <caret line="5" column="48" lean-forward="false" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
                   <folding>
                     <element signature="n#style#0;n#html#0;n#!!top" expanded="false" />
                   </folding>
@@ -80,9 +90,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="Html5" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -103,6 +113,7 @@
         <option value="$PROJECT_DIR$/experiment/html/bubble.html" />
         <option value="$PROJECT_DIR$/experiment/js/bubble.js" />
         <option value="$PROJECT_DIR$/experiment/js/filter.js" />
+        <option value="$PROJECT_DIR$/experiment/css/slider.css" />
         <option value="$PROJECT_DIR$/experiment/html/index.html" />
       </list>
     </option>
@@ -322,12 +333,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1487788676555</updated>
-      <workItem from="1488233312934" duration="10106000" />
+      <workItem from="1488233312934" duration="12620000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10106000" />
+    <option name="totallyTimeSpent" value="12620000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -493,10 +504,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/experiment/html/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="48" lean-forward="false" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
+          <folding>
+            <element signature="n#style#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiment/js/filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="53" column="26" lean-forward="false" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/experiment/js/bubble.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="430" column="30" lean-forward="false" selection-start-line="430" selection-start-column="30" selection-end-line="430" selection-end-column="30" />
+        <state relative-caret-position="462">
+          <caret line="432" column="19" lean-forward="false" selection-start-line="432" selection-start-column="19" selection-end-line="432" selection-end-column="19" />
           <folding>
             <element signature="n#!!block;n#createBubble#0" expanded="false" />
             <element signature="n#!!block;n#loadDonut#0" expanded="false" />
@@ -504,23 +535,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiment/js/filter.js">
+    <entry file="file://$PROJECT_DIR$/experiment/css/slider.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="13" column="6" lean-forward="true" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#42#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/experiment/html/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="124" column="49" lean-forward="false" selection-start-line="124" selection-start-column="49" selection-end-line="124" selection-end-column="49" />
-          <folding>
-            <element signature="n#style#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
+        <state relative-caret-position="544">
+          <caret line="32" column="1" lean-forward="false" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
