@@ -392,8 +392,14 @@ function createBubble(data, el, options, filter, groups) {
         return radius(b) - radius(a);
     }
 }
+var idMap = {
+    "select-x-axis": "x",
+    "select-y-axis": "y",
+    "select-filter": "z",
+    "select-r-axis": "r",
 
-var customAxis = ["x", "y", "z", "r"];
+};
+
 var filter = {
     field: 'Category',
     value: 'ALL'
@@ -414,9 +420,10 @@ d3.csv("../data/food.csv", function(data) {
     var groups = _.uniqBy(data.map(function(datum) { return datum[filter.field]}));
 
     groups.forEach(function(filter) {
-        $("#select-filter").append("<option value='" + filter + "'>" + filter + "</option>");
+        $("#select-category").append("<option value='" + filter + "'>" + filter + "</option>");
     });
-    $("#select-filter")
+
+    $("#select-category")
         .val(filter.value)
         .on("change", function() {
             filter.value = $(this).val();
@@ -429,19 +436,19 @@ d3.csv("../data/food.csv", function(data) {
         return !isNaN(data[0][col]);
     });
 
-    customAxis.forEach(function(axis) {
-        $("#control-table").append("<tr><td>" + axis + " axis</td> <td><select class='select-field' id='" + axis + "'></select></td></tr>");
+    Object.keys(idMap).forEach(function(id) {
+        var axis = idMap[id];
         cols.forEach(function(col) {
-            $("#" + axis).append("<option " + (options[axis] === col ? "selected" : "") + " value='" + col + "'>" + col + "</option");
-        })
+            $("#" + id).append("<option value='" + col + "'>" + col + "</option");
+        });
+        $("#" + id)
+            .val(options[axis])
+            .on('change', function() {
+                options[axis] = $(this).val();
+                render();
+            });
     });
 
-
-
-    $("select.select-field").on('change', function() {
-        options[$(this).attr('id')] = $(this).val();
-        render();
-    });
     render();
 
     function render() {
