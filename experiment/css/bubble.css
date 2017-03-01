@@ -6,6 +6,12 @@
     display: inline-block;
 }
 
+.dot.selected {
+    stroke: black;
+    stroke-width: 4px;
+    stroke-dasharray: 2;
+}
+
 svg {
     overflow: hidden;
 }

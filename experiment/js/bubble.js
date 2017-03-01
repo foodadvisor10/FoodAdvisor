@@ -291,11 +291,14 @@ function createBubble(data, el, options, filter, groups) {
         .on("mousemove", moveTooltip)
         .on("mouseleave", unhighlightDot)
         .on("click", function(d){
+            unhighlightSelected(currentlySelectedPieChart);
             currentlySelectedPieChart = key(d);
+            highlightSelected(currentlySelectedPieChart);
             pieChart();
         })
         .call(position)
         .sort(order);
+    highlightSelected(currentlySelectedPieChart);
 
 
     // Setup search box
@@ -304,6 +307,19 @@ function createBubble(data, el, options, filter, groups) {
             search(this.value)
         });
     search(searchBox.node().value);
+
+    function highlightSelected(selected) {
+        dot.filter(function(d) {
+            return key(d) === selected;
+        }).classed('selected', true);
+    }
+
+
+    function unhighlightSelected(selected) {
+        dot.filter(function(d) {
+            return key(d) === selected;
+        }).classed('selected', false);
+    }
 
     function search(query) {
         query = query || '';
