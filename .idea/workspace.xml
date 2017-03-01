@@ -32,11 +32,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="filter.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="filter.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/experiment/js/filter.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="448">
-                  <caret line="53" column="26" lean-forward="false" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
+                <state relative-caret-position="514">
+                  <caret line="71" column="28" lean-forward="false" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="28" />
                   <folding>
                     <element signature="e#0#42#0" expanded="false" />
                   </folding>
@@ -44,7 +44,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="slider.css" pinned="false" current-in-tab="true">
+          <file leaf-file-name="slider.css" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/experiment/css/slider.css">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="66">
@@ -112,9 +112,9 @@
         <option value="$PROJECT_DIR$/experiment/css/bubble.css" />
         <option value="$PROJECT_DIR$/experiment/html/bubble.html" />
         <option value="$PROJECT_DIR$/experiment/js/bubble.js" />
-        <option value="$PROJECT_DIR$/experiment/js/filter.js" />
         <option value="$PROJECT_DIR$/experiment/html/index.html" />
         <option value="$PROJECT_DIR$/experiment/css/slider.css" />
+        <option value="$PROJECT_DIR$/experiment/js/filter.js" />
       </list>
     </option>
   </component>
@@ -333,12 +333,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1487788676555</updated>
-      <workItem from="1488233312934" duration="13027000" />
+      <workItem from="1488233312934" duration="14110000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13027000" />
+    <option name="totallyTimeSpent" value="14110000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -514,13 +514,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiment/js/filter.js">
+    <entry file="file://$PROJECT_DIR$/experiment/css/slider.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="53" column="26" lean-forward="false" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#42#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="66">
+          <caret line="3" column="12" lean-forward="false" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -535,11 +533,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiment/css/slider.css">
+    <entry file="file://$PROJECT_DIR$/experiment/js/filter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="12" lean-forward="false" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
-          <folding />
+        <state relative-caret-position="514">
+          <caret line="71" column="28" lean-forward="false" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
