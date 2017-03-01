@@ -62,3 +62,8 @@ div.bubble-tooltip {
     fill: none;
     pointer-events: all;
 }
+
+#search {
+    margin-top: 50px;
+    margin-left: 50px;
+}
