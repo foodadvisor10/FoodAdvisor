@@ -19,9 +19,12 @@ function addFilterButtonListener() {
 //Function for adding a new filter
 function createNewFilter(){
 
-  var dropdown = d3.select("#filter-table")
-    .append("tr").attr("id", "filterRow")
-    .append("td")
+  var row = d3.select("#filter-table")
+    .append("tr").attr("class", "filterRow");
+
+  var row2 = $(".filterRow");
+
+  var dropdown = row.append("td")
     .append("select").attr("class", "filterList");
 
   //Append the options to the dropdown
@@ -41,7 +44,7 @@ function createNewFilter(){
   });
 
   //createScaler();
-  jQueryRangeScaler();
+  jQueryRangeScaler(row.node());
 }
 
 //Function for creating the scaler when a filter is selected
@@ -86,13 +89,14 @@ function createScaler() {
 
 }
 
-function jQueryRangeScaler() {
+function jQueryRangeScaler(container) {
 
-  d3.select("#filterRow").append("div")
-    .attr("id", "slider-range")
+ // var row = $(".filterRow").append("<div>");
+
+  container.append("<div>")
     .attr("class", "range-slider");
 
-  $("#slider-range").slider({
+  container.find(".range-slider").slider({
     range: true,
     min: 0,
     max: 100,
