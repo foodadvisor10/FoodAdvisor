@@ -1,101 +1,101 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="../css/bubble.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="../css/bubble.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
 
 <style>
-    * {
-        font-family: Roboto, sans-serif;
-    }
+  * {
+    font-family: Roboto, sans-serif;
+  }
 
-    #chart {
-        height: 420px;
-        /*    margin-left: 150px;
-            margin-top: 0px;*/
-        position: absolute;
-        text-align: center;
-        width: 420px;
-    }
+  #chart {
+    height: 420px;
+    /*    margin-left: 150px;
+        margin-top: 0px;*/
+    position: absolute;
+    text-align: center;
+    width: 420px;
+  }
 
-    #chart svg {
+  #chart svg {
 
-        overflow: visible;
-    }
+    overflow: visible;
+  }
 
-    .tooltip {
-        background: #eee;
-        box-shadow: 0 0 5px #999999;
-        color: #333;
-        display: none;
-        font-size: 12px;
-        left: 130px;
-        padding: 10px;
-        position: absolute;
-        text-align: center;
-        top: 95px;
-        width: 80px;
-        z-index: 10;
-    }
+  .tooltip {
+    background: #eee;
+    box-shadow: 0 0 5px #999999;
+    color: #333;
+    display: none;
+    font-size: 12px;
+    left: 130px;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    top: 95px;
+    width: 80px;
+    z-index: 10;
+  }
 
-    .legend {
-        font-size: 13px;
-        /*margin-left: 100px */
-    }
+  .legend {
+    font-size: 13px;
+    /*margin-left: 100px */
+  }
 
-    .legend rect {
-        cursor: pointer;
-        stroke-width: 2;
-    }
+  .legend rect {
+    cursor: pointer;
+    stroke-width: 2;
+  }
 
-    rect.disabled {
-        fill: transparent !important;
-    }
+  rect.disabled {
+    fill: transparent !important;
+  }
 
-    .chart {
-        font-size: 14px;
-        text-align: center;
-    }
+  .chart {
+    font-size: 14px;
+    text-align: center;
+  }
 
-    #headerimg img {
-        padding-top: 80px;
-        display: block;
-        margin: auto;
-        max-width: 50%;
-        max-height: 50%;
-        text-align: center;
+  #headerimg img {
+    padding-top: 80px;
+    display: block;
+    margin: auto;
+    max-width: 50%;
+    max-height: 50%;
+    text-align: center;
 
-    }
+  }
 
-    #control {
-        position: absolute;
-        padding: 20px;
-        width: 400px;
-        left: 700px;
-    }
+  #control {
+    position: absolute;
+    padding: 20px;
+    width: 400px;
+    left: 700px;
+  }
 
-    #control-table {
-        width:400px;
-    }
+  #control-table {
+    width: 400px;
+  }
 
-    #control-table tr {
-        height: 40px;
-    }
+  #control-table tr {
+    height: 40px;
+  }
 
-    #control-table select{
-        width:300px;
-    }
+  #control-table select {
+    width: 300px;
+  }
 
 </style>
 <body onload="pieChart()">
 <div id='headerimg'>
-    <img src="../img/headerimg.png" alt="Food Advisor - for a healthier life &amp; a healthier planet"
-         class="floatRight">
+  <img src="../img/headerimg.png" alt="Food Advisor - for a healthier life &amp; a healthier planet"
+       class="floatRight">
 </div>
 <!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
 
@@ -104,24 +104,35 @@
 </div>
 <div id="chart"><b id="titlehead"></b></div>
 <div id="control">
-    <table id="control-table">
-        <tr>
-            <td>Filter</td>
-            <td>
-                <select id="select-filter">
-                    <option value="ALL">All</option>
-                </select>
-            </td>
-        </tr>
-    </table>
-</div>
+  <table id="control-table">
+    <tr>
+      <td>Filter</td>
+      <td>
+        <select id="select-filter">
+          <option value="ALL">All</option>
+        </select>
+      </td>
+    </tr>
+  </table>
 
-</body>
+  <!-- Add filters -->
+  <table id="filter-table">
+    <tr>
+      <td>
+        <button id="filterButton"> Add Filter</button>
+      </td>
+    </tr>
+
+  </table>
+</div>
 <script src="../js/d3.v4.min.js" charset="utf-8"></script>
 <script src="../js/lodash.min.js" charset="utf-8"></script>
 <script src="../js/jquery-3.1.1.min.js"></script>
 
 <script src="../js/piechart.js"></script>
 <script src="../js/bubble.js"></script>
+<script src="../js/filter.js"></script>
+
+</body>
 
 </html>
