@@ -46,7 +46,8 @@ function createScaler() {
   //Add the scaler
   var x = d3.scaleLinear()
     .domain([0, 100])   //TODO: Change this to the max and min values of the filter selected
-    .range([0, scalerWidth]);
+    .range([0, scalerWidth])
+    .clamp(true);
 
   var dispatch = d3.dispatch("sliderChange");
 
