@@ -37,8 +37,11 @@ function createNewFilter(){
       });
 
   dropdown.on("change", function () {
-    createScaler();
-  })
+
+  });
+
+  //createScaler();
+  jQueryRangeScaler();
 }
 
 //Function for creating the scaler when a filter is selected
@@ -80,5 +83,26 @@ function createScaler() {
       //dispatch.sliderChange(x.invert(d3.mouse(sliderTray.node())[0]));
     }));
 
+
+}
+
+function jQueryRangeScaler() {
+
+  d3.select("#filterRow").append("div")
+    .attr("id", "slider-range")
+    .attr("class", "range-slider");
+
+  $("#slider-range").slider({
+    range: true,
+    min: 0,
+    max: 100,
+    values: [ 0, 100 ],
+    slide: function( event, ui ) {
+      var begin = d3.min([ui.values[0], 100]);
+      var end = d3.max([ui.values[1], 0]);
+      console.log("begin:", begin, "end:", end);
+
+    }
+  });
 
 }

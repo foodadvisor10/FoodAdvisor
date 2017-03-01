@@ -31,3 +31,9 @@
     top: -7px;
     left: -7px;
 }
+
+.range-slider{
+    position: relative;
+    top: 10px;
+    left: 15px;
+}
