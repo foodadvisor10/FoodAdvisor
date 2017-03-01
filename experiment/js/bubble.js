@@ -301,9 +301,10 @@ function createBubble(data, el, options, filter, groups) {
         .on("input", function() {
             search(this.value)
         });
-    search(d3.select("#search-box").attr("value"));
+    search(searchBox.node().value);
 
     function search(query) {
+        query = query || '';
         dot.each(function(d) {
             var pattern = new RegExp(query, "i");
             var filtered = pattern.exec(key(d));
@@ -356,6 +357,7 @@ function createBubble(data, el, options, filter, groups) {
         tooltip.transition()
             .duration(50)
             .style("opacity", 0);
+        search(searchBox.node().value);
     }
 
 
