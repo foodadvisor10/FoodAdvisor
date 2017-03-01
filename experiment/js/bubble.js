@@ -94,11 +94,13 @@ function createBubble(data, el, options, filter, groups) {
         .scaleExtent([1, Infinity])
         .translateExtent([[0, 0], [width, height]])
         .extent([[0, 0], [width, height]])
-        .on("zoom", onZoom);
+        .on("zoom", onZoom)
+        .on("end", onZoomend);
 
 
-    svg.append("rect")
+    var zoomRegion = svg.append("rect")
         .attr("class", "zoom")
+        .style("cursor", "zoom-in")
         .attr("width", width)
         .attr("height", height)
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -177,6 +179,9 @@ function createBubble(data, el, options, filter, groups) {
         //if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return; // ignore zoom-by-brush
         //console.log("zooming");
         var t = d3.event.transform;
+        if (d3.event.sourceEvent.type === 'mousemove') {
+            zoomRegion.style("cursor", "move");
+        }
         xScale.domain(t.rescaleX(xScaleB).domain());
         yScale.domain(t.rescaleY(yScaleL).domain());
         //svg.selectAll(".dot")
@@ -190,6 +195,11 @@ function createBubble(data, el, options, filter, groups) {
         svg.selectAll(".dot")
             .attr("cx", function(d) { return xScale(x(d)); })
             .attr("cy", function(d) { return yScale(y(d)); });
+
+    }
+
+    function onZoomend() {
+        zoomRegion.style("cursor", "zoom-in");
 
     }
 
@@ -443,5 +453,5 @@ d3.csv("../data/food.csv", function(data) {
 
 
 function loadDonut(){
-    
+
 }
