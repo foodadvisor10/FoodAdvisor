@@ -1,7 +1,9 @@
 
 
 #bubble {
-    height: 506px;
+    width: 700px;
+    height: 500px;
+    display: inline-block;
 }
 
 svg {

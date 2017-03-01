@@ -48,14 +48,16 @@ function createBubble(data, el, options, filter, groups) {
         return filterValue === 'ALL' || f(d) === filterValue;
     });
 
+    var W = parseInt(el.style('width')), H = parseInt(el.style('height'));
+
     // Chart dimensions.
     var margin = {top: 19.5, right: 19.5, bottom: 30, left: 39.5},
         marginL = {top: 19.5, right: 19.5, bottom: 120, left: 29.5},
         marginB = {top: 430, right: 19.5, bottom: 30, left: 79.5},
-        width = 1100 - margin.right,
-        height = 500 - margin.top - margin.bottom,
-        heightB = 500 - marginB.top - marginB.bottom,
-        heightL = 500 - marginL.top - marginL.bottom;
+        width = W - margin.right,
+        height = H - margin.top - margin.bottom,
+        heightB = H - marginB.top - marginB.bottom,
+        heightL = H - marginL.top - marginL.bottom;
 
     // Brush dimensions
     var zBrushHeight = height / 2,
