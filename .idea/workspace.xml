@@ -47,8 +47,8 @@
           <file leaf-file-name="slider.css" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/experiment/css/slider.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="544">
-                  <caret line="32" column="1" lean-forward="false" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
+                <state relative-caret-position="66">
+                  <caret line="3" column="12" lean-forward="false" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
                   <folding />
                 </state>
               </provider>
@@ -113,8 +113,8 @@
         <option value="$PROJECT_DIR$/experiment/html/bubble.html" />
         <option value="$PROJECT_DIR$/experiment/js/bubble.js" />
         <option value="$PROJECT_DIR$/experiment/js/filter.js" />
-        <option value="$PROJECT_DIR$/experiment/css/slider.css" />
         <option value="$PROJECT_DIR$/experiment/html/index.html" />
+        <option value="$PROJECT_DIR$/experiment/css/slider.css" />
       </list>
     </option>
   </component>
@@ -333,12 +333,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1487788676555</updated>
-      <workItem from="1488233312934" duration="12620000" />
+      <workItem from="1488233312934" duration="13027000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12620000" />
+    <option name="totallyTimeSpent" value="13027000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -537,8 +537,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/experiment/css/slider.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="1" lean-forward="false" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
+        <state relative-caret-position="66">
+          <caret line="3" column="12" lean-forward="false" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
           <folding />
         </state>
       </provider>
