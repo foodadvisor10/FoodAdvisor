@@ -35,13 +35,12 @@
           <file leaf-file-name="filter.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/experiment/js/filter.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="231">
-                  <caret line="62" column="0" lean-forward="true" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+                <state relative-caret-position="365">
+                  <caret line="82" column="48" lean-forward="false" selection-start-line="82" selection-start-column="48" selection-end-line="82" selection-end-column="48" />
                   <folding>
                     <element signature="e#0#42#0" expanded="false" />
                     <element signature="n#!!block;n#addFilterButtonListener#0" expanded="false" />
                     <element signature="n#!!block;n#addOptionsToFilterDropdown#0" expanded="false" />
-                    <element signature="n#!!block;n#createNewFilter#0" expanded="false" />
                     <element signature="n#!!block;n#jQueryRangeScaler#0" expanded="false" />
                   </folding>
                 </state>
@@ -51,8 +50,8 @@
           <file leaf-file-name="slider.css" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/experiment/css/slider.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="697">
-                  <caret line="41" column="17" lean-forward="false" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+                <state relative-caret-position="420">
+                  <caret line="57" column="17" lean-forward="true" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -338,12 +337,12 @@
       <option name="presentableId" value="Default" />
       <updated>1487788676555</updated>
       <workItem from="1488233312934" duration="17913000" />
-      <workItem from="1488482181440" duration="8682000" />
+      <workItem from="1488482181440" duration="9935000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26595000" />
+    <option name="totallyTimeSpent" value="27848000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -376,7 +375,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <option name="time" value="9" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -397,7 +396,6 @@
             <element signature="e#0#42#0" expanded="false" />
             <element signature="n#!!block;n#addFilterButtonListener#0" expanded="false" />
             <element signature="n#!!block;n#addOptionsToFilterDropdown#0" expanded="false" />
-            <element signature="n#!!block;n#createNewFilter#0" expanded="false" />
             <element signature="n#!!block;n#jQueryRangeScaler#0" expanded="false" />
           </folding>
         </state>
@@ -558,6 +556,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/experiment/html/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="126" column="66" lean-forward="false" selection-start-line="126" selection-start-column="66" selection-end-line="126" selection-end-column="66" />
+          <folding>
+            <element signature="n#style#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiment/css/slider.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="57" column="17" lean-forward="true" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/experiment/js/bubble.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="799">
@@ -569,33 +585,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiment/css/slider.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="17" lean-forward="false" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/experiment/html/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="126" column="66" lean-forward="false" selection-start-line="126" selection-start-column="66" selection-end-line="126" selection-end-column="66" />
-          <folding>
-            <element signature="n#style#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/experiment/js/filter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="62" column="0" lean-forward="true" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+        <state relative-caret-position="365">
+          <caret line="82" column="48" lean-forward="false" selection-start-line="82" selection-start-column="48" selection-end-line="82" selection-end-column="48" />
           <folding>
             <element signature="e#0#42#0" expanded="false" />
             <element signature="n#!!block;n#addFilterButtonListener#0" expanded="false" />
             <element signature="n#!!block;n#addOptionsToFilterDropdown#0" expanded="false" />
-            <element signature="n#!!block;n#createNewFilter#0" expanded="false" />
             <element signature="n#!!block;n#jQueryRangeScaler#0" expanded="false" />
           </folding>
         </state>

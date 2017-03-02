@@ -41,3 +41,38 @@
 .filter-row {
     margin-top: 15px;
 }
+/*http://codepen.io/qaidj/pen/eKruC*/
+.cssCircle {
+    border-radius: 999px;
+    width: 13px;
+    height: 13px;
+    padding: 0;
+
+    background: #779BCA;
+    border: 1px solid #003580;
+    color: #003580;
+    text-align: center;
+    transition: background 0.2s linear;
+    transition: color 0.2s linear;
+
+    font: 13px Arial, sans-serif
+}
+
+.cssCircle:hover {
+    background: #3F69A0 ;
+    cursor: pointer;
+}
+
+.minusSign {
+    line-height: 0.9em;
+    margin-bottom: 1px;
+}
+
+.plusSign {
+    line-height: 1.1em;
+}
+
+.minusSign:hover,
+.plusSign:hover {
+    color: white;
+}

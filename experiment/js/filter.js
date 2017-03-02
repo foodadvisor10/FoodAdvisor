@@ -58,9 +58,61 @@ function createNewFilter(filter) {
   //Add the scale
   var scaleContainer = filterRow.append("td");
   createD3Scaler(scaleContainer, filter);
+  var buttonContainer = filterRow.append("td");
+  createRemoveButton(buttonContainer);
+}
+
+//Container should be a d3 selection
+function createD3Scaler(container, category){
+
+  var height = 30,
+    width = 120;
+
+  var svg = container.append('svg')
+    .attr("height", height)
+    .attr("width", width);
+
+  var brush = d3.brushX()
+    .extent([[0, 0], [width*0.8, height]]);
+
+  var x = d3.scaleLinear()
+    .domain([0, width*0.8])
+    .range([0, 100]);
+
+  brush.on('end', function() {
+    //Check first that the user made a selection
+    if(d3.event.selection != null){
+      //Lower bound of the filter
+      var min = d3.event.selection[0];
+      //Upper bound of the filter
+      var max = d3.event.selection[1];
+      //Set the filter
+      setLimits(x(min), x(max));
+    }
+  });
+
+  var g = svg.append('g')
+    .attr("class", "brush")
+    .attr("transform", "translate(10, 2)")
+    .call(brush);
+
+  g.selectAll('.overlay')
+    .attr("style", "fill: #4b9e9e");
+  g.selectAll('.selection')
+    .attr("style", "fill: #78c5c5");
+  g.selectAll('.handle')
+    .attr("style", "fill: #276c86");
 
 }
 
+function createRemoveButton(container) {
+
+  container.append("div")
+    .attr("class", "cssCircle minusSign")
+    .html("&#8211;");
+
+  //TODO: Add click listener
+}
 //Container should be a jQuery selection
 function jQueryRangeScaler(container) {
 
@@ -84,44 +136,6 @@ function jQueryRangeScaler(container) {
 
 }
 
-//Container should be a d3 selection
-function createD3Scaler(container, category){
-
-  var height = 30,
-      width = 120;
-
-  var svg = container.append('svg')
-    .attr("height", height)
-    .attr("width", width);
-
-  var brush = d3.brushX()
-    .extent([[0, 0], [width*0.8, height]]);
-
-  var x = d3.scaleLinear()
-    .domain([0, width*0.8])
-    .range([0, 100]);
-
-  brush.on('end', function() {
-    //Lower bound of the filter
-    var min = d3.event.selection[0];
-    //Upper bound of the filter
-    var max = d3.event.selection[1];
-    //Set the filter
-    setLimits(x(min), x(max));
-  });
-
-  var g = svg.append('g')
-    .attr("class", "brush")
-    .attr("transform", "translate(10, 2)")
-    .call(brush);
-
-   g.selectAll('.overlay')
-     .attr("style", "fill: #4b9e9e");
-   g.selectAll('.selection')
-     .attr("style", "fill: #78c5c5");
-   g.selectAll('.handle')
-     .attr("style", "fill: #276c86");
-}
 //Set the limits of the filter
 function setLimits(min, max) {
   //console.log("Min: " + min + " Max: " + max);
