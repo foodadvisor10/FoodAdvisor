@@ -7,6 +7,7 @@
 }
 
 .dot.selected {
+    opacity: 1;
     stroke: black;
     stroke-width: 4px;
     stroke-dasharray: 2;
@@ -78,4 +79,9 @@ div.bubble-tooltip {
 #search {
     margin-top: 50px;
     margin-left: 50px;
+}
+
+#search-box{
+    margin-left: 50px;
+    width: 500px;
 }

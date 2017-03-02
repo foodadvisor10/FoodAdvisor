@@ -44,7 +44,7 @@ function createBubble(data, el, options, filter, groups) {
     }
 
 
-    data = data.filter(function(d) {
+    data = data.filter(function (d) {
         return filterValue === 'ALL' || f(d) === filterValue;
     });
 
@@ -112,7 +112,7 @@ function createBubble(data, el, options, filter, groups) {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-    var rightPanel =  svg.append("g")
+    var rightPanel = svg.append("g")
         .attr("transform", "translate(" + zBrushX + "," + zBrushY + ")");
 
     var leftPanel = svg.append("g")
@@ -195,8 +195,12 @@ function createBubble(data, el, options, filter, groups) {
         svg.select(".axis--x").call(xAxis);
         svg.select(".axis--y").call(yAxis);
         svg.selectAll(".dot")
-            .attr("cx", function(d) { return xScale(x(d)); })
-            .attr("cy", function(d) { return yScale(y(d)); });
+            .attr("cx", function (d) {
+                return xScale(x(d));
+            })
+            .attr("cy", function (d) {
+                return yScale(y(d));
+            });
 
     }
 
@@ -223,7 +227,6 @@ function createBubble(data, el, options, filter, groups) {
         .attr("dy", ".75em")
         .attr("transform", "translate(" + (-zBrushWidth - 5) + ", 0) rotate(-90)")
         .text(zField);
-
 
 
     var zBrush = rightPanel.append("g")
@@ -290,7 +293,7 @@ function createBubble(data, el, options, filter, groups) {
         .on("mouseenter", highlightDot)
         .on("mousemove", moveTooltip)
         .on("mouseleave", unhighlightDot)
-        .on("click", function(d){
+        .on("click", function (d) {
             unhighlightSelected(currentlySelectedPieChart);
             currentlySelectedPieChart = key(d);
             highlightSelected(currentlySelectedPieChart);
@@ -302,31 +305,36 @@ function createBubble(data, el, options, filter, groups) {
 
 
     // Setup search box
-    var searchBox = d3.select("#search-box")
-        .on("input", function() {
+    // TODO: change to d3 selection
+    var searchBox = $("#search-box")
+        .on("change", function () {
             search(this.value)
         });
-    search(searchBox.node().value);
+    search(searchBox.val());
 
     function highlightSelected(selected) {
-        dot.filter(function(d) {
+        toggleTransparency(dot, true);
+        dot.filter(function (d) {
             return key(d) === selected;
         }).classed('selected', true);
     }
 
 
     function unhighlightSelected(selected) {
-        dot.filter(function(d) {
+        dot.filter(function (d) {
             return key(d) === selected;
         }).classed('selected', false);
     }
 
+    function toggleTransparency(s, hidden) {
+        s.classed("half-transparent", hidden);
+    }
+
     function search(query) {
+        console.log(query);
         query = query || '';
-        dot.each(function(d) {
-            var pattern = new RegExp(query, "i");
-            var filtered = pattern.exec(key(d));
-            if (!filtered) {
+        dot.each(function (d) {
+            if (key(d) !== query) {
                 d3.select(this)
                     .classed("half-transparent", true);
             } else {
@@ -374,9 +382,8 @@ function createBubble(data, el, options, filter, groups) {
         tooltip.transition()
             .duration(50)
             .style("opacity", 0);
-        search(searchBox.node().value);
+        search(searchBox.val());
     }
-
 
 
     function moveTooltip(d) {
@@ -435,73 +442,109 @@ function createBubble(data, el, options, filter, groups) {
         return radius(b) - radius(a);
     }
 }
-var idMap = {
-    "select-x-axis": "x",
-    "select-y-axis": "y",
-    "select-filter": "z",
-    "select-r-axis": "r"
 
-};
+$(document).ready(function () {
+    var idMap = {
+        "select-x-axis": "x",
+        "select-y-axis": "y",
+        "select-filter": "z",
+        "select-r-axis": "r"
 
-var filter = {
-    field: 'Category',
-    value: 'ALL'
-};
-var options = {
-    key: "Food",
-    x: "Fat (g)",
-    y: "Fat (g)",
-    z: "Fat (g)",
-    r: "CO2 footprint",
-    color: "Category"
-};
+    };
+
+    var filter = {
+        field: 'Category',
+        value: 'ALL'
+    };
+    var options = {
+        key: "Food",
+        x: "Fat (g)",
+        y: "Fat (g)",
+        z: "Fat (g)",
+        r: "CO2 footprint",
+        color: "Category"
+    };
 
 // Load the data.
-d3.csv("../data/food.csv", function(data) {
+    d3.csv("../data/food.csv", function (data) {
 
-    // Create filter selection
-    var groups = _.uniqBy(data.map(function(datum) { return datum[filter.field]}));
+        // Create filter selection
+        var groups = _.uniqBy(data.map(function (datum) {
+            return datum[filter.field]
+        }));
 
-    groups.forEach(function(filter) {
-        $("#select-category").append("<option value='" + filter + "'>" + filter + "</option>");
-    });
-
-    $("#select-category")
-        .val(filter.value)
-        .on("change", function() {
-            filter.value = $(this).val();
-            render();
+        groups.forEach(function (filter) {
+            $("#select-category").append("<option value='" + filter + "'>" + filter + "</option>");
         });
 
-    // Create axis definition
-
-    var cols = data.columns.filter(function(col) {
-        return !isNaN(data[0][col]);
-    });
-
-    Object.keys(idMap).forEach(function(id) {
-        var axis = idMap[id];
-        cols.forEach(function(col) {
-            $("#" + id).append("<option value='" + col + "'>" + col + "</option");
-        });
-        $("#" + id)
-            .val(options[axis])
-            .on('change', function() {
-                options[axis] = $(this).val();
+        $("#select-category")
+            .val(filter.value)
+            .on("change", function () {
+                filter.value = $(this).val();
                 render();
             });
+
+        // Create axis definition
+
+        var cols = data.columns.filter(function (col) {
+            return !isNaN(data[0][col]);
+        });
+
+        Object.keys(idMap).forEach(function (id) {
+            var axis = idMap[id];
+            cols.forEach(function (col) {
+                $("#" + id).append("<option value='" + col + "'>" + col + "</option");
+            });
+            $("#" + id)
+                .val(options[axis])
+                .on('change', function () {
+                    options[axis] = $(this).val();
+                    render();
+                });
+        });
+
+        createSearch($("#search-box"), data, options.key, 'Category');
+        render();
+
+        function render() {
+            $("#bubble").empty();
+
+            createBubble(data, d3.select("#bubble"), options, filter, groups);
+        }
+
+        function createSearch(el, data, key, group) {
+            var groups = _.groupBy(data, group);
+            var searchData = Object.keys(groups).map(function (g) {
+                return {
+                    text: g,
+                    children: groups[g].map(function (d) {
+                        return {
+                            id: d[key],
+                            text: d[key]
+                        }
+                    })
+                }
+            });
+            //Object.keys(groups).forEach(function(g) {
+            //    var optGroup = el.append($("<optgroup>").attr('label', g).text(g));
+            //    groups[g].forEach(function(d) {
+            //        $("<option>").attr("value", d[key]).text(d[key]).appendTo(optGroup);
+            //
+            //    });
+            //});
+            $(el).select2({
+                data: searchData,
+                placeholder: 'Search'
+            });
+
+        }
+
     });
 
-    render();
 
-    function render() {
-        $("#bubble").empty();
+    function loadDonut() {
 
-        createBubble(data, d3.select("#bubble"), options, filter, groups);
     }
-});
 
 
-function loadDonut(){
-
-}
+})
