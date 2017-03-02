@@ -351,9 +351,9 @@ function createBubble(data, el, options, filter, groups) {
 
     function highlightDot(d) {
         dot
-            .attr("opacity", 0.3);
+            .classed("hide", true);
         d3.select(this)
-            .attr("opacity", 1);
+            .classed("hide", false);
 
         showDash(d);
 
@@ -368,7 +368,7 @@ function createBubble(data, el, options, filter, groups) {
 
     function unhighlightDot(d) {
         dot
-            .attr("opacity", 1);
+            .classed("hide", false);
 
         hideDash(d);
 
