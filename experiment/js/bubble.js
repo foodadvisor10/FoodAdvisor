@@ -336,10 +336,12 @@ function createBubble(data, el, options, filter, groups) {
         dot.each(function (d) {
             if (key(d) !== query) {
                 d3.select(this)
-                    .classed("half-transparent", true);
+                    .classed("half-transparent", true)
+                    .classed("search-target", false);
             } else {
                 d3.select(this)
-                    .classed("half-transparent", false);
+                    .classed("half-transparent", false)
+                    .classed("search-target", true);
             }
         })
 
@@ -353,6 +355,8 @@ function createBubble(data, el, options, filter, groups) {
             dot.attr('visibility', function (d) {
                 return d3.min(sz) <= z(d) && z(d) <= d3.max(sz) ? 'visible' : 'hidden';
             })
+            d3.select(".search-target")
+                .attr("visibility", true)
         }
     }
 
