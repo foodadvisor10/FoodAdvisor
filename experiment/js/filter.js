@@ -44,7 +44,8 @@ function createNewFilter(){
   });
 
   //createScaler();
-  jQueryRangeScaler(row.node());
+  createD3Scaler(row);
+  //jQueryRangeScaler(row.node());
 }
 
 //Function for creating the scaler when a filter is selected
@@ -89,6 +90,7 @@ function createScaler() {
 
 }
 
+//Container should be a jQuery selection
 function jQueryRangeScaler(container) {
 
  // var row = $(".filterRow").append("<div>");
@@ -109,4 +111,34 @@ function jQueryRangeScaler(container) {
     }
   });
 
+}
+
+//Container should be a d3 selection
+function createD3Scaler(container){
+
+  var height = 20,
+      width = 100;
+
+  var svg = container.append('svg')
+    .attr("height", height)
+    .attr("width", width);
+
+  var brush = d3.brushX()
+    .extent([[0, 0], [width, height]]);
+
+  brush.on('end', function() {
+    console.log(brush.extent())
+  });
+
+  var g = svg.append('g')
+    .attr("class", "brush")
+    .attr("transform", "translate(10, 2)")
+    .call(brush);
+
+   g.selectAll('.overlay')
+     .attr("style", "fill: #4b9e9e");
+   g.selectAll('.selection')
+     .attr("style", "fill: #78c5c5");
+   g.selectAll('.handle')
+     .attr("style", "fill: #276c86");
 }
