@@ -382,7 +382,7 @@ function createBubble(data, el, options, filter, groups) {
 
     function moveTooltip(d) {
         tooltip
-            .style("left", (d3.event.pageX - 110) + "px")
+            .style("left", (d3.event.pageX + 10) + "px")
             .style("top", (d3.event.pageY - 28) + "px")
     }
 
