@@ -428,7 +428,8 @@ d3.csv("../data/food.csv", function(data) {
         })
     });
 
-    addFilterButtonListener();
+    //addFilterButtonListener();
+    addOptionsToFilterDropdown();
 
     $("select.select-field").on('change', function() {
         options[$(this).attr('id')] = $(this).val();

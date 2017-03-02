@@ -3,6 +3,7 @@
  */
 
 var filters = [
+  "Select Filter",
   "Fat",
   "Carbohydrates",
   "Proteins",
@@ -16,8 +17,50 @@ function addFilterButtonListener() {
   button.on("click", createNewFilter);
 }
 
+function addOptionsToFilterDropdown() {
+
+  var dropdown = d3.select("#filter-dropdown");
+
+  dropdown.selectAll("option")
+    .data(filters)
+    .enter()
+    .append("option")
+      .attr("value", function (d) {
+        return d;
+      })
+      .text(function (d) {
+        return d;
+      });
+
+  dropdown.on("change", function () {
+        var selectedFilter = $("#filter-dropdown").val();
+        if(selectedFilter != "Select Filter"){
+          createNewFilter(selectedFilter);
+        }
+      });
+}
+
+function createNewFilter(filter) {
+
+  var filterRow = d3.select("#filter-table")
+    .append("tr")
+    .attr("class", "filter-row");
+
+  //The text saying which variable is filtered
+  filterRow
+    .append("td")
+    .append("text")
+      .text(filter + ": ")
+        .attr("style", "font-size: 20px");
+
+  //Add the scale
+  var scaleContainer = filterRow.append("td");
+  createD3Scaler(scaleContainer, filter);
+
+}
+
 //Function for adding a new filter
-function createNewFilter(){
+function addNewFilter(){
 
   var row = d3.select("#filter-table")
     .append("tr").attr("class", "filterRow");
