@@ -9,7 +9,8 @@ var filters = [
   "Proteins",
   "Calories"
 ];
-
+//var to keep track of the ids of the filters
+var nrOfCreatedFilters = 0;
 var scalerWidth = 100;
 //Set button listener
 function addFilterButtonListener() {
@@ -44,9 +45,11 @@ function addOptionsToFilterDropdown() {
 //Creates a new filter row that filters the "filter" variable
 function createNewFilter(filter) {
 
+  var filterId = "filter-nr-" + ++nrOfCreatedFilters;
   var filterRow = d3.select("#filter-table")
     .append("tr")
-    .attr("class", "filter-row");
+    .attr("class", "filter-row")
+    .attr("id", filterId); //Give the filter rows an unique id
 
   //The text saying which variable is filtered
   filterRow
@@ -59,7 +62,7 @@ function createNewFilter(filter) {
   var scaleContainer = filterRow.append("td");
   createD3Scaler(scaleContainer, filter);
   var buttonContainer = filterRow.append("td");
-  createRemoveButton(buttonContainer);
+  createRemoveButton(buttonContainer, filterId);
 }
 
 //Container should be a d3 selection
@@ -105,11 +108,14 @@ function createD3Scaler(container, category){
 
 }
 
-function createRemoveButton(container) {
+function createRemoveButton(container, filterId) {
 
   container.append("div")
     .attr("class", "cssCircle minusSign")
-    .html("&#8211;");
+    .html("&#8211;")
+    .on("click", function () {
+      d3.select("#" + filterId).remove();
+    });
 
   //TODO: Add click listener
 }
