@@ -351,9 +351,9 @@ function createBubble(data, el, options, filter, groups) {
 
     function highlightDot(d) {
         dot
-            .classed("hide", true);
+            .classed("half-transparent", true);
         d3.select(this)
-            .classed("hide", false);
+            .classed("half-transparent", false);
 
         showDash(d);
 
@@ -368,7 +368,7 @@ function createBubble(data, el, options, filter, groups) {
 
     function unhighlightDot(d) {
         dot
-            .classed("hide", false);
+            .classed("half-transparent", false);
 
         hideDash(d);
 

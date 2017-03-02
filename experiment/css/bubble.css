@@ -34,7 +34,7 @@ text {
     fill: #777;
 }
 
-.hide {
+.half-transparent {
     opacity: 0.3;
 }
 
