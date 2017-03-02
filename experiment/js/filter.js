@@ -40,7 +40,7 @@ function createNewFilter(){
       });
 
   dropdown.on("change", function () {
-
+    //TODO: Set selected filter
   });
 
   //createScaler();
@@ -114,7 +114,7 @@ function jQueryRangeScaler(container) {
 }
 
 //Container should be a d3 selection
-function createD3Scaler(container){
+function createD3Scaler(container, category){
 
   var height = 30,
       width = 120;
@@ -126,8 +126,17 @@ function createD3Scaler(container){
   var brush = d3.brushX()
     .extent([[0, 0], [width*0.8, height]]);
 
+  var x = d3.scaleLinear()
+    .domain([0, width*0.8])
+    .range([0, 100]);
+
   brush.on('end', function() {
-    console.log(brush.extent())
+    //Lower bound of the filter
+    var min = d3.event.selection[0];
+    //Upper bound of the filter
+    var max = d3.event.selection[1];
+    //Set the filter
+    setLimits(x(min), x(max));
   });
 
   var g = svg.append('g')
@@ -141,4 +150,8 @@ function createD3Scaler(container){
      .attr("style", "fill: #78c5c5");
    g.selectAll('.handle')
      .attr("style", "fill: #276c86");
+}
+//Set the limits of the filter
+function setLimits(min, max) {
+  //console.log("Min: " + min + " Max: " + max);
 }
