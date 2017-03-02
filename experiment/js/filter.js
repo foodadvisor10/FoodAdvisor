@@ -17,6 +17,7 @@ function addFilterButtonListener() {
   button.on("click", createNewFilter);
 }
 
+//Function for adding the dropdown items(e.g. the filters) and making them interactive
 function addOptionsToFilterDropdown() {
 
   var dropdown = d3.select("#filter-dropdown");
@@ -40,6 +41,7 @@ function addOptionsToFilterDropdown() {
       });
 }
 
+//Creates a new filter row that filters the "filter" variable
 function createNewFilter(filter) {
 
   var filterRow = d3.select("#filter-table")
@@ -56,80 +58,6 @@ function createNewFilter(filter) {
   //Add the scale
   var scaleContainer = filterRow.append("td");
   createD3Scaler(scaleContainer, filter);
-
-}
-
-//Function for adding a new filter
-function addNewFilter(){
-
-  var row = d3.select("#filter-table")
-    .append("tr").attr("class", "filterRow");
-
-  var row2 = $(".filterRow");
-
-  var dropdown = row.append("td")
-    .append("select").attr("class", "filterList");
-
-  //Append the options to the dropdown
-  dropdown.selectAll("option")
-    .data(filters)
-    .enter()
-    .append("option")
-      .attr("value", function (d) {
-        return d;
-      })
-      .text(function (d) {
-        return d;
-      });
-
-  dropdown.on("change", function () {
-    //TODO: Set selected filter
-  });
-
-  //createScaler();
-  createD3Scaler(row);
-  //jQueryRangeScaler(row.node());
-}
-
-//Function for creating the scaler when a filter is selected
-function createScaler() {
-  //Add the scaler
-  var x = d3.scaleLinear()
-    .domain([0, 100])   //TODO: Change this to the max and min values of the filter selected
-    .range([0, scalerWidth])
-    .clamp(true);
-
-  var dispatch = d3.dispatch("sliderChange");
-
-  var slider = d3.select("#filterRow").append("div")
-    .attr("class", "slider")
-    .style("width", scalerWidth + "px");
-
-  var sliderTray = slider.append("div")
-    .attr("class", "slider-tray");
-
-  var sliderHandle = slider.append("div")
-    .attr("class", "slider-handle");
-
-  sliderHandle.append("div")
-    .attr("class", "slider-handle-icon");
-
-  dispatch.on("sliderChange.slider", function(value) {
-    sliderHandle.style("left", x(value) + "px")
-  });
-
-  slider.call(d3.drag()
-    .on("start", function() {
-      dispatch.call("sliderChange", this, x.invert(d3.mouse(sliderTray.node())[0]));
-
-      //dispatch.sliderChange(x.invert(d3.mouse(sliderTray.node())[0]));
-      d3.event.sourceEvent.preventDefault();
-    })
-    .on("drag", function() {
-      dispatch.call("sliderChange", this, x.invert(d3.mouse(sliderTray.node())[0]));
-      //dispatch.sliderChange(x.invert(d3.mouse(sliderTray.node())[0]));
-    }));
-
 
 }
 

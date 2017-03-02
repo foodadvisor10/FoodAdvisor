@@ -35,12 +35,13 @@
           <file leaf-file-name="filter.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/experiment/js/filter.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="316">
-                  <caret line="53" column="8" lean-forward="false" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
+                <state relative-caret-position="231">
+                  <caret line="62" column="0" lean-forward="true" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#42#0" expanded="false" />
-                    <element signature="n#!!block;n#addNewFilter#0" expanded="false" />
-                    <element signature="n#!!block;n#createScaler#0" expanded="false" />
+                    <element signature="n#!!block;n#addFilterButtonListener#0" expanded="false" />
+                    <element signature="n#!!block;n#addOptionsToFilterDropdown#0" expanded="false" />
+                    <element signature="n#!!block;n#createNewFilter#0" expanded="false" />
                     <element signature="n#!!block;n#jQueryRangeScaler#0" expanded="false" />
                   </folding>
                 </state>
@@ -115,9 +116,9 @@
         <option value="$PROJECT_DIR$/experiment/css/bubble.css" />
         <option value="$PROJECT_DIR$/experiment/html/bubble.html" />
         <option value="$PROJECT_DIR$/experiment/js/bubble.js" />
-        <option value="$PROJECT_DIR$/experiment/js/filter.js" />
         <option value="$PROJECT_DIR$/experiment/html/index.html" />
         <option value="$PROJECT_DIR$/experiment/css/slider.css" />
+        <option value="$PROJECT_DIR$/experiment/js/filter.js" />
       </list>
     </option>
   </component>
@@ -337,12 +338,12 @@
       <option name="presentableId" value="Default" />
       <updated>1487788676555</updated>
       <workItem from="1488233312934" duration="17913000" />
-      <workItem from="1488482181440" duration="8515000" />
+      <workItem from="1488482181440" duration="8682000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26428000" />
+    <option name="totallyTimeSpent" value="26595000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -394,8 +395,9 @@
           <caret line="95" column="25" lean-forward="false" selection-start-line="95" selection-start-column="25" selection-end-line="95" selection-end-column="25" />
           <folding>
             <element signature="e#0#42#0" expanded="false" />
-            <element signature="n#!!block;n#addNewFilter#0" expanded="false" />
-            <element signature="n#!!block;n#createScaler#0" expanded="false" />
+            <element signature="n#!!block;n#addFilterButtonListener#0" expanded="false" />
+            <element signature="n#!!block;n#addOptionsToFilterDropdown#0" expanded="false" />
+            <element signature="n#!!block;n#createNewFilter#0" expanded="false" />
             <element signature="n#!!block;n#jQueryRangeScaler#0" expanded="false" />
           </folding>
         </state>
@@ -587,12 +589,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/experiment/js/filter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="53" column="8" lean-forward="false" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
+        <state relative-caret-position="231">
+          <caret line="62" column="0" lean-forward="true" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
           <folding>
             <element signature="e#0#42#0" expanded="false" />
-            <element signature="n#!!block;n#addNewFilter#0" expanded="false" />
-            <element signature="n#!!block;n#createScaler#0" expanded="false" />
+            <element signature="n#!!block;n#addFilterButtonListener#0" expanded="false" />
+            <element signature="n#!!block;n#addOptionsToFilterDropdown#0" expanded="false" />
+            <element signature="n#!!block;n#createNewFilter#0" expanded="false" />
             <element signature="n#!!block;n#jQueryRangeScaler#0" expanded="false" />
           </folding>
         </state>
