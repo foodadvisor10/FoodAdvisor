@@ -6,7 +6,7 @@ function pieChart() {
 
         var width = 440;
         var height = 840;
-        var radius = Math.min(width, 420) / 2;
+        var radius = Math.min(width, 420) / 3;
         var donutWidth = 75;
         var legendRectSize = 18;
         var legendSpacing = 3;
@@ -117,7 +117,7 @@ function pieChart() {
                     .attr('transform', function (d, i) {
                         var height = legendRectSize + legendSpacing;
                         var offset = height * dataset.length / 2;
-                        var horz = -2 * legendRectSize + 300;
+                        var horz = -2 * legendRectSize + 220;
                         var vert = i * height - offset + 30;
                         return 'translate(' + horz + ',' + vert + ')';
                     });
