@@ -116,15 +116,15 @@ function jQueryRangeScaler(container) {
 //Container should be a d3 selection
 function createD3Scaler(container){
 
-  var height = 20,
-      width = 100;
+  var height = 30,
+      width = 120;
 
   var svg = container.append('svg')
     .attr("height", height)
     .attr("width", width);
 
   var brush = d3.brushX()
-    .extent([[0, 0], [width, height]]);
+    .extent([[0, 0], [width*0.8, height]]);
 
   brush.on('end', function() {
     console.log(brush.extent())
