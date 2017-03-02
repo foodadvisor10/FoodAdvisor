@@ -34,6 +34,10 @@ text {
     fill: #777;
 }
 
+text.label {
+    font-size: 14px;
+}
+
 .year.label {
     font: 500 196px "Helvetica Neue";
     fill: #ddd;
