@@ -38,6 +38,9 @@ function addOptionsToFilterDropdown() {
         var selectedFilter = $("#filter-dropdown").val();
         if(selectedFilter != "Select Filter"){
           createNewFilter(selectedFilter);
+          //Hide the option from the dropdown
+          dropdown.select("option[value=" + selectedFilter)
+            .attr("disabled", "disabled");
         }
       });
 }
@@ -116,8 +119,6 @@ function createRemoveButton(container, filterId) {
     .on("click", function () {
       d3.select("#" + filterId).remove();
     });
-
-  //TODO: Add click listener
 }
 //Container should be a jQuery selection
 function jQueryRangeScaler(container) {
