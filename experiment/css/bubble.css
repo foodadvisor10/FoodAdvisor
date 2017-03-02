@@ -34,6 +34,10 @@ text {
     fill: #777;
 }
 
+.hidden {
+    opacity: 0;
+}
+
 .half-transparent {
     opacity: 0.3;
 }

@@ -328,11 +328,10 @@ function createBubble(data, el, options, filter, groups) {
             var filtered = pattern.exec(key(d));
             if (!filtered) {
                 d3.select(this)
-                    .attr("opacity", 0.3);
+                    .classed("half-transparent", true);
             } else {
-
                 d3.select(this)
-                    .attr("opacity", 1);
+                    .classed("half-transparent", false);
             }
         })
 
