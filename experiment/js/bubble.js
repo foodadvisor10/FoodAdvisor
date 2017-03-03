@@ -301,7 +301,7 @@ function createBubble(data, el, options, filter, groups) {
         })
         .call(position)
         .sort(order);
-    highlightSelected(currentlySelectedPieChart);
+    //highlightSelected(currentlySelectedPieChart);
 
 
     // Setup search box
@@ -331,8 +331,7 @@ function createBubble(data, el, options, filter, groups) {
     }
 
     function search(query) {
-        console.log(query);
-        query = query || '';
+        if (!query) return;
         dot.each(function (d) {
             if (key(d) !== query) {
                 d3.select(this)
