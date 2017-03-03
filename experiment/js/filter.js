@@ -9,16 +9,26 @@ var filters = [
   "Proteins",
   "Calories"
 ];
-//var to keep track of the ids of the filters
-var nrOfCreatedFilters = 0;
-var scalerWidth = 100;
+//Add filters to this object when they are created
+var filterObjects = [];
 
-//Set button listener
-function addFilterButtonListener() {
-  var button = $("#add-filter-button");
-  button.on("click", createNewFilter);
+var defaultMin = 0;
+var defaultMax = 100;
+
+createDefaultFilterObjects();
+
+function createDefaultFilterObjects() {
+  filters.forEach(function (filter) {
+    if(filter != "Select Filter"){
+      var filterObj = {
+        id: filter,
+        min: defaultMin,
+        max: defaultMax
+      };
+      filterObjects.push(filterObj);
+    }
+  });
 }
-
 //Function for adding the dropdown items(e.g. the filters) and making them interactive
 function addOptionsToFilterDropdown() {
 
@@ -70,7 +80,7 @@ function createNewFilter(filter) {
 }
 
 //Container should be a d3 selection
-function createD3Scaler(container, category){
+function createD3Scaler(container, filter){
 
   var height = 30,
     width = 120;
@@ -94,7 +104,7 @@ function createD3Scaler(container, category){
       //Upper bound of the filter
       var max = d3.event.selection[1];
       //Set the filter
-      setLimits(x(min), x(max));
+      setLimits(filter, x(min), x(max));
     }
   });
 
@@ -124,10 +134,22 @@ function createRemoveButton(container, filter) {
 
     });
 }
+
+//Set the limits of the filter
+function setLimits(id, min, max) {
+  //Get the correct filter obj for this filter
+  for(var i in filterObjects){
+    if(filterObjects[i].id == id){
+      filterObjects[i].min = min;
+      filterObjects[i].max = max;
+    }
+  }
+}
+
 //Container should be a jQuery selection
 function jQueryRangeScaler(container) {
 
- // var row = $(".filterRow").append("<div>");
+  // var row = $(".filterRow").append("<div>");
 
   container.append("<div>")
     .attr("class", "range-slider");
@@ -145,9 +167,4 @@ function jQueryRangeScaler(container) {
     }
   });
 
-}
-
-//Set the limits of the filter
-function setLimits(min, max) {
-  //console.log("Min: " + min + " Max: " + max);
 }
