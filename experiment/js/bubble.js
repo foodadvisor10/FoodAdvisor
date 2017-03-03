@@ -470,7 +470,7 @@ $(document).ready(function () {
 
 // Load the data.
     d3.csv("../data/food.csv", function (data) {
-
+        groupNutrients(data);
         // Create filter selection
         var groups = _.uniqBy(data.map(function (datum) {
             return datum[filter.field]
@@ -505,11 +505,14 @@ $(document).ready(function () {
                     render();
                 });
         });
+        //addFilterButtonListener();
+        addOptionsToFilterDropdown();
 
         createSearch($("#search-box"), data, options.key, 'Category');
         render();
 
         function render() {
+            console.log("render");
             $("#bubble").empty();
 
             createBubble(data, d3.select("#bubble"), options, filter, groups);
@@ -549,5 +552,25 @@ $(document).ready(function () {
 
     }
 
+//Function for grouping certain nutrients into larger groups, such as all the fats into one group
+    function groupNutrients(data) {
+        var fats = [];
+        var vitamins = [];
+        var fatsSearchString = "fatty";
+        var vitaminsSearchString = "vitamin";
+        /*
+         for(var i = 0; i < data.length; i++){
+         var elem = data[i];
+         //var keys = elem.keys();
+         for(var j = 0; j < keys.length; j++){
+
+         }
+         }
+         */
+    }
+
+    function createFilters() {
+
+    }
 
 })
