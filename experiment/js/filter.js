@@ -1,5 +1,5 @@
 /**
- * Created by marti on 2017-03-01.
+ * Created by martin on 2017-03-01.
  */
 
 var filters = [
@@ -12,6 +12,7 @@ var filters = [
 //var to keep track of the ids of the filters
 var nrOfCreatedFilters = 0;
 var scalerWidth = 100;
+
 //Set button listener
 function addFilterButtonListener() {
   var button = $("#add-filter-button");
@@ -38,7 +39,7 @@ function addOptionsToFilterDropdown() {
         var selectedFilter = $("#filter-dropdown").val();
         if(selectedFilter != "Select Filter"){
           createNewFilter(selectedFilter);
-          //Hide the option from the dropdown
+          //Hide the selected option from the dropdown
           dropdown.select("option[value=" + selectedFilter)
             .attr("disabled", "disabled");
         }
@@ -48,11 +49,10 @@ function addOptionsToFilterDropdown() {
 //Creates a new filter row that filters the "filter" variable
 function createNewFilter(filter) {
 
-  var filterId = "filter-nr-" + ++nrOfCreatedFilters;
   var filterRow = d3.select("#filter-table")
     .append("tr")
     .attr("class", "filter-row")
-    .attr("id", filterId); //Give the filter rows an unique id
+    .attr("id", filter); //Give the filter rows id that is the name of the filter
 
   //The text saying which variable is filtered
   filterRow
@@ -65,7 +65,7 @@ function createNewFilter(filter) {
   var scaleContainer = filterRow.append("td");
   createD3Scaler(scaleContainer, filter);
   var buttonContainer = filterRow.append("td");
-  createRemoveButton(buttonContainer, filterId);
+  createRemoveButton(buttonContainer, filter);
 }
 
 //Container should be a d3 selection
@@ -111,13 +111,16 @@ function createD3Scaler(container, category){
 
 }
 
-function createRemoveButton(container, filterId) {
+function createRemoveButton(container, filter) {
 
   container.append("div")
     .attr("class", "cssCircle minusSign")
     .html("&#8211;")
     .on("click", function () {
-      d3.select("#" + filterId).remove();
+      d3.select("#" + filter).remove();
+      d3.select("#filter-dropdown").select("option[value=" + filter)
+        .attr("disabled", null);
+
     });
 }
 //Container should be a jQuery selection
