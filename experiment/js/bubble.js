@@ -400,8 +400,10 @@ var options = {
 // Load the data.
 d3.csv("../data/food.csv", function(data) {
 
+    groupNutrients(data);
     // Create filter selection
     var groups = _.uniqBy(data.map(function(datum) { return datum[filter.field]}));
+
 
     groups.forEach(function(filter) {
         $("#select-filter").append("<option value='" + filter + "'>" + filter + "</option>");
@@ -422,11 +424,12 @@ d3.csv("../data/food.csv", function(data) {
     customAxis.forEach(function(axis) {
         $("#control-table").append("<tr><td>" + axis + " axis</td> <td><select class='select-field' id='" + axis + "'></select></td></tr>");
         cols.forEach(function(col) {
-            $("#" + axis).append("<option " + (options[axis] === col ? "selected" : "") + " value='" + col + "'>" + col + "</option");
+            $("#" + axis).append("<option " + (options[axis] === col ? "selected" : "") + " value='" + col + "'>" + col + "</option>");
         })
     });
 
-
+    //addFilterButtonListener();
+    addOptionsToFilterDropdown();
 
     $("select.select-field").on('change', function() {
         options[$(this).attr('id')] = $(this).val();
@@ -441,6 +444,26 @@ d3.csv("../data/food.csv", function(data) {
     }
 });
 
+//Function for grouping certain nutrients into larger groups, such as all the fats into one group
+function groupNutrients(data){
+    var fats = [];
+    var vitamins = [];
+    var fatsSearchString = "fatty";
+    var vitaminsSearchString = "vitamin";
+    /*
+    for(var i = 0; i < data.length; i++){
+        var elem = data[i];
+        //var keys = elem.keys();
+        for(var j = 0; j < keys.length; j++){
+            
+        }
+    }
+    */
+}
+
+function createFilters() {
+
+}
 
 function loadDonut(){
     
