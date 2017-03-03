@@ -9,7 +9,7 @@ var categories = [
   "Dairy"
 ];
 
-
+var itemsPerRow = 4;
 
 //svg is the group element where the legend should be created
 function createLegend(svg) {
@@ -29,9 +29,8 @@ function createLegend(svg) {
     .enter()
     .append("g")
       .attr("transform", function (d, i) {
-        console.log(i%5);
-        var x = 170 * (i%5);  //Change row every fifth element
-        var y = 30 * Math.floor(i/5);
+        var x = 200 * (i%itemsPerRow);  //Change row every fifth element
+        var y = 30 * Math.floor(i/itemsPerRow);
         return "translate(" + x + "," + y + ")";
       });
 
