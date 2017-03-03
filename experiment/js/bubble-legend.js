@@ -13,10 +13,10 @@ var categories = [
 
 //svg is the group element where the legend should be created
 function createLegend(svg) {
+
   var color = d3.scaleOrdinal(d3.schemeCategory10);
   color.domain(categories);
 
-  console.log(color.range());
   var width = svg.attr("width"),
       height = svg.attr("height");
 
@@ -29,10 +29,11 @@ function createLegend(svg) {
     .enter()
     .append("g")
       .attr("transform", function (d, i) {
-        var x = 100 * i;
-        var y = 0;
+        console.log(i%5);
+        var x = 100 * (i%5);  //Change row every fifth element
+        var y = 30 * Math.floor(i/5);
         return "translate(" + x + "," + y + ")";
-      })
+      });
 
   rows
     .append("rect")
@@ -50,3 +51,7 @@ function createLegend(svg) {
     })
 }
 
+function bubbleLegend(groups) {
+  categories = groups;
+  createLegend(d3.select("#bubble-legend"));
+}

@@ -475,6 +475,9 @@ $(document).ready(function () {
             return datum[filter.field]
         }));
 
+        //Send the category data to the bubble legend
+        bubbleLegend(groups);
+
         groups.forEach(function (filter) {
             $("#select-category").append("<option value='" + filter + "'>" + filter + "</option>");
         });
@@ -506,7 +509,7 @@ $(document).ready(function () {
         });
 
         addOptionsToFilterDropdown();
-        createLegend(d3.select("#bubble-legend"));
+        //createLegend(d3.select("#bubble-legend"));
 
         createSearch($("#search-box"), data, options.key, 'Category');
         render();
