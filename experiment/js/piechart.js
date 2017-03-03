@@ -4,24 +4,26 @@ function pieChart() {
     (function (d3) {
         'use strict';
 
-        var width = 840;
+        var width = 440;
         var height = 840;
-        var radius = Math.min(width, 420) / 2;
+        var radius = Math.min(width, 420) / 3;
         var donutWidth = 75;
         var legendRectSize = 18;
         var legendSpacing = 3;
+
+        var marginPie = { top: 20 + radius, left: 20 + radius};
 
 
         var color = d3.scaleOrdinal(d3.schemeCategory20);
         var svg = d3.select('#chart')
             .append('svg')
             .attr('width', width)
-            .attr('height', height)
-            .append('g')
+            .attr('height', height);
+        var donut = svg.append('g')
             // .style('margin-left', '500px');
-            .attr('transform', 'translate(' + (width / 4) +
-            ',' + (height / 4) + ')');
-
+            //.attr('transform', 'translate(0, 0)');
+            .attr('transform', 'translate(' + (marginPie.left) +
+            ',' + (marginPie.top) + ')');
         var arc = d3.arc()
             .innerRadius(radius - donutWidth)
             .outerRadius(radius);
@@ -51,7 +53,6 @@ function pieChart() {
             if (error) {
                 document.getElementById("chart").innerHTML = "<b id=\"titlehead\">" + country + " " + yearStr[yearSelected] + ": " + tempT + "</b><br>\nThere is unfortunately no data for this category!";
             } else {
-                $("#titlehead").text(currentlySelectedPieChart);
                 dataset.forEach(function (d) {
                     d.count = +d.count;
                     d.enabled = true;
@@ -62,8 +63,14 @@ function pieChart() {
                     return b.count - a.count;
                 });
 
+                donut.append("text")
+                    .style("text-anchor", "middle")
+                    .style("font-size", "20px")
+                    .text(currentlySelectedPieChart);
 
-                var path = svg.selectAll('path')
+                //return;
+
+                var path = donut.selectAll('path')
                     .data(pie(dataset))
                     .enter()
                     .append('path')
@@ -97,7 +104,7 @@ function pieChart() {
                 });
 
 
-                var legend = svg.selectAll('.legend')
+                var legend = donut.selectAll('.legend')
                     .data(color.domain())
                     .enter()
                     .append('g')
@@ -110,7 +117,7 @@ function pieChart() {
                     .attr('transform', function (d, i) {
                         var height = legendRectSize + legendSpacing;
                         var offset = height * dataset.length / 2;
-                        var horz = -2 * legendRectSize + 300;
+                        var horz = -2 * legendRectSize + 220;
                         var vert = i * height - offset + 30;
                         return 'translate(' + horz + ',' + vert + ')';
                     });
