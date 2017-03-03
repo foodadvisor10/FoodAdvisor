@@ -30,7 +30,7 @@ function createLegend(svg) {
     .append("g")
       .attr("transform", function (d, i) {
         console.log(i%5);
-        var x = 100 * (i%5);  //Change row every fifth element
+        var x = 170 * (i%5);  //Change row every fifth element
         var y = 30 * Math.floor(i/5);
         return "translate(" + x + "," + y + ")";
       });
