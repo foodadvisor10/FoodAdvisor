@@ -42,6 +42,7 @@ function addOptionsToFilterDropdown() {
           //Hide the selected option from the dropdown
           dropdown.select("option[value=" + selectedFilter)
             .attr("disabled", "disabled");
+          dropdown.property("value", "Select Filter");
         }
       });
 }
