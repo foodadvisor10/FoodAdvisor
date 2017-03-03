@@ -14,7 +14,7 @@ var categories = [
 //svg is the group element where the legend should be created
 function createLegend(svg) {
 
-  var color = d3.scaleOrdinal(d3.schemeCategory10);
+  var color = d3.scaleOrdinal(d3.schemeCategory20);
   color.domain(categories);
 
   var width = svg.attr("width"),
