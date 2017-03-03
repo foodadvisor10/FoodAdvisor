@@ -1,7 +1,16 @@
 
 
 #bubble {
-    height: 506px;
+    width: 700px;
+    height: 500px;
+    display: inline-block;
+}
+
+.dot.selected {
+    opacity: 1;
+    stroke: black;
+    stroke-width: 4px;
+    stroke-dasharray: 2;
 }
 
 svg {
@@ -24,6 +33,18 @@ text {
 
 .label {
     fill: #777;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.half-transparent {
+    opacity: 0.3;
+}
+
+text.label {
+    font-size: 14px;
 }
 
 .year.label {
@@ -53,4 +74,14 @@ div.bubble-tooltip {
     cursor: default;
     fill: none;
     pointer-events: all;
+}
+
+#search {
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+#search-box{
+    margin-left: 50px;
+    width: 500px;
 }

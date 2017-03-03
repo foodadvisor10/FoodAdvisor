@@ -44,18 +44,20 @@ function createBubble(data, el, options, filter, groups) {
     }
 
 
-    data = data.filter(function(d) {
+    data = data.filter(function (d) {
         return filterValue === 'ALL' || f(d) === filterValue;
     });
+
+    var W = parseInt(el.style('width')), H = parseInt(el.style('height'));
 
     // Chart dimensions.
     var margin = {top: 19.5, right: 19.5, bottom: 30, left: 39.5},
         marginL = {top: 19.5, right: 19.5, bottom: 120, left: 29.5},
         marginB = {top: 430, right: 19.5, bottom: 30, left: 79.5},
-        width = 1100 - margin.right,
-        height = 500 - margin.top - margin.bottom,
-        heightB = 500 - marginB.top - marginB.bottom,
-        heightL = 500 - marginL.top - marginL.bottom;
+        width = W - margin.right,
+        height = H - margin.top - margin.bottom,
+        heightB = H - marginB.top - marginB.bottom,
+        heightL = H - marginL.top - marginL.bottom;
 
     // Brush dimensions
     var zBrushHeight = height / 2,
@@ -94,11 +96,13 @@ function createBubble(data, el, options, filter, groups) {
         .scaleExtent([1, Infinity])
         .translateExtent([[0, 0], [width, height]])
         .extent([[0, 0], [width, height]])
-        .on("zoom", onZoom);
+        .on("zoom", onZoom)
+        .on("end", onZoomend);
 
 
-    svg.append("rect")
+    var zoomRegion = svg.append("rect")
         .attr("class", "zoom")
+        .style("cursor", "zoom-in")
         .attr("width", width)
         .attr("height", height)
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -108,7 +112,7 @@ function createBubble(data, el, options, filter, groups) {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-    var rightPanel =  svg.append("g")
+    var rightPanel = svg.append("g")
         .attr("transform", "translate(" + zBrushX + "," + zBrushY + ")");
 
     var leftPanel = svg.append("g")
@@ -177,6 +181,9 @@ function createBubble(data, el, options, filter, groups) {
         //if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return; // ignore zoom-by-brush
         //console.log("zooming");
         var t = d3.event.transform;
+        if (d3.event.sourceEvent.type === 'mousemove') {
+            zoomRegion.style("cursor", "move");
+        }
         xScale.domain(t.rescaleX(xScaleB).domain());
         yScale.domain(t.rescaleY(yScaleL).domain());
         //svg.selectAll(".dot")
@@ -188,8 +195,17 @@ function createBubble(data, el, options, filter, groups) {
         svg.select(".axis--x").call(xAxis);
         svg.select(".axis--y").call(yAxis);
         svg.selectAll(".dot")
-            .attr("cx", function(d) { return xScale(x(d)); })
-            .attr("cy", function(d) { return yScale(y(d)); });
+            .attr("cx", function (d) {
+                return xScale(x(d));
+            })
+            .attr("cy", function (d) {
+                return yScale(y(d));
+            });
+
+    }
+
+    function onZoomend() {
+        zoomRegion.style("cursor", "zoom-in");
 
     }
 
@@ -211,7 +227,6 @@ function createBubble(data, el, options, filter, groups) {
         .attr("dy", ".75em")
         .attr("transform", "translate(" + (-zBrushWidth - 5) + ", 0) rotate(-90)")
         .text(zField);
-
 
 
     var zBrush = rightPanel.append("g")
@@ -278,12 +293,58 @@ function createBubble(data, el, options, filter, groups) {
         .on("mouseenter", highlightDot)
         .on("mousemove", moveTooltip)
         .on("mouseleave", unhighlightDot)
-        .on("click", function(d){
+        .on("click", function (d) {
+            unhighlightSelected(currentlySelectedPieChart);
             currentlySelectedPieChart = key(d);
+            highlightSelected(currentlySelectedPieChart);
             pieChart();
         })
         .call(position)
         .sort(order);
+    //highlightSelected(currentlySelectedPieChart);
+
+
+    // Setup search box
+    // TODO: change to d3 selection
+    var searchBox = $("#search-box")
+        .on("change", function () {
+            search(this.value)
+        });
+    search(searchBox.val());
+
+    function highlightSelected(selected) {
+        toggleTransparency(dot, true);
+        dot.filter(function (d) {
+            return key(d) === selected;
+        }).classed('selected', true);
+    }
+
+
+    function unhighlightSelected(selected) {
+        dot.filter(function (d) {
+            return key(d) === selected;
+        }).classed('selected', false);
+    }
+
+    function toggleTransparency(s, hidden) {
+        s.classed("half-transparent", hidden);
+    }
+
+    function search(query) {
+        if (!query) return;
+        dot.each(function (d) {
+            if (key(d) !== query) {
+                d3.select(this)
+                    .classed("half-transparent", true)
+                    .classed("search-target", false);
+            } else {
+                d3.select(this)
+                    .classed("half-transparent", false)
+                    .classed("search-target", true);
+            }
+        })
+
+    }
 
 
     function zBrushMove() {
@@ -293,14 +354,16 @@ function createBubble(data, el, options, filter, groups) {
             dot.attr('visibility', function (d) {
                 return d3.min(sz) <= z(d) && z(d) <= d3.max(sz) ? 'visible' : 'hidden';
             })
+            d3.select(".search-target")
+                .attr("visibility", true)
         }
     }
 
     function highlightDot(d) {
         dot
-            .attr("opacity", 0.3);
+            .classed("half-transparent", true);
         d3.select(this)
-            .attr("opacity", 1);
+            .classed("half-transparent", false);
 
         showDash(d);
 
@@ -315,20 +378,20 @@ function createBubble(data, el, options, filter, groups) {
 
     function unhighlightDot(d) {
         dot
-            .attr("opacity", 1);
+            .classed("half-transparent", false);
 
         hideDash(d);
 
         tooltip.transition()
             .duration(50)
             .style("opacity", 0);
+        search(searchBox.val());
     }
-
 
 
     function moveTooltip(d) {
         tooltip
-            .style("left", (d3.event.pageX - 110) + "px")
+            .style("left", (d3.event.pageX + 10) + "px")
             .style("top", (d3.event.pageY - 28) + "px")
     }
 
@@ -383,88 +446,131 @@ function createBubble(data, el, options, filter, groups) {
     }
 }
 
-var customAxis = ["x", "y", "z", "r"];
-var filter = {
-    field: 'Category',
-    value: 'ALL'
-};
-var options = {
-    key: "Food",
-    x: "Fat (g)",
-    y: "Fat (g)",
-    z: "Fat (g)",
-    r: "CO2 footprint",
-    color: "Category"
-};
+$(document).ready(function () {
+    var idMap = {
+        "select-x-axis": "x",
+        "select-y-axis": "y",
+        "select-filter": "z",
+        "select-r-axis": "r"
+
+    };
+
+    var filter = {
+        field: 'Category',
+        value: 'ALL'
+    };
+    var options = {
+        key: "Food",
+        x: "Fat (g)",
+        y: "Fat (g)",
+        z: "Fat (g)",
+        r: "CO2 footprint",
+        color: "Category"
+    };
 
 // Load the data.
-d3.csv("../data/food.csv", function(data) {
+    d3.csv("../data/food.csv", function (data) {
+        groupNutrients(data);
+        // Create filter selection
+        var groups = _.uniqBy(data.map(function (datum) {
+            return datum[filter.field]
+        }));
 
-    groupNutrients(data);
-    // Create filter selection
-    var groups = _.uniqBy(data.map(function(datum) { return datum[filter.field]}));
-
-
-    groups.forEach(function(filter) {
-        $("#select-filter").append("<option value='" + filter + "'>" + filter + "</option>");
-    });
-    $("#select-filter")
-        .val(filter.value)
-        .on("change", function() {
-            filter.value = $(this).val();
-            render();
+        groups.forEach(function (filter) {
+            $("#select-category").append("<option value='" + filter + "'>" + filter + "</option>");
         });
 
-    // Create axis definition
+        $("#select-category")
+            .val(filter.value)
+            .on("change", function () {
+                filter.value = $(this).val();
+                render();
+            });
 
-    var cols = data.columns.filter(function(col) {
-        return !isNaN(data[0][col]);
-    });
+        // Create axis definition
 
-    customAxis.forEach(function(axis) {
-        $("#control-table").append("<tr><td>" + axis + " axis</td> <td><select class='select-field' id='" + axis + "'></select></td></tr>");
-        cols.forEach(function(col) {
-            $("#" + axis).append("<option " + (options[axis] === col ? "selected" : "") + " value='" + col + "'>" + col + "</option>");
-        })
-    });
+        var cols = data.columns.filter(function (col) {
+            return !isNaN(data[0][col]);
+        });
 
-    //addFilterButtonListener();
-    addOptionsToFilterDropdown();
+        Object.keys(idMap).forEach(function (id) {
+            var axis = idMap[id];
+            cols.forEach(function (col) {
+                $("#" + id).append("<option value='" + col + "'>" + col + "</option");
+            });
+            $("#" + id)
+                .val(options[axis])
+                .on('change', function () {
+                    options[axis] = $(this).val();
+                    render();
+                });
+        });
+        //addFilterButtonListener();
+        addOptionsToFilterDropdown();
 
-    $("select.select-field").on('change', function() {
-        options[$(this).attr('id')] = $(this).val();
+        createSearch($("#search-box"), data, options.key, 'Category');
         render();
+
+        function render() {
+            console.log("render");
+            $("#bubble").empty();
+
+            createBubble(data, d3.select("#bubble"), options, filter, groups);
+        }
+
+        function createSearch(el, data, key, group) {
+            var groups = _.groupBy(data, group);
+            var searchData = Object.keys(groups).map(function (g) {
+                return {
+                    text: g,
+                    children: groups[g].map(function (d) {
+                        return {
+                            id: d[key],
+                            text: d[key]
+                        }
+                    })
+                }
+            });
+            //Object.keys(groups).forEach(function(g) {
+            //    var optGroup = el.append($("<optgroup>").attr('label', g).text(g));
+            //    groups[g].forEach(function(d) {
+            //        $("<option>").attr("value", d[key]).text(d[key]).appendTo(optGroup);
+            //
+            //    });
+            //});
+            $(el).select2({
+                data: searchData,
+                placeholder: 'Search'
+            });
+
+        }
+
     });
-    render();
 
-    function render() {
-        $("#bubble").empty();
 
-        createBubble(data, d3.select("#bubble"), options, filter, groups);
+    function loadDonut() {
+
     }
-});
 
 //Function for grouping certain nutrients into larger groups, such as all the fats into one group
-function groupNutrients(data){
-    var fats = [];
-    var vitamins = [];
-    var fatsSearchString = "fatty";
-    var vitaminsSearchString = "vitamin";
-    /*
-    for(var i = 0; i < data.length; i++){
-        var elem = data[i];
-        //var keys = elem.keys();
-        for(var j = 0; j < keys.length; j++){
-            
-        }
+    function groupNutrients(data) {
+        var fats = [];
+        var vitamins = [];
+        var fatsSearchString = "fatty";
+        var vitaminsSearchString = "vitamin";
+        /*
+         for(var i = 0; i < data.length; i++){
+         var elem = data[i];
+         //var keys = elem.keys();
+         for(var j = 0; j < keys.length; j++){
+
+         }
+         }
+         */
     }
-    */
-}
 
-function createFilters() {
+    function createFilters() {
 
-}
+    }
 
-function loadDonut(){
-    
-}
+})
