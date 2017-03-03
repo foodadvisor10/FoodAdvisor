@@ -8,12 +8,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <script src="../js/jquery-3.1.1.min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="../css/slider.css">
+    <link rel="stylesheet" href="../css/bubble-legend.css">
     <link rel="stylesheet" href="../css/jquery-ui.min.css">
 
     <script src="../js/jquery-3.1.1.min.js"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 </head>
 
 
@@ -83,7 +84,7 @@
     }
 
     #control {
-        position: absolute;
+        position: relative;
         padding: 20px;
         width: 400px;
     }
@@ -162,17 +163,15 @@
     <table id="filter-table">
         <tr>
             <td>
-                <!--<button id="add-filter-button"> Add Filter</button>-->
                 <select id="filter-dropdown"></select>
             </td>
-            <!--
-            <td>
-              <button id="remove-filter-button"> Remove Filter</button>
-            </td>
-            -->
         </tr>
 
     </table>
+</div>
+
+<div id="bubble-legend-container">
+    <svg id="bubble-legend" width="500" height="100"></svg>
 </div>
 
 <script src="../js/d3.v4.min.js" charset="utf-8"></script>
@@ -181,6 +180,7 @@
 <script src="../js/piechart.js"></script>
 <script src="../js/bubble.js"></script>
 <script src="../js/filter.js"></script>
+<script src="../js/bubble-legend.js"></script>
 
 </body>
 

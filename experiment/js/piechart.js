@@ -103,7 +103,6 @@ function pieChart() {
                         .style('left', (d3.event.layerX + 10) + 'px');
                 });
 
-
                 var legend = donut.selectAll('.legend')
                     .data(color.domain())
                     .enter()
