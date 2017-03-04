@@ -359,17 +359,17 @@ function BubbleChart(el) {
         }
 
 
-        function zBrushMove() {
-            var s = d3.event.selection || zScale.range();
-            if (s) {
-                var sz = s.map(zScale.invert);
-                dot.attr('visibility', function (d) {
-                    return d3.min(sz) <= z(d) && z(d) <= d3.max(sz) ? 'visible' : 'hidden';
-                })
-                d3.select(".search-target")
-                    .attr("visibility", true)
-            }
-        }
+        // function zBrushMove() {
+        //     var s = d3.event.selection || zScale.range();
+        //     if (s) {
+        //         var sz = s.map(zScale.invert);
+        //         dot.attr('visibility', function (d) {
+        //             return d3.min(sz) <= z(d) && z(d) <= d3.max(sz) ? 'visible' : 'hidden';
+        //         })
+        //         d3.select(".search-target")
+        //             .attr("visibility", true)
+        //     }
+        // }
 
         function highlightDot(d) {
             dot
@@ -408,35 +408,35 @@ function BubbleChart(el) {
         }
 
         function showDash(d) {
-            vLine.attr("visibility", "visible")
+            vLine.classed("invisible", false)
                 .attr("x1", xScale(x(d)))
                 .attr("y1", yScale.range()[0])
                 .attr("x2", xScale(x(d)))
                 .attr("y2", yScale(y(d)));
 
-            hLine.attr("visibility", "visible")
+            hLine.classed("invisible", false)
                 .attr("x1", xScale.range()[0])
                 .attr("y1", yScale(y(d)))
                 .attr("x2", xScale(x(d)))
                 .attr("y2", yScale(y(d)));
 
-            xText.attr('visibility', 'visible')
+            xText.classed("invisible", false)
                 .attr('x', xScale.range()[0] - 20)
                 .attr('y', yScale(y(d)))
                 .text(y(d));
 
-            yText.attr('visibility', 'visible')
+            yText.classed("invisible", false)
                 .attr('x', xScale(x(d)))
                 .attr('y', yScale.range()[0] + 16)
                 .text(x(d));
         }
 
         function hideDash(d) {
-            vLine.attr("visibility", "hidden");
-            hLine.attr("visibility", "hidden");
+            vLine.classed("invisible", true);
+            hLine.classed("invisible", false);
 
-            xText.attr("visibility", "hidden");
-            yText.attr("visibility", "hidden");
+            xText.classed("invisible", false);
+            yText.classed("invisible", false);
         }
 
         // Positions the dots based on data.
@@ -459,15 +459,15 @@ function BubbleChart(el) {
     };
 
     this.updateFilter = function(filters) {
-        dot.attr('visibility', function(d) {
-            var filtered = filters.every(function(filter) {
+        dot.classed("invisible", function(d) {
+            var visible = filters.every(function(filter) {
                 return (filter.min <= d[filter.field] && d[filter.field] <= filter.max);
             });
-            return filtered ? 'visible' : 'hidden';
-        })
+            return !visible;
+        });
 
         d3.select(".search-target")
-            .attr("visibility", true)
+            .classed("invisible", true)
 
     }
 

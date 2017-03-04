@@ -90,7 +90,6 @@ function MultiFilter(filterTable, data, filters, onChange) {
             //Check first that the user made a selection
             if(s != null){
                 var sz = s.map(x);
-                console.log(sz[0] + " " + sz[1]);
                 setFilter(filter, d3.min(sz), d3.max(sz))
             } else {
                 setFilter(filter);
