@@ -89,12 +89,15 @@ function createD3Scaler(container, filter){
     .attr("height", height)
     .attr("width", width);
 
-  var brush = d3.brushX()
-    .extent([[0, 0], [width*0.8, height]]);
 
   var x = d3.scaleLinear()
     .domain([0, width*0.8])
     .range([0, 100]);
+
+  var xAxis = d3.axisBottom(x);
+
+  var brush = d3.brushX()
+    .extent([[0, 0], [width*0.8, height]]);
 
   brush.on('end', function() {
     //Check first that the user made a selection
@@ -111,7 +114,8 @@ function createD3Scaler(container, filter){
   var g = svg.append('g')
     .attr("class", "brush")
     .attr("transform", "translate(10, 2)")
-    .call(brush);
+    .call(brush)
+    .call(brush.move, x.range());   //Sets the brush to cover the whole range
 
   g.selectAll('.overlay')
     .attr("style", "fill: #4b9e9e");
