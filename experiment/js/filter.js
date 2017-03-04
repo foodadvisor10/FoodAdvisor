@@ -82,22 +82,24 @@ function createNewFilter(filter) {
 //Container should be a d3 selection
 function createD3Scaler(container, filter){
 
-  var height = 30,
+  var svgHeight = 50,
+    brushHeight = 30,
     width = 120;
 
   var svg = container.append('svg')
-    .attr("height", height)
+    .attr("height", svgHeight)
     .attr("width", width);
 
 
   var x = d3.scaleLinear()
-    .domain([0, width*0.8])
-    .range([0, 100]);
+    .domain([0, 100])
+    .range([0, width*0.8]);
 
-  var xAxis = d3.axisBottom(x);
+  var xAxis = d3.axisBottom(x)
+    .tickValues([0, 50, 100]);
 
   var brush = d3.brushX()
-    .extent([[0, 0], [width*0.8, height]]);
+    .extent([[0, 0], [width*0.8, brushHeight]]);
 
   brush.on('end', function() {
     //Check first that the user made a selection
@@ -107,21 +109,31 @@ function createD3Scaler(container, filter){
       //Upper bound of the filter
       var max = d3.event.selection[1];
       //Set the filter
-      setLimits(filter, x(min), x(max));
+      setLimits(filter, x.invert(min), x.invert(max));
     }
   });
 
-  var g = svg.append('g')
+  var context = svg.append("g")
+    .attr("class", "context");
+
+  //Add the axis
+  context.append("g")
+    .attr("class", "axis axis--x")
+    .attr("transform", "translate(10," + brushHeight + ")")
+    .call(xAxis);
+
+
+  var brushG = context.append('g')
     .attr("class", "brush")
-    .attr("transform", "translate(10, 2)")
+    .attr("transform", "translate(10, 0)")
     .call(brush)
     .call(brush.move, x.range());   //Sets the brush to cover the whole range
 
-  g.selectAll('.overlay')
+  brushG.selectAll('.overlay')
     .attr("style", "fill: #4b9e9e");
-  g.selectAll('.selection')
+  brushG.selectAll('.selection')
     .attr("style", "fill: #78c5c5");
-  g.selectAll('.handle')
+  brushG.selectAll('.handle')
     .attr("style", "fill: #276c86");
 
 }
@@ -141,6 +153,7 @@ function createRemoveButton(container, filter) {
 
 //Set the limits of the filter
 function setLimits(id, min, max) {
+ // console.log("max: " + max + ", min: " + min);
   //Get the correct filter obj for this filter
   for(var i in filterObjects){
     if(filterObjects[i].id == id){
