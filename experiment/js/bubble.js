@@ -75,8 +75,8 @@ function BubbleChart(el) {
     var yAxisGroup = focus.append("g")
         .attr("class", "y axis--y");
 
-    // Create z-brush
-    var zAxisGroup = rightPanel.append("g");
+    // // Create z-brush
+    // var zAxisGroup = rightPanel.append("g");
 
     // Create bubbles
     var dots = focus.append("g")
@@ -98,13 +98,13 @@ function BubbleChart(el) {
         .attr("dy", ".75em")
         .attr("transform", "rotate(-90)");
 
-    // Add an z-axis label.
-    var zLabel = rightPanel.append("text")
-        .attr("class", "z label")
-        .attr("text-anchor", "end")
-        .attr("y", 20)
-        .attr("dy", ".75em")
-        .attr("transform", "translate(" + (-zBrushWidth - 5) + ", 0) rotate(-90)");
+    // // Add an z-axis label.
+    // var zLabel = rightPanel.append("text")
+    //     .attr("class", "z label")
+    //     .attr("text-anchor", "end")
+    //     .attr("y", 20)
+    //     .attr("dy", ".75em")
+    //     .attr("transform", "translate(" + (-zBrushWidth - 5) + ", 0) rotate(-90)");
 
 
     this.createBubble = function(newData, options, filter, groups) {
@@ -270,19 +270,19 @@ function BubbleChart(el) {
         }
 
 
-        zAxisGroup.call(zAxis);
+        // zAxisGroup.call(zAxis);
 
 
-        var zBrushOption = d3.brushY()
-            .extent([[-zBrushWidth / 2, 0], [zBrushWidth / 2, zBrushHeight]])
-            .on("start brush end", zBrushMove);
+        // var zBrushOption = d3.brushY()
+        //     .extent([[-zBrushWidth / 2, 0], [zBrushWidth / 2, zBrushHeight]])
+        //     .on("start brush end", zBrushMove);
+        //
+        // zLabel.text(zField);
 
-        zLabel.text(zField);
 
-
-        var zBrush = rightPanel.append("g")
-            .attr("class", "brush")
-            .call(zBrushOption);
+        // var zBrush = rightPanel.append("g")
+        //     .attr("class", "brush")
+        //     .call(zBrushOption);
 
         xAxisGroup.call(xAxis);
         yAxisGroup.call(yAxis);
