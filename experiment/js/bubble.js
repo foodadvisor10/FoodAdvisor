@@ -82,6 +82,8 @@ function BubbleChart(el) {
     var dots = focus.append("g")
         .attr("class", "dots");
 
+    var dot = dots.selectAll(".dot");
+
 
     // Add an x-axis label.
     var xLabel = focus.append("text")
@@ -310,7 +312,7 @@ function BubbleChart(el) {
             .call(position)
             .sort(order);
         s.exit().remove();
-        var dot = dots.selectAll(".dot");
+        dot = dots.selectAll(".dot");
         //highlightSelected(currentlySelectedPieChart);
 
 
@@ -347,7 +349,7 @@ function BubbleChart(el) {
                     d3.select(this)
                         .classed("half-transparent", true)
                         .classed("search-target", false);
-                } else {
+                } else if (key(d) === query) {
                     d3.select(this)
                         .classed("half-transparent", false)
                         .classed("search-target", true);
@@ -454,6 +456,19 @@ function BubbleChart(el) {
         function order(a, b) {
             return radius(b) - radius(a);
         }
+    };
+
+    this.updateFilter = function(filters) {
+        dot.attr('visibility', function(d) {
+            var filtered = filters.every(function(filter) {
+                return (filter.min <= d[filter.field] && d[filter.field] <= filter.max);
+            });
+            return filtered ? 'visible' : 'hidden';
+        })
+
+        d3.select(".search-target")
+            .attr("visibility", true)
+
     }
 
 }
