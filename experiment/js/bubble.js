@@ -109,7 +109,7 @@ function BubbleChart(el) {
     //     .attr("transform", "translate(" + (-zBrushWidth - 5) + ", 0) rotate(-90)");
 
 
-    this.createBubble = function(newData, options, filter, groups) {
+    this.createBubble = function (newData, options, filter, groups) {
         // Axis definition
         var keyField = options.key,
             xField = options.x,
@@ -294,6 +294,8 @@ function BubbleChart(el) {
         yLabel.text(yField);
 
         var s = dots.selectAll(".dot").data(data, key);
+        s.sort(order).transition()
+            .call(position);
         s.enter().append("circle")
             .attr("class", "dot")
             .style("fill", function (d) {
@@ -309,9 +311,17 @@ function BubbleChart(el) {
                 highlightSelected(currentlySelectedPieChart);
                 pieChart();
             })
-            .merge(s)
-            .call(position)
-            .sort(order);
+            .sort(order)
+            .attr("cx", function (d) {
+                return xScale(x(d));
+            })
+            .attr("cy", function (d) {
+                return yScale(y(d));
+            })
+            .transition()
+            .attr("r", function (d) {
+                return radiusScale(radius(d));
+            });
         s.exit().remove();
         dot = dots.selectAll(".dot");
         //highlightSelected(currentlySelectedPieChart);
@@ -459,9 +469,9 @@ function BubbleChart(el) {
         }
     };
 
-    this.updateFilter = function(filters) {
-        dot.classed("invisible", function(d) {
-            var visible = filters.every(function(filter) {
+    this.updateFilter = function (filters) {
+        dot.classed("invisible", function (d) {
+            var visible = filters.every(function (filter) {
                 return (filter.min <= d[filter.field] && d[filter.field] <= filter.max);
             });
             return !visible;
