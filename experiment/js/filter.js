@@ -145,26 +145,3 @@ function setLimits(id, min, max) {
     }
   }
 }
-
-//Container should be a jQuery selection
-function jQueryRangeScaler(container) {
-
-  // var row = $(".filterRow").append("<div>");
-
-  container.append("<div>")
-    .attr("class", "range-slider");
-
-  container.find(".range-slider").slider({
-    range: true,
-    min: 0,
-    max: 100,
-    values: [ 0, 100 ],
-    slide: function( event, ui ) {
-      var begin = d3.min([ui.values[0], 100]);
-      var end = d3.max([ui.values[1], 0]);
-      console.log("begin:", begin, "end:", end);
-
-    }
-  });
-
-}

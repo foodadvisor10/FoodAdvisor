@@ -457,5 +457,3 @@ function BubbleChart(el) {
     }
 
 }
-
-;
