@@ -71,41 +71,53 @@ function MultiFilter(filterTable, data, filters, onChange) {
 //Container should be a d3 selection
     function createD3Scaler(container, filter) {
         var f = function(d) {return +d[filter.field]};
-        var height = 30,
+        var svgHeight = 50,
+            brushHeight = 30,
             width = 200;
 
         var svg = container.append('svg')
-            .attr("height", height)
+            .attr("height", svgHeight)
             .attr("width", width);
 
         var brush = d3.brushX()
-            .extent([[0, 0], [width * 0.8, height]]);
+            .extent([[0, 0], [width * 0.8, brushHeight]]);
 
         var x = d3.scaleLinear()
-            .domain([0, width * 0.8])
-            .range(d3.extent(data, f));
+            .domain(d3.extent(data, f))
+            .range([0, width * 0.8]);
+
+        var xAxis = d3.axisBottom(x)
+            .ticks(3);
 
         brush.on('start brush end', function() {
             var s = d3.event.selection;
             //Check first that the user made a selection
             if(s != null){
-                var sz = s.map(x);
+                var sz = s.map(x.invert);
                 setFilter(filter, d3.min(sz), d3.max(sz))
             } else {
                 setFilter(filter);
             }
         });
 
-        var g = svg.append('g')
+        var context = svg.append("g")
+            .attr("class", "context");
+
+        //Add the axis
+        context.append("g")
+            .attr("transform", "translate(10," + brushHeight + ")")
+            .call(xAxis);
+
+        var brushGroup = svg.append('g')
             .attr("class", "brush")
             .attr("transform", "translate(10, 2)")
             .call(brush);
 
-        g.selectAll('.overlay')
+        brushGroup.selectAll('.overlay')
             .attr("style", "fill: #4b9e9e");
-        g.selectAll('.selection')
+        brushGroup.selectAll('.selection')
             .attr("style", "fill: #78c5c5");
-        g.selectAll('.handle')
+        brushGroup.selectAll('.handle')
             .attr("style", "fill: #276c86");
     }
 
