@@ -309,6 +309,7 @@ function BubbleChart(el) {
                 highlightSelected(currentlySelectedPieChart);
                 pieChart();
             })
+            .merge(s)
             .call(position)
             .sort(order);
         s.exit().remove();
