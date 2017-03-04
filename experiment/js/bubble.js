@@ -318,6 +318,7 @@ function BubbleChart(el) {
         // TODO: change to d3 selection
         var searchBox = $("#search-box")
             .on("change", function () {
+                console.log("update search" + this.value);
                 search(this.value)
             });
         search(searchBox.val());
@@ -341,9 +342,8 @@ function BubbleChart(el) {
         }
 
         function search(query) {
-            if (!query) return;
             dot.each(function (d) {
-                if (key(d) !== query) {
+                if (query && key(d) !== query) {
                     d3.select(this)
                         .classed("half-transparent", true)
                         .classed("search-target", false);
@@ -557,7 +557,8 @@ $(document).ready(function () {
             //});
             $(el).select2({
                 data: searchData,
-                placeholder: 'Search'
+                placeholder: 'Search',
+                allowClear: true
             });
 
         }
