@@ -433,10 +433,10 @@ function BubbleChart(el) {
 
         function hideDash(d) {
             vLine.classed("invisible", true);
-            hLine.classed("invisible", false);
+            hLine.classed("invisible", true);
 
-            xText.classed("invisible", false);
-            yText.classed("invisible", false);
+            xText.classed("invisible", true);
+            yText.classed("invisible", true);
         }
 
         // Positions the dots based on data.
