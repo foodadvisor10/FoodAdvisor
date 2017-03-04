@@ -1,0 +1,21 @@
+* {
+    font-family: Roboto, sans-serif;
+}
+
+#control {
+    position: relative;
+    padding: 20px;
+    width: 400px;
+}
+
+#control-table {
+    width:400px;
+}
+
+#control-table tr {
+    height: 40px;
+}
+
+#control-table select{
+    width:300px;
+}

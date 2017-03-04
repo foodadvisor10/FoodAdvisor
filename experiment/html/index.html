@@ -1,107 +1,21 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../css/normalize.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <link rel="stylesheet" href="../css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="../css/bubble.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <script src="../js/jquery-3.1.1.min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="../css/slider.css">
     <link rel="stylesheet" href="../css/bubble-legend.css">
-    <link rel="stylesheet" href="../css/jquery-ui.min.css">
+    <link rel="stylesheet" href="../css/donut.css">
+    <link rel="stylesheet" href="../css/index.css">
 
-    <script src="../js/jquery-3.1.1.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
 </head>
 
-
-<style>
-    * {
-        font-family: Roboto, sans-serif;
-    }
-
-    #chart {
-        height: 420px;
-        margin-left: 50px;
-        /*
-            margin-top: 0px;*/
-        position: absolute;
-        text-align: center;
-        width: 300px;
-        display: inline-block;
-    }
-
-    #chart svg {
-
-        overflow: visible;
-    }
-
-    .tooltip {
-        background: #eee;
-        box-shadow: 0 0 5px #999999;
-        color: #333;
-        display: none;
-        font-size: 12px;
-        left: 130px;
-        padding: 10px;
-        position: absolute;
-        text-align: center;
-        top: 95px;
-        width: 80px;
-        z-index: 10;
-    }
-
-    .legend {
-        font-size: 13px;
-        /*margin-left: 100px */
-    }
-
-    .legend rect {
-        cursor: pointer;
-        stroke-width: 2;
-    }
-
-    rect.disabled {
-        fill: transparent !important;
-    }
-
-    .chart {
-        font-size: 14px;
-        text-align: center;
-    }
-
-    #headerimg img {
-        padding-top: 80px;
-        display: block;
-        margin: auto;
-        max-width: 50%;
-        max-height: 50%;
-        text-align: center;
-
-    }
-
-    #control {
-        position: relative;
-        padding: 20px;
-        width: 400px;
-    }
-
-    #control-table {
-        width:400px;
-    }
-
-    #control-table tr {
-        height: 40px;
-    }
-
-    #control-table select{
-        width:300px;
-    }
-
-</style>
 <body onload="pieChart()">
 <div id='headerimg'>
     <img src="../img/headerimg.png" alt="Food Advisor - for a healthier life &amp; a healthier planet"
@@ -148,22 +62,15 @@
                 </select>
             </td>
         </tr>
-        <tr>
-            <td>Filter</td>
-            <td>
-                <select id="select-filter">
-                </select>
-            </td>
-        </tr>
-        <tr>
-        </tr>
     </table>
 
     <!-- Add filters -->
     <table id="filter-table">
         <tr>
             <td>
-                <select id="filter-dropdown"></select>
+                <select id="filter-dropdown">
+                    <option value="Select Filter">Select Filter</option>
+                </select>
             </td>
         </tr>
 
@@ -174,14 +81,17 @@
     <svg id="bubble-legend" width="900" height="200"></svg>
 </div>
 
-<script src="../js/d3.v4.min.js" charset="utf-8"></script>
-<script src="../js/lodash.min.js" charset="utf-8"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
 
 <script src="../js/piechart.js"></script>
 <script src="../js/bubble.js"></script>
 <script src="../js/filter.js"></script>
 <script src="../js/bubble-legend.js"></script>
-
+<script src="../js/search-box.js"></script>
+<script src="../js/index.js"></script>
 </body>
 
 </html>

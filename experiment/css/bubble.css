@@ -85,3 +85,7 @@ div.bubble-tooltip {
     margin-left: 50px;
     width: 500px;
 }
+
+.invisible {
+    visibility: hidden;
+}
