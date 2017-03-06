@@ -1,5 +1,11 @@
 var currentlySelectedPieChart = 'rice';
-function pieChart() {
+function pieChart(a) {
+    // console.log("Is it updating");
+    // console.log(a.Food);
+    if (a == null){
+        a= {"Energy (kcal)":"364.6"};
+    }
+    // console.log(a["Energy (kcal)"]);
     $("#chart").find("svg").remove();
     (function (d3) {
         'use strict';
@@ -66,7 +72,14 @@ function pieChart() {
                 donut.append("text")
                     .style("text-anchor", "middle")
                     .style("font-size", "20px")
+                    .attr("dy", "0em")
                     .text(currentlySelectedPieChart);
+
+                donut.append("text")
+                    .style("text-anchor", "middle")
+                    .style("font-size", "15px")
+                    .attr("dy", "1em")
+                    .text(a["Energy (kcal)"] + " (kcal)")
 
                 //return;
 
@@ -87,8 +100,9 @@ function pieChart() {
                         return (d.enabled) ? d.count : 0;
                     }));
                     var percent = Math.round(1000 * d.data.count / total) / 10;
-                    tooltip.select('.label').html(d.data.label);
-                    tooltip.select('.count').html(d.data.count);
+                    var measurement = d.data.label.substring(d.data.label.indexOf("("),d.data.label.length);
+                    tooltip.select('.label').html(d.data.label.substring(0, d.data.label.indexOf("(")).trim());
+                    tooltip.select('.count').html(d.data.count + " " + measurement);
                     tooltip.select('.percent').html(percent + '%');
                     tooltip.style('display', 'block');
                 });

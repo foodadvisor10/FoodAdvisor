@@ -309,7 +309,18 @@ function BubbleChart(el) {
                 unhighlightSelected(currentlySelectedPieChart);
                 currentlySelectedPieChart = key(d);
                 highlightSelected(currentlySelectedPieChart);
-                pieChart();
+                // console.log("Is it updating");
+
+                //This is to extract the JSON object of our currently selected food. 
+                var food;
+                for(var i = 0; i < data.length; i++){
+                    if(data[i].Food == currentlySelectedPieChart){
+                        food = data[i];
+                        console.log(i);
+                        i = data.length;
+                    }
+                }
+                pieChart(food);
             })
             .sort(order)
             .attr("cx", function (d) {
