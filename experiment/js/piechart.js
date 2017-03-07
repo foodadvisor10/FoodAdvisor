@@ -1,5 +1,10 @@
 var currentlySelectedPieChart = 'rice';
 
+//1 == macro
+//2 == micro
+var currentlySelectedSizing = 1;
+var currentFood;
+
 var colorsize = {   "Potassium (mg)" : "#5061fb",
                     "Phosphorus (mg)" : "#DD1133",
                     "Fat (g)" : "#FFFF3C",
@@ -32,11 +37,11 @@ var colorsize = {   "Potassium (mg)" : "#5061fb",
 
 // var currentFood = "";
 function pieChart(a) {
-
     //This is for initial load food. i.e our rice. 
     if (a == null){
         a = {"Energy (kcal)":"364.6"};
     }
+    currentFood = a;
 
     $("#chart").find("svg").remove();
     (function (d3) {
@@ -85,8 +90,11 @@ function pieChart(a) {
         tooltip.append('div')
             .attr('class', 'percent');
 
-        // try {
-        d3.csv('../data/food/' + currentlySelectedPieChart + '.csv', function (error, dataset) {
+        // THis function will be used in future when we differ from Macro file and Micro file.
+        // Or we just redo the system and use JSON objects and yeah.. dynamically update.             
+       d3.csv('../data/food/'+currentlySelectedSizing+'/' + currentlySelectedPieChart + "_" + currentlySelectedSizing + '.csv', function (error, dataset) {
+        // d3.csv('../data/food/' + currentlySelectedPieChart + '.csv', function (error, dataset) {
+
             //console.log(dataset);
             if (error) {
                 document.getElementById("chart").innerHTML = "This is not supposed to happen! No data was found for this food.";
@@ -221,6 +229,11 @@ function pieChart(a) {
     })(window.d3);
 }
 
+function updateChart(chart){
+    // console.log(chart);
+    currentlySelectedSizing = chart;
+    pieChart(currentFood);
+}
 
 
 
