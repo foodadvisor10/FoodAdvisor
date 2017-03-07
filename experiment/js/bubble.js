@@ -1,4 +1,4 @@
-function BubbleChart(el, filterField) {
+function BubbleChart(el, filterField, filters) {
     var that = this;
 
     var db = [];
@@ -89,13 +89,36 @@ function BubbleChart(el, filterField) {
 
     var dot = dots.selectAll(".dot");
 
+    var menuX = filters.map(function(d) {
+        return {
+            title: d,
+            action: function() {
+                options.x = d;
+                that.createBubble(data, options, filter, groups);
+            }
+        }
+    });
+
+    var menuY = filters.map(function(d) {
+        return {
+            title: d,
+            action: function() {
+                options.y = d;
+                that.createBubble(data, options, filter, groups);
+            }
+        }
+    });
+
+
+
 
     // Add an x-axis label.
     var xLabel = focus.append("text")
         .attr("class", "x label")
         .attr("text-anchor", "end")
         .attr("x", width)
-        .attr("y", height - 6);
+        .attr("y", height - 6)
+        .on("click", d3.contextMenu(menuX));
 
     // Add a y-axis label.
     var yLabel = focus.append("text")
@@ -103,7 +126,8 @@ function BubbleChart(el, filterField) {
         .attr("text-anchor", "end")
         .attr("y", 6)
         .attr("dy", ".75em")
-        .attr("transform", "rotate(-90)");
+        .attr("transform", "rotate(-90)")
+        .on("click", d3.contextMenu(menuY));
 
     // // Add an z-axis label.
     // var zLabel = rightPanel.append("text")
@@ -117,10 +141,10 @@ function BubbleChart(el, filterField) {
         db = data;
     };
 
-    this.createBubble = function (newData, options, filter, groups, keyword) {
-        that.options = options;
-        that.filter = filter;
-        that.groups = groups;
+    this.createBubble = function (newData, opt, fil, grps, keyword) {
+        options = opt;
+        filter = fil;
+        groups = grps;
         console.log("redrawn");
         // Axis definition
         var keyField = options.key,
@@ -515,7 +539,6 @@ function BubbleChart(el, filterField) {
     }
 
     this.updateGroups = function(category) {
-        that.createBubble(db, that.options, category, that.groups);
+        that.createBubble(db, options, category, groups);
     }
-
 }
