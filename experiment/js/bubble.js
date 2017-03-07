@@ -24,7 +24,7 @@ function BubbleChart(el) {
         yBrushWidth = 30;
 
     // Create the SVG container and set the origin.
-    var svg = el.append("svg")
+    var svg = el.select("svg")
         .attr('class', 'container')
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom);
