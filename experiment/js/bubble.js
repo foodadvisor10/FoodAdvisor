@@ -294,23 +294,16 @@ function BubbleChart(el) {
         yLabel.text(yField);
 
         var s = dots.selectAll(".dot").data(data, key);
-        s.sort(order).transition()
+        s.call(setDotEvent)
+            .sort(order)
+            .transition()
             .call(position);
         s.enter().append("circle")
             .attr("class", "dot")
             .style("fill", function (d) {
                 return colorScale(color(d));
             })
-            .on("mouseenter", highlightDot)
-            .on("mousemove", moveTooltip)
-            .on("mouseleave", unhighlightDot)
-            .on("click", function (d) {
-                console.log(currentlySelectedPieChart);
-                unhighlightSelected(currentlySelectedPieChart);
-                currentlySelectedPieChart = key(d);
-                highlightSelected(currentlySelectedPieChart);
-                pieChart(d);
-            })
+            .call(setDotEvent)
             .sort(order)
             .attr("cx", function (d) {
                 return xScale(x(d));
@@ -381,6 +374,21 @@ function BubbleChart(el) {
         //             .attr("visibility", true)
         //     }
         // }
+
+        function setDotEvent(dot) {
+            dot.on("mouseenter", highlightDot)
+                .on("mousemove", moveTooltip)
+                .on("mouseleave", unhighlightDot)
+                .on("click", selectDot)
+        }
+
+        function selectDot(d) {
+            console.log(currentlySelectedPieChart);
+            unhighlightSelected(currentlySelectedPieChart);
+            currentlySelectedPieChart = key(d);
+            highlightSelected(currentlySelectedPieChart);
+            pieChart(d);
+        }
 
         function highlightDot(d) {
             dot
