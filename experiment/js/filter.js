@@ -126,7 +126,7 @@ function MultiFilter(filterTable, data, filters, onChange) {
 
         container.append("div")
             .attr("class", "cssCircle minusSign")
-            .html("&#8211;")
+            .html("x")       //&#8211;
             .on("click", function () {
                 filterTable.select("#" + filter.id).remove();
                 dropdown.select("option[value=\"" + filter.field + "\"]")

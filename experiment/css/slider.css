@@ -48,7 +48,7 @@
     height: 13px;
     padding: 0;
 
-    background: #779BCA;
+    background: #e83e3e;
     border: 1px solid #003580;
     color: #003580;
     text-align: center;
@@ -59,7 +59,7 @@
 }
 
 .cssCircle:hover {
-    background: #3F69A0 ;
+    background: #f70c0c ;
     cursor: pointer;
 }
 
