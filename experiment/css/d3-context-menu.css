@@ -17,6 +17,8 @@
 	margin: 4px 0px;
 	padding: 0px;
 	cursor: default;
+	height: 200px;
+	overflow: auto;
 }
 
 .d3-context-menu ul li {
