@@ -1,4 +1,11 @@
 #bubble-legend-container{
     position: relative;
-    margin-left: 20px;
+    margin-left: 40px;
+    margin-top: 20px;
 }
+
+.legend-row rect{
+    cursor: pointer;
+    stroke-width: 2;
+}
+
