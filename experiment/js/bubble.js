@@ -61,9 +61,9 @@ function BubbleChart(el) {
             .style("stroke-dasharray", "3, 3")
             .attr("class", "v-line")
             .style("stroke", "gray"),
-        xText = focus.append('text')
+        vText = focus.append('text')
             .style('font-weight', 'bold'),
-        yText = focus.append('text')
+        hText = focus.append('text')
             .style('font-weight', 'bold');
 
     // Add the x-axis.
@@ -439,12 +439,12 @@ function BubbleChart(el) {
                 .attr("x2", xScale(x(d)))
                 .attr("y2", yScale(y(d)));
 
-            xText.classed("invisible", false)
-                .attr('x', xScale.range()[0] - 20)
+            vText.classed("invisible", false)
+                .attr('x', xScale.range()[0] - 28)
                 .attr('y', yScale(y(d)))
                 .text(y(d));
 
-            yText.classed("invisible", false)
+            hText.classed("invisible", false)
                 .attr('x', xScale(x(d)))
                 .attr('y', yScale.range()[0] + 16)
                 .text(x(d));
@@ -454,8 +454,8 @@ function BubbleChart(el) {
             vLine.classed("invisible", true);
             hLine.classed("invisible", true);
 
-            xText.classed("invisible", true);
-            yText.classed("invisible", true);
+            vText.classed("invisible", true);
+            hText.classed("invisible", true);
         }
 
         // Positions the dots based on data.
