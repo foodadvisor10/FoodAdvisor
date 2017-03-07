@@ -1,5 +1,7 @@
 function BubbleChart(el) {
+    var that = this;
 
+    var db = [];
     var data = [];
 
     var W = parseInt(el.style('width')), H = parseInt(el.style('height'));
@@ -108,8 +110,12 @@ function BubbleChart(el) {
     //     .attr("dy", ".75em")
     //     .attr("transform", "translate(" + (-zBrushWidth - 5) + ", 0) rotate(-90)");
 
+    this.setDB = function(data) {
+        db = data;
+    };
 
-    this.createBubble = function (newData, options, filter, groups) {
+    this.createBubble = function (newData, options, filter, groups, keyword) {
+        console.log("redrawn");
         // Axis definition
         var keyField = options.key,
             xField = options.x,
@@ -157,6 +163,18 @@ function BubbleChart(el) {
         data = newData.filter(function (d) {
             return filterValue === 'ALL' || f(d) === filterValue;
         });
+
+        // additional search item
+        if (keyword && data.filter(function(d) {
+                return key(d) === keyword;
+            }).length === 0) {
+            var d = db.filter(function(d) {
+                return key(d) === keyword;
+            });
+            if (d) {
+                data.push(d[0]);
+            }
+        }
 
         // Various scales. These domains make assumptions of data, naturally.
         var xScale = d3.scaleLinear().domain(scaler(data, x)).range([0, width]),
@@ -323,9 +341,10 @@ function BubbleChart(el) {
         // Setup search box
         // TODO: change to d3 selection
         var searchBox = $("#search-box")
+            .unbind("change")
             .on("change", function () {
-                console.log("update search" + this.value);
-                search(this.value)
+                console.log("on change");
+                that.createBubble(data, options, filter, groups, this.value);
             });
         search(searchBox.val());
 
