@@ -1,4 +1,4 @@
-function BubbleChart(el) {
+function BubbleChart(el, filters) {
     var that = this;
 
     var db = [];
@@ -86,13 +86,46 @@ function BubbleChart(el) {
 
     var dot = dots.selectAll(".dot");
 
+/*
+    var xLabelContainer = focus.append("g")
+      .attr("class", "x-label-container")
+      .attr("x", width)
+      .attr("y", height - 6);
+*/
+/*
+    var menu = [
+      {
+          title: "Fats",
+          action: function(elm, d, i){
+            //TODO: Set selected filter to "Fats"
+          }
+      },
+      {
+          title: "Protein"
+      },
+      {
+          title: "Carbohydrates"
+      }
+    ];
+*/
+    var menu = [];
+    for(var i = 0; i < filters.length; i++){
+        var menuObj = {
+            title: filters[i],
+            action: function (elm, d, i) {
+              //TODO: Set selected filter to "filters[i]"
+            }
+        };
+        menu.push(menuObj);
+    }
 
     // Add an x-axis label.
     var xLabel = focus.append("text")
         .attr("class", "x label")
         .attr("text-anchor", "end")
         .attr("x", width)
-        .attr("y", height - 6);
+        .attr("y", height - 6)
+        .on("click", d3.contextMenu(menu));
 
     // Add a y-axis label.
     var yLabel = focus.append("text")

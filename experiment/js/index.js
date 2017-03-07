@@ -52,8 +52,6 @@ $(document).ready(function () {
         //Send the category data to the bubble legend
         bubbleLegend(groups);
 
-        var bubble = new BubbleChart(d3.select("#bubble"));
-
         groups.forEach(function (filter) {
             $("#select-category").append("<option value='" + filter + "'>" + filter + "</option>");
         });
@@ -70,8 +68,12 @@ $(document).ready(function () {
         var cols = data.columns.filter(function (col) {
             return !isNaN(data[0][col]);
         });
+        //console.log(cols);
 
-        Object.keys(idMap).forEach(function (id) {
+        var bubble = new BubbleChart(d3.select("#bubble"), cols);
+
+
+      Object.keys(idMap).forEach(function (id) {
             var axis = idMap[id];
             cols.forEach(function (col) {
                 $("#" + id).append("<option value='" + col + "'>" + col + "</option>");
