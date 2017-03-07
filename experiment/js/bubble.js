@@ -1,8 +1,11 @@
-function BubbleChart(el, filters) {
+function BubbleChart(el, filterField, filters) {
     var that = this;
 
     var db = [];
     var data = [];
+    var options = {};
+    var filter = [];
+    var groups = [];
 
     var W = parseInt(el.style('width')), H = parseInt(el.style('height'));
 
@@ -86,16 +89,28 @@ function BubbleChart(el, filters) {
 
     var dot = dots.selectAll(".dot");
 
-    var menu = [];
-    for(var i = 0; i < filters.length; i++){
-        var menuObj = {
-            title: filters[i],
-            action: function (elm, d, i) {
-              //TODO: Set selected filter to "filters[i]"
+    var menuX = filters.map(function(d) {
+        return {
+            title: d,
+            action: function() {
+                options.x = d;
+                that.createBubble(data, options, filter, groups);
             }
-        };
-        menu.push(menuObj);
-    }
+        }
+    });
+
+    var menuY = filters.map(function(d) {
+        return {
+            title: d,
+            action: function() {
+                options.y = d;
+                that.createBubble(data, options, filter, groups);
+            }
+        }
+    });
+
+
+
 
     // Add an x-axis label.
     var xLabel = focus.append("text")
@@ -103,7 +118,7 @@ function BubbleChart(el, filters) {
         .attr("text-anchor", "end")
         .attr("x", width)
         .attr("y", height - 6)
-        .on("click", d3.contextMenu(menu));
+        .on("click", d3.contextMenu(menuX));
 
     // Add a y-axis label.
     var yLabel = focus.append("text")
@@ -112,7 +127,7 @@ function BubbleChart(el, filters) {
         .attr("y", 6)
         .attr("dy", ".75em")
         .attr("transform", "rotate(-90)")
-        .on("click", d3.contextMenu(menu));
+        .on("click", d3.contextMenu(menuY));
 
     // // Add an z-axis label.
     // var zLabel = rightPanel.append("text")
@@ -126,7 +141,10 @@ function BubbleChart(el, filters) {
         db = data;
     };
 
-    this.createBubble = function (newData, options, filter, groups, keyword) {
+    this.createBubble = function (newData, opt, fil, grps, keyword) {
+        options = opt;
+        filter = fil;
+        groups = grps;
         console.log("redrawn");
         // Axis definition
         var keyField = options.key,
@@ -136,8 +154,6 @@ function BubbleChart(el, filters) {
             radiusField = options.r,
             colorField = options.color;
 
-        var filterField = filter.field,
-            filterValue = filter.value;
 
         // Various accessors that specify the dimensions of data to visualize.
         function x(d) {
@@ -173,7 +189,7 @@ function BubbleChart(el, filters) {
         }
 
         data = newData.filter(function (d) {
-            return filterValue === 'ALL' || f(d) === filterValue;
+            return !filter || filter[f(d)];
         });
 
         // additional search item
@@ -522,4 +538,7 @@ function BubbleChart(el, filters) {
 
     }
 
+    this.updateGroups = function(category) {
+        that.createBubble(db, options, category, groups);
+    }
 }
