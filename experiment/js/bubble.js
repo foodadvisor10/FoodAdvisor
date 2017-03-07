@@ -86,28 +86,6 @@ function BubbleChart(el, filters) {
 
     var dot = dots.selectAll(".dot");
 
-/*
-    var xLabelContainer = focus.append("g")
-      .attr("class", "x-label-container")
-      .attr("x", width)
-      .attr("y", height - 6);
-*/
-/*
-    var menu = [
-      {
-          title: "Fats",
-          action: function(elm, d, i){
-            //TODO: Set selected filter to "Fats"
-          }
-      },
-      {
-          title: "Protein"
-      },
-      {
-          title: "Carbohydrates"
-      }
-    ];
-*/
     var menu = [];
     for(var i = 0; i < filters.length; i++){
         var menuObj = {
@@ -133,7 +111,8 @@ function BubbleChart(el, filters) {
         .attr("text-anchor", "end")
         .attr("y", 6)
         .attr("dy", ".75em")
-        .attr("transform", "rotate(-90)");
+        .attr("transform", "rotate(-90)")
+        .on("click", d3.contextMenu(menu));
 
     // // Add an z-axis label.
     // var zLabel = rightPanel.append("text")
