@@ -22,6 +22,7 @@ text {
 }
 
 .dot {
+    cursor: pointer;
     stroke: #000;
 }
 
