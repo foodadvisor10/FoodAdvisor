@@ -18,7 +18,8 @@ function createLegend(svg) {
       height = svg.attr("height");
 
   var legend = svg.append("g")
-    .attr("class", "bubble-legend");
+    .attr("class", "bubble-legend")
+    .attr("transform", "translate(5,5)");
 
   //Add a color and a text for each category
   var rows = legend.selectAll("g")
