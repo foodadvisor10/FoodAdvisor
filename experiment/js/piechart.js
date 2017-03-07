@@ -235,21 +235,14 @@ function pieChart(a) {
 }
 
 function updateChart(chart){
-    // console.log(chart);
     currentlySelectedSizing = chart;
-    // pieChart(currentFood);
     $("#chart svg").attr("id","chart_transition");
     window.setTimeout(updateChart2,250);
 
 }
 function updateChart2(){
-
     pieChart(currentFood);
     $("#chart svg").attr("id","chart_fadein");
-
-    // $("#chart svg").attr("id","chart_transition");
-    // window.setTimeout(timedEvent2,2000);
-    
 }
 
 

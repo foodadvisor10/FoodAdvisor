@@ -305,9 +305,10 @@ function BubbleChart(el) {
             .on("mousemove", moveTooltip)
             .on("mouseleave", unhighlightDot)
             .on("click", function (d) {
-                console.log(currentlySelectedPieChart);
+                // console.log(currentlySelectedPieChart);
                 unhighlightSelected(currentlySelectedPieChart);
                 currentlySelectedPieChart = key(d);
+                firstLoad = true;
                 highlightSelected(currentlySelectedPieChart);
                 // console.log("Is it updating");
 
