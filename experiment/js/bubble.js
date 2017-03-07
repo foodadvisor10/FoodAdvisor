@@ -404,6 +404,7 @@ function BubbleChart(el) {
         function selectDot(d) {
             console.log(currentlySelectedPieChart);
             unhighlightSelected(currentlySelectedPieChart);
+            firstLoad = true;
             currentlySelectedPieChart = key(d);
             highlightSelected(currentlySelectedPieChart);
             pieChart(d);
