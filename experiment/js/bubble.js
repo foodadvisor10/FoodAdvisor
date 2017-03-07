@@ -53,7 +53,7 @@ function BubbleChart(el, filterField) {
         .attr("transform", "translate(" + marginB.left + "," + marginB.top + ")");
 
     // Define the div for the tooltip
-    var tooltip = d3.select("body").append("div")
+    var tooltip = el.append("div")
         .attr("class", "bubble-tooltip")
         .style("opacity", 0);
 
@@ -509,7 +509,7 @@ function BubbleChart(el, filterField) {
             return !visible;
         });
 
-        d3.select(".search-target")
+        el.select(".search-target")
             .classed("invisible", true)
 
     }
