@@ -32,7 +32,20 @@
     </select>
 </div>
 <div id="bubble">
-
+<svg>
+    <defs>
+        <filter id="dropshadow" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feComponentTransfer in="SourceAlpha">
+                <feFuncR type="discrete" tableValues="0"/>
+                <feFuncG type="discrete" tableValues="0"/>
+                <feFuncB type="discrete" tableValues="0"/>
+            </feComponentTransfer>
+            <feGaussianBlur stdDeviation="2.5"/>
+            <feOffset dx="0" dy="0" result="shadow"/>
+            <feComposite in="SourceGraphic" in2="shadow" operator="over"/>
+        </filter>
+    </defs>
+</svg>
 </div>
 <div id="chart"><form>
 <input type="radio" name="chart_style" value="macro" onclick="updateChart(1)" checked> Macro <input type="radio" name="chart_style" value="micro" onclick="updateChart(2)"> Micro 

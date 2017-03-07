@@ -13,7 +13,7 @@ var colorsize = {   "Potassium (mg)" : "#5061fb",
                     "Water (g)" : "#0099ff",
                     "Protein (g)" : "#ff5050",
                     "Fibre (g)" : "#663300",
-                    "Sodium (mg)" : "#FFFFE0",
+                    "Sodium (mg)" : "#FFFFE0",  //Color very feint. 
                     "Zinc (mg)" : "#778899",
                     "Sugar total (g)" : "#FFEFD5",
                     "Sucrose (g)" : "#2E8B57",
@@ -32,7 +32,8 @@ var colorsize = {   "Potassium (mg)" : "#5061fb",
                     "Vitamin D (µg)" : "#fb7921",
                     "Selenium (µg)" : "#cc6699",
                     "Vitamin C (mg)" : "#ffcc00",
-                    "Vitamin B-12 (µg)" : "#66ffff"
+                    "Vitamin B-12 (µg)" : "#66ffff",
+                    "Wholegrain total (g)" : "#FC2543"
                     };
 
 // var currentFood = "";
