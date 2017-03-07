@@ -74,7 +74,7 @@ $(document).ready(function () {
         Object.keys(idMap).forEach(function (id) {
             var axis = idMap[id];
             cols.forEach(function (col) {
-                $("#" + id).append("<option value='" + col + "'>" + col + "</option");
+                $("#" + id).append("<option value='" + col + "'>" + col + "</option>");
             });
             $("#" + id)
                 .val(options[axis])
@@ -88,6 +88,7 @@ $(document).ready(function () {
         //createLegend(d3.select("#bubble-legend"));
 
         createSearch($("#search-box"), data, options.key, 'Category');
+        bubble.setDB(data);
         render();
 
         function render() {

@@ -1,0 +1,17 @@
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100px" height="100px">
+    <title>svg arrow with dropshadow</title>
+    <desc>An svg example of an arrow shape with a dropshadow filter applied. The dropshadow filter effect uses feGaussianBlur, feOffset and feMerge.</desc>
+    <defs>
+        <filter id="dropshadow" height="130%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1"/>
+            <feOffset dx="0" dy="0" result="offsetblur"/>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    <circle cx="50" cy="50" r="10" fill="#EEEEEE" filter="url(#dropshadow)"/>
+</svg>
+</body>

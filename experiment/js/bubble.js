@@ -1,5 +1,7 @@
 function BubbleChart(el) {
+    var that = this;
 
+    var db = [];
     var data = [];
 
     var W = parseInt(el.style('width')), H = parseInt(el.style('height'));
@@ -22,7 +24,7 @@ function BubbleChart(el) {
         yBrushWidth = 30;
 
     // Create the SVG container and set the origin.
-    var svg = el.append("svg")
+    var svg = el.select("svg")
         .attr('class', 'container')
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom);
@@ -61,9 +63,9 @@ function BubbleChart(el) {
             .style("stroke-dasharray", "3, 3")
             .attr("class", "v-line")
             .style("stroke", "gray"),
-        xText = focus.append('text')
+        vText = focus.append('text')
             .style('font-weight', 'bold'),
-        yText = focus.append('text')
+        hText = focus.append('text')
             .style('font-weight', 'bold');
 
     // Add the x-axis.
@@ -108,8 +110,12 @@ function BubbleChart(el) {
     //     .attr("dy", ".75em")
     //     .attr("transform", "translate(" + (-zBrushWidth - 5) + ", 0) rotate(-90)");
 
+    this.setDB = function(data) {
+        db = data;
+    };
 
-    this.createBubble = function (newData, options, filter, groups) {
+    this.createBubble = function (newData, options, filter, groups, keyword) {
+        console.log("redrawn");
         // Axis definition
         var keyField = options.key,
             xField = options.x,
@@ -157,6 +163,18 @@ function BubbleChart(el) {
         data = newData.filter(function (d) {
             return filterValue === 'ALL' || f(d) === filterValue;
         });
+
+        // additional search item
+        if (keyword && data.filter(function(d) {
+                return key(d) === keyword;
+            }).length === 0) {
+            var d = db.filter(function(d) {
+                return key(d) === keyword;
+            });
+            if (d) {
+                data.push(d[0]);
+            }
+        }
 
         // Various scales. These domains make assumptions of data, naturally.
         var xScale = d3.scaleLinear().domain(scaler(data, x)).range([0, width]),
@@ -294,35 +312,16 @@ function BubbleChart(el) {
         yLabel.text(yField);
 
         var s = dots.selectAll(".dot").data(data, key);
-        s.sort(order).transition()
+        s.call(setDotEvent)
+            .sort(order)
+            .transition()
             .call(position);
         s.enter().append("circle")
             .attr("class", "dot")
             .style("fill", function (d) {
                 return colorScale(color(d));
             })
-            .on("mouseenter", highlightDot)
-            .on("mousemove", moveTooltip)
-            .on("mouseleave", unhighlightDot)
-            .on("click", function (d) {
-                // console.log(currentlySelectedPieChart);
-                unhighlightSelected(currentlySelectedPieChart);
-                currentlySelectedPieChart = key(d);
-                firstLoad = true;
-                highlightSelected(currentlySelectedPieChart);
-                // console.log("Is it updating");
-
-                //This is to extract the JSON object of our currently selected food. 
-                var food;
-                for(var i = 0; i < data.length; i++){
-                    if(data[i].Food == currentlySelectedPieChart){
-                        food = data[i];
-                        console.log(i);
-                        i = data.length;
-                    }
-                }
-                pieChart(food);
-            })
+            .call(setDotEvent)
             .sort(order)
             .attr("cx", function (d) {
                 return xScale(x(d));
@@ -342,9 +341,10 @@ function BubbleChart(el) {
         // Setup search box
         // TODO: change to d3 selection
         var searchBox = $("#search-box")
+            .unbind("change")
             .on("change", function () {
-                console.log("update search" + this.value);
-                search(this.value)
+                console.log("on change");
+                that.createBubble(data, options, filter, groups, this.value);
             });
         search(searchBox.val());
 
@@ -393,6 +393,22 @@ function BubbleChart(el) {
         //             .attr("visibility", true)
         //     }
         // }
+
+        function setDotEvent(dot) {
+            dot.on("mouseenter", highlightDot)
+                .on("mousemove", moveTooltip)
+                .on("mouseleave", unhighlightDot)
+                .on("click", selectDot)
+        }
+
+        function selectDot(d) {
+            console.log(currentlySelectedPieChart);
+            unhighlightSelected(currentlySelectedPieChart);
+            firstLoad = true;
+            currentlySelectedPieChart = key(d);
+            highlightSelected(currentlySelectedPieChart);
+            pieChart(d);
+        }
 
         function highlightDot(d) {
             dot
@@ -443,12 +459,12 @@ function BubbleChart(el) {
                 .attr("x2", xScale(x(d)))
                 .attr("y2", yScale(y(d)));
 
-            xText.classed("invisible", false)
-                .attr('x', xScale.range()[0] - 20)
+            vText.classed("invisible", false)
+                .attr('x', xScale.range()[0] - 28)
                 .attr('y', yScale(y(d)))
                 .text(y(d));
 
-            yText.classed("invisible", false)
+            hText.classed("invisible", false)
                 .attr('x', xScale(x(d)))
                 .attr('y', yScale.range()[0] + 16)
                 .text(x(d));
@@ -458,8 +474,8 @@ function BubbleChart(el) {
             vLine.classed("invisible", true);
             hLine.classed("invisible", true);
 
-            xText.classed("invisible", true);
-            yText.classed("invisible", true);
+            vText.classed("invisible", true);
+            hText.classed("invisible", true);
         }
 
         // Positions the dots based on data.
