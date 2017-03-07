@@ -1,5 +1,5 @@
 var currentlySelectedPieChart = 'rice';
-
+var firstLoad = true;
 //1 == macro
 //2 == micro
 var currentlySelectedSizing = 1;
@@ -62,6 +62,11 @@ function pieChart(a) {
             .append('svg')
             .attr('width', width)
             .attr('height', height);
+
+        if(!firstLoad){
+            svg.attr('opacity', 0)
+        }
+        firstLoad = false;
         var donut = svg.append('g')
             // .style('margin-left', '500px');
             //.attr('transform', 'translate(0, 0)');
@@ -232,8 +237,21 @@ function pieChart(a) {
 function updateChart(chart){
     // console.log(chart);
     currentlySelectedSizing = chart;
-    pieChart(currentFood);
+    // pieChart(currentFood);
+    $("#chart svg").attr("id","chart_transition");
+    window.setTimeout(updateChart2,250);
+
 }
+function updateChart2(){
+
+    pieChart(currentFood);
+    $("#chart svg").attr("id","chart_fadein");
+
+    // $("#chart svg").attr("id","chart_transition");
+    // window.setTimeout(timedEvent2,2000);
+    
+}
+
 
 
 
