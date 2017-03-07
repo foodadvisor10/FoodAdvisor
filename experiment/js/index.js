@@ -1,7 +1,5 @@
 $(document).ready(function () {
     var idMap = {
-        "select-x-axis": "x",
-        "select-y-axis": "y",
         "select-r-axis": "r"
 
     };
@@ -49,18 +47,17 @@ $(document).ready(function () {
             return datum[category.field]
         }));
 
-        var bubble = new BubbleChart(d3.select("#bubble"), category.field);
 
-        groups.forEach(function (filter) {
-            $("#select-category").append("<option value='" + filter + "'>" + filter + "</option>");
-        });
-
-        $("#select-category")
-            .val(category.value)
-            .on("change", function () {
-                category.value = $(this).val();
-                render();
-            });
+        // groups.forEach(function (filter) {
+        //     $("#select-category").append("<option value='" + filter + "'>" + filter + "</option>");
+        // });
+        //
+        // $("#select-category")
+        //     .val(category.value)
+        //     .on("change", function () {
+        //         category.value = $(this).val();
+        //         render();
+        //     });
 
         // Create axis definition
 
@@ -80,6 +77,9 @@ $(document).ready(function () {
                     render();
                 });
         });
+
+
+        var bubble = new BubbleChart(d3.select("#bubble"), category.field, cols);
 
         var multiFilter = new MultiFilter(d3.select("#filter-table"), data, filters, bubble.updateFilter);
         //createLegend(d3.select("#bubble-legend"));

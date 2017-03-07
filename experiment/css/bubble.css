@@ -88,3 +88,7 @@ div.bubble-tooltip {
 .invisible {
     visibility: hidden;
 }
+
+.x.label, .y.label {
+    cursor: pointer;
+}
