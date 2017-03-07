@@ -49,10 +49,7 @@ $(document).ready(function () {
             return datum[category.field]
         }));
 
-        //Send the category data to the bubble legend
-        bubbleLegend(groups);
-
-        var bubble = new BubbleChart(d3.select("#bubble"));
+        var bubble = new BubbleChart(d3.select("#bubble"), category.field);
 
         groups.forEach(function (filter) {
             $("#select-category").append("<option value='" + filter + "'>" + filter + "</option>");
@@ -87,6 +84,10 @@ $(document).ready(function () {
         var multiFilter = new MultiFilter(d3.select("#filter-table"), data, filters, bubble.updateFilter);
         //createLegend(d3.select("#bubble-legend"));
 
+        //Send the category data to the bubble legend
+        var bubbleLegend = new BubbleLegend(groups, bubble.updateGroups);
+
+
         createSearch($("#search-box"), data, options.key, 'Category');
         bubble.setDB(data);
         render();
@@ -95,7 +96,7 @@ $(document).ready(function () {
             console.log("render");
             // $("#bubble").empty();
 
-            bubble.createBubble(data, options, category, groups);
+            bubble.createBubble(data, options, false, groups);
         }
     });
 

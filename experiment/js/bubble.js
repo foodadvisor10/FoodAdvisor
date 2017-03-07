@@ -1,8 +1,11 @@
-function BubbleChart(el) {
+function BubbleChart(el, filterField) {
     var that = this;
 
     var db = [];
     var data = [];
+    var options = {};
+    var filter = [];
+    var groups = [];
 
     var W = parseInt(el.style('width')), H = parseInt(el.style('height'));
 
@@ -115,6 +118,9 @@ function BubbleChart(el) {
     };
 
     this.createBubble = function (newData, options, filter, groups, keyword) {
+        that.options = options;
+        that.filter = filter;
+        that.groups = groups;
         console.log("redrawn");
         // Axis definition
         var keyField = options.key,
@@ -124,8 +130,6 @@ function BubbleChart(el) {
             radiusField = options.r,
             colorField = options.color;
 
-        var filterField = filter.field,
-            filterValue = filter.value;
 
         // Various accessors that specify the dimensions of data to visualize.
         function x(d) {
@@ -161,7 +165,7 @@ function BubbleChart(el) {
         }
 
         data = newData.filter(function (d) {
-            return filterValue === 'ALL' || f(d) === filterValue;
+            return !filter || filter[f(d)];
         });
 
         // additional search item
@@ -508,6 +512,10 @@ function BubbleChart(el) {
         d3.select(".search-target")
             .classed("invisible", true)
 
+    }
+
+    this.updateGroups = function(category) {
+        that.createBubble(db, that.options, category, that.groups);
     }
 
 }
