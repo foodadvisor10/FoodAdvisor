@@ -4,7 +4,7 @@
 var rectSide = 20;
 
 var categories = [];
-var selectedCategories = [];
+var selectedCategories = {};
 
 var itemsPerRow = 6;
 
@@ -45,18 +45,14 @@ function createLegend(svg) {
       .on("click", function () {
         var rect = d3.select(this);
         var category = rect.attr("category");
-        //Check if this rect is selected
-        var index = selectedCategories.indexOf(category);
-        if(index > -1){
-          //Remove this element from selected
-          selectedCategories.splice(index, 1);
-          //Set rect to deselected
-          rect.attr("class", "disabled");
-        }else{
-          //Add this element to the selected
-          selectedCategories.push(category);
+        //Set the category to true if it is not selected and the opposite if selected
+        selectedCategories[category] = !selectedCategories[category];
+        if(selectedCategories[category]){
           //Set rect to selected
           rect.attr("class", "");
+        }else{
+          //Set rect to deselected
+          rect.attr("class", "disabled");
         }
       });
 
@@ -72,6 +68,8 @@ function createLegend(svg) {
 
 function bubbleLegend(groups) {
   categories = groups;
-  selectedCategories = categories;
+  for(var i = 0; i < categories.length; i++){
+    selectedCategories[categories[i]] = true;
+  }
   createLegend(d3.select("#bubble-legend"));
 }
