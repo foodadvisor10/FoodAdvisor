@@ -111,7 +111,8 @@ function MultiFilter(filterTable, data, filters, onChange) {
         var brushGroup = svg.append('g')
             .attr("class", "brush")
             .attr("transform", "translate(10, 2)")
-            .call(brush);
+            .call(brush)
+            .call(brush.move, x.range());
 
         brushGroup.selectAll('.overlay')
             .attr("style", "fill: #4b9e9e");

@@ -3,11 +3,7 @@
  */
 var rectSide = 20;
 
-var categories = [
-  "Meat",
-  "Vegetables",
-  "Dairy"
-];
+var categories = [];
 
 var itemsPerRow = 4;
 
