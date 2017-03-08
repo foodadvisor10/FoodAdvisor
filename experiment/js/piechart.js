@@ -1,4 +1,4 @@
-var currentlySelectedPieChart = 'rice';
+var currentlySelectedPieChart = 'Apple';
 var firstLoad = true;
 //1 == macro
 //2 == micro
