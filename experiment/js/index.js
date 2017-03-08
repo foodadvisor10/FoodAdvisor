@@ -81,13 +81,17 @@ $(document).ready(function () {
         });
 
         var allFilters = [];
+        var removeString = "fatty";
         for(var i = 0; i < cols.length; i++){
-           var filterObj = {
-             id: changeSpacesToHyphens(cols[i]),
-             label: cols[i],
-             field: cols[i]
-           };
-           allFilters.push(filterObj);
+          //Dont add the stings containing "fatty"
+           if(cols[i].toLowerCase().indexOf(removeString) == -1){
+             var filterObj = {
+               id: changeSpacesToHyphens(cols[i]),
+               label: cols[i],
+               field: cols[i]
+             };
+             allFilters.push(filterObj);
+           }
         }
 
         var multiFilter = new MultiFilter(d3.select("#filter-table"), data, allFilters, bubble.updateFilter);
