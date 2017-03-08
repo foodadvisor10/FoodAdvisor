@@ -53,7 +53,7 @@ function BubbleChart(el, filterField, filters) {
         .attr("transform", "translate(" + marginB.left + "," + marginB.top + ")");
 
     // Define the div for the tooltip
-    var tooltip = d3.select("body").append("div")
+    var tooltip = el.append("div")
         .attr("class", "bubble-tooltip")
         .style("opacity", 0);
 
@@ -66,10 +66,8 @@ function BubbleChart(el, filterField, filters) {
             .style("stroke-dasharray", "3, 3")
             .attr("class", "v-line")
             .style("stroke", "gray"),
-        vText = focus.append('text')
-            .style('font-weight', 'bold'),
-        hText = focus.append('text')
-            .style('font-weight', 'bold');
+        vText,
+        hText;
 
     // Add the x-axis.
     var xAxisGroup = focus.append("g")
@@ -474,6 +472,25 @@ function BubbleChart(el, filterField, filters) {
                 .style("top", (d3.event.pageY - 28) + "px")
         }
 
+        function drawTextbox(s, x, y, v, isV) {
+            var w = 40, h = 20;
+            var pad = 1;
+            var g = s.append("g")
+                .attr("transform", "translate(" + x + "," + y + ")");
+            g.append('rect')
+                .attr("x", isV ? -w - pad : -0.5 * w)
+                .attr("y", isV ? -0.5 * h : pad)
+                .attr("width", w)
+                .attr("height", h)
+                .style("fill", "white")
+                .style("opacity", 0.8);
+            g.append("text")
+                .attr("x", isV ? -10 : 0)
+                .attr("y", isV ? 4: 16)
+                .attr("text-anchor", isV ? "end" : "middle")
+                .text(v);
+        }
+
         function showDash(d) {
             vLine.classed("invisible", false)
                 .attr("x1", xScale(x(d)))
@@ -487,23 +504,33 @@ function BubbleChart(el, filterField, filters) {
                 .attr("x2", xScale(x(d)))
                 .attr("y2", yScale(y(d)));
 
-            vText.classed("invisible", false)
-                .attr('x', xScale.range()[0] - 28)
-                .attr('y', yScale(y(d)))
-                .text(y(d));
+            vText = focus.append("g")
+                .call(drawTextbox, xScale.range()[0], yScale(y(d)), y(d), true);
 
-            hText.classed("invisible", false)
-                .attr('x', xScale(x(d)))
-                .attr('y', yScale.range()[0] + 16)
-                .text(x(d));
+            hText = focus.append("g")
+                .call(drawTextbox, xScale(x(d)), yScale.range()[0], x(d), false);
+
+            // vText.remove();
+            // vText = focus.append('text')
+            //     .style('font-weight', 'bold');
+            //
+            // vText.classed("invisible", false)
+            //     .attr('x', xScale.range()[0] - 28)
+            //     .attr('y', yScale(y(d)))
+            //     .text(y(d));
+            //
+            // hText.classed("invisible", false)
+            //     .attr('x', xScale(x(d)))
+            //     .attr('y', yScale.range()[0] + 16)
+            //     .text(x(d));
         }
 
         function hideDash(d) {
             vLine.classed("invisible", true);
             hLine.classed("invisible", true);
 
-            vText.classed("invisible", true);
-            hText.classed("invisible", true);
+            vText.remove();
+            hText.remove();
         }
 
         // Positions the dots based on data.
@@ -533,7 +560,7 @@ function BubbleChart(el, filterField, filters) {
             return !visible;
         });
 
-        d3.select(".search-target")
+        el.select(".search-target")
             .classed("invisible", true)
 
     }
