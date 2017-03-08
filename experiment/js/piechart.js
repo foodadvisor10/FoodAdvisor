@@ -242,8 +242,10 @@ function updateChart(chart){
 
 }
 function updateChart2(){
+    // document.getElementByClass().innerHTML = "";
     pieChart(currentFood);
     $("#chart svg").attr("id","chart_fadein");
+
 }
 
 
