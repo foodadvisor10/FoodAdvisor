@@ -573,4 +573,8 @@ function BubbleChart(el, filterField, filters) {
     this.updateGroups = function(category) {
         that.createBubble(db, options, category, groups, keyword);
     }
+
+    this.updateOptions = function(options) {
+        that.createBubble(db, options, filter, groups, keyword);
+    }
 }
