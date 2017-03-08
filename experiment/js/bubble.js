@@ -66,10 +66,8 @@ function BubbleChart(el, filterField, filters) {
             .style("stroke-dasharray", "3, 3")
             .attr("class", "v-line")
             .style("stroke", "gray"),
-        vText = focus.append('text')
-            .style('font-weight', 'bold'),
-        hText = focus.append('text')
-            .style('font-weight', 'bold');
+        vText,
+        hText;
 
     // Add the x-axis.
     var xAxisGroup = focus.append("g")
