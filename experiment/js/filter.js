@@ -3,7 +3,6 @@
  */
 
 function MultiFilter(filterTable, data, filters, onChange) {
-  console.log(filters);
   var dropdown = filterTable.select("select");
   var maxNrOfFilters = 5;
 
@@ -65,8 +64,7 @@ function MultiFilter(filterTable, data, filters, onChange) {
     filterRow
       .append("td")
       .append("text")
-      .text(filter.label + ": ")
-      .attr("style", "font-size: 20px");
+      .text(filter.label + ": ");
 
     //Add the scale
     var scaleContainer = filterRow.append("td");
