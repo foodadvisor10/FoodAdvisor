@@ -103,8 +103,9 @@ function pieChart(a) {
 
             //console.log(dataset);
             if (error) {
-                document.getElementById("chart").innerHTML = "This is not supposed to happen! No data was found for this food.";
+                document.getElementById("titlehead").innerHTML = "This is not supposed to happen! No data was found for this food.";
             } else {
+                document.getElementById("titlehead").innerHTML = "<form><input type=\"radio\" name=\"chart_style\" value=\"macro\" onclick=\"updateChart(1)\" checked> Macro <input type=\"radio\" name=\"chart_style\" value=\"micro\" onclick=\"updateChart(2)\"> Micro \n</form>";
                 dataset.forEach(function (d) {
                     d.count = +d.count;
                     d.enabled = true;
