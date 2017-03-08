@@ -5,7 +5,7 @@
 function MultiFilter(filterTable, data, filters, onChange) {
 
   var dropdown = filterTable.select("select");
-  var maxNrOfFilters = 2;
+  var maxNrOfFilters = 5;
 
   filters = filters.map(function (filter) {
     return {
