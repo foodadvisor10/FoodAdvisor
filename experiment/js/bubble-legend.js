@@ -4,7 +4,8 @@
 
 function BubbleLegend(categories, onLegendClick) {
   var rectSide = 20;
-
+  var legendRowWidth = 150;
+  var legendRowHeight = 30;
   //Add an "all" category
   categories.push("ALL");
 
@@ -37,8 +38,8 @@ function BubbleLegend(categories, onLegendClick) {
       .append("g")
       .attr("class", "legend-row")
       .attr("transform", function (d, i) {
-        var x = 200 * (i % itemsPerRow);  //Change row every fifth element
-        var y = 30 * Math.floor(i / itemsPerRow);
+        var x = legendRowWidth * (i % itemsPerRow);  //Change row every fifth element
+        var y = legendRowHeight * Math.floor(i / itemsPerRow);
         return "translate(" + x + "," + y + ")";
       });
 
