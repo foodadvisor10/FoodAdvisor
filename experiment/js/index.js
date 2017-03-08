@@ -89,7 +89,7 @@ $(document).ready(function () {
         allFilters.push(selectFilter);
         for(var i = 0; i < cols.length; i++){
            var filterObj = {
-             id: cols[i],
+             id: changeSpacesToHyphens(cols[i]),
              label: cols[i],
              field: cols[i]
            };
@@ -109,8 +109,8 @@ $(document).ready(function () {
         bubble.createBubble(data, options, false, groups);
 
     });
-
-    function loadDonut() {
-
+    function changeSpacesToHyphens(str){
+        str = str.replace(/\W+/g, '-').toLowerCase();
+        return str;
     }
-})
+});
