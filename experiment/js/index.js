@@ -40,13 +40,13 @@ $(document).ready(function () {
         }
     ];
 
+
 // Load the data.
     d3.csv("../data/food.csv", function (data) {
         // Create filter selection
         var groups = _.uniqBy(data.map(function (datum) {
             return datum[category.field]
         }));
-
 
         // groups.forEach(function (filter) {
         //     $("#select-category").append("<option value='" + filter + "'>" + filter + "</option>");
@@ -64,7 +64,6 @@ $(document).ready(function () {
         var cols = data.columns.filter(function (col) {
             return !isNaN(data[0][col]);
         });
-
         var bubble = new BubbleChart(d3.select("#bubble"), category.field, cols);
 
         Object.keys(idMap).forEach(function (id) {
@@ -81,9 +80,23 @@ $(document).ready(function () {
                 });
         });
 
+        var allFilters = [];
+        var selectFilter ={
+          id: "select-filter",
+          label: "Select Filter",
+          field: "Select Filter"
+        };
+        allFilters.push(selectFilter);
+        for(var i = 0; i < cols.length; i++){
+           var filterObj = {
+             id: cols[i],
+             label: cols[i],
+             field: cols[i]
+           };
+           allFilters.push(filterObj);
+        }
 
-
-        var multiFilter = new MultiFilter(d3.select("#filter-table"), data, filters, bubble.updateFilter);
+        var multiFilter = new MultiFilter(d3.select("#filter-table"), data, allFilters, bubble.updateFilter);
         //createLegend(d3.select("#bubble-legend"));
 
         //Send the category data to the bubble legend
