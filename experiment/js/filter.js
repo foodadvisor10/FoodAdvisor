@@ -64,6 +64,7 @@ function MultiFilter(filterTable, data, filters, onChange) {
     filterRow
       .append("td")
       .append("text")
+      .attr("class", "filter-text")
       .text(filter.label + ": ");
 
     //Add the scale

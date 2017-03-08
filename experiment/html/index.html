@@ -25,53 +25,54 @@
 </div>
 <!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
 <div id="bubble-legend-container">
-    <svg id="bubble-legend" width="1200" height="130"></svg>
+    <svg id="bubble-legend" width="1200" height="70"></svg>
 </div>
+<div class="wrapper-row">
+    <div id="control">
+        <table id="control-table">
+            <tr>
+                <td>Bubble size</td>
+                <td>
+                    <select id="select-r-axis">
+                    </select>
+                </td>
+            </tr>
+        </table>
 
-<div id="search">
-    <select id="search-box">
-        <option></option>
-    </select>
-</div>
-<div id="bubble">
-<svg>
-    <defs>
-        <filter id="dropshadow" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feComponentTransfer in="SourceAlpha">
-                <feFuncR type="discrete" tableValues="0"/>
-                <feFuncG type="discrete" tableValues="0"/>
-                <feFuncB type="discrete" tableValues="0"/>
-            </feComponentTransfer>
-            <feGaussianBlur stdDeviation="2.5"/>
-            <feOffset dx="0" dy="0" result="shadow"/>
-            <feComposite in="SourceGraphic" in2="shadow" operator="over"/>
-        </filter>
-    </defs>
-</svg>
-</div>
-<div id="chart"><div id="titlehead"></div></div>
-<div id="control">
-    <table id="control-table">
-        <tr>
-            <td>Bubble size</td>
-            <td>
-                <select id="select-r-axis">
-                </select>
-            </td>
-        </tr>
-    </table>
+        <!-- Add filters -->
+        <table id="filter-table">
+            <tr>
+                <td>
+                    <select id="filter-dropdown">
+                        <option value="Select Filter">Select Filter</option>
+                    </select>
+                </td>
+            </tr>
 
-    <!-- Add filters -->
-    <table id="filter-table">
-        <tr>
-            <td>
-                <select id="filter-dropdown">
-                    <option value="Select Filter">Select Filter</option>
-                </select>
-            </td>
-        </tr>
-
-    </table>
+        </table>
+    </div>
+    <div id="bubble">
+        <div id="search">
+            <select id="search-box">
+                <option></option>
+            </select>
+        </div>
+        <svg>
+            <defs>
+                <filter id="dropshadow" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feComponentTransfer in="SourceAlpha">
+                        <feFuncR type="discrete" tableValues="0"/>
+                        <feFuncG type="discrete" tableValues="0"/>
+                        <feFuncB type="discrete" tableValues="0"/>
+                    </feComponentTransfer>
+                    <feGaussianBlur stdDeviation="2.5"/>
+                    <feOffset dx="0" dy="0" result="shadow"/>
+                    <feComposite in="SourceGraphic" in2="shadow" operator="over"/>
+                </filter>
+            </defs>
+        </svg>
+    </div>
+    <div id="chart"><div id="titlehead"></div></div>
 </div>
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
