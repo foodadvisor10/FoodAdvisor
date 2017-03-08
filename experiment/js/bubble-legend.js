@@ -66,7 +66,6 @@ function BubbleLegend(categories, onLegendClick) {
             .attr("class", function () {
               return selected ? "" : "disabled";
             });
-        //  console.log(selectedCategories);
         }else {
           //Set the category to true if it is not selected and the opposite if selected
           selectedCategories[category] = !selectedCategories[category];
@@ -76,7 +75,7 @@ function BubbleLegend(categories, onLegendClick) {
           } else {
             //Set rect to deselected
             rect.attr("class", "disabled");
-          }           
+          }
         }
         onLegendClick(selectedCategories);
       });
