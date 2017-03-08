@@ -6,6 +6,13 @@ function BubbleChart(el, filterField, filters) {
     var options = {};
     var filter = [];
     var groups = [];
+    var keyword = "";
+
+    //TODO: move this to its rightful place
+    function onSearch() {
+        console.log("on change");
+        that.createBubble(data, options, filter, groups, this.value);
+    }
 
     var W = parseInt(el.style('width')), H = parseInt(el.style('height'));
 
@@ -139,10 +146,11 @@ function BubbleChart(el, filterField, filters) {
         db = data;
     };
 
-    this.createBubble = function (newData, opt, fil, grps, keyword) {
+    this.createBubble = function (newData, opt, fil, grps, kw) {
         options = opt;
         filter = fil;
         groups = grps;
+        keyword = kw;
         console.log("redrawn");
         // Axis definition
         var keyField = options.key,
@@ -367,11 +375,8 @@ function BubbleChart(el, filterField, filters) {
         // Setup search box
         // TODO: change to d3 selection
         var searchBox = $("#search-box")
-            .unbind("change")
-            .on("change", function () {
-                console.log("on change");
-                that.createBubble(data, options, filter, groups, this.value);
-            });
+            .off("change", onSearch)
+            .on("change", onSearch);
         search(searchBox.val());
 
         function highlightSelected(selected) {
@@ -566,6 +571,10 @@ function BubbleChart(el, filterField, filters) {
     }
 
     this.updateGroups = function(category) {
-        that.createBubble(db, options, category, groups);
+        that.createBubble(db, options, category, groups, keyword);
+    }
+
+    this.updateOptions = function(options) {
+        that.createBubble(db, options, filter, groups, keyword);
     }
 }

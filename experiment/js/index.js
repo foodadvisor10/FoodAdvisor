@@ -65,6 +65,8 @@ $(document).ready(function () {
             return !isNaN(data[0][col]);
         });
 
+        var bubble = new BubbleChart(d3.select("#bubble"), category.field, cols);
+
         Object.keys(idMap).forEach(function (id) {
             var axis = idMap[id];
             cols.forEach(function (col) {
@@ -73,13 +75,13 @@ $(document).ready(function () {
             $("#" + id)
                 .val(options[axis])
                 .on('change', function () {
+                    // TODO: fetch option from obj
                     options[axis] = $(this).val();
-                    render();
+                    bubble.updateOptions(options);
                 });
         });
 
 
-        var bubble = new BubbleChart(d3.select("#bubble"), category.field, cols);
 
         var multiFilter = new MultiFilter(d3.select("#filter-table"), data, filters, bubble.updateFilter);
         //createLegend(d3.select("#bubble-legend"));
@@ -90,14 +92,9 @@ $(document).ready(function () {
 
         createSearch($("#search-box"), data, options.key, 'Category');
         bubble.setDB(data);
-        render();
 
-        function render() {
-            console.log("render");
-            // $("#bubble").empty();
+        bubble.createBubble(data, options, false, groups);
 
-            bubble.createBubble(data, options, false, groups);
-        }
     });
 
     function loadDonut() {
