@@ -81,12 +81,6 @@ $(document).ready(function () {
         });
 
         var allFilters = [];
-        var selectFilter ={
-          id: "select-filter",
-          label: "Select Filter",
-          field: "Select Filter"
-        };
-        allFilters.push(selectFilter);
         for(var i = 0; i < cols.length; i++){
            var filterObj = {
              id: changeSpacesToHyphens(cols[i]),
