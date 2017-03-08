@@ -105,7 +105,11 @@ function pieChart(a) {
             if (error) {
                 document.getElementById("titlehead").innerHTML = "This is not supposed to happen! No data was found for this food.";
             } else {
-                document.getElementById("titlehead").innerHTML = "<form><input type=\"radio\" name=\"chart_style\" value=\"macro\" onclick=\"updateChart(1)\" checked> Macro <input type=\"radio\" name=\"chart_style\" value=\"micro\" onclick=\"updateChart(2)\"> Micro \n</form>";
+                if(currentlySelectedSizing == 1){
+                    document.getElementById("titlehead").innerHTML = "<form><input type=\"radio\" name=\"chart_style\" value=\"macro\" onclick=\"updateChart(1)\" checked> Macro <input type=\"radio\" name=\"chart_style\" value=\"micro\" onclick=\"updateChart(2)\"> Micro \n</form>";
+                } else {
+                    document.getElementById("titlehead").innerHTML = "<form><input type=\"radio\" name=\"chart_style\" value=\"macro\" onclick=\"updateChart(1)\"> Macro <input type=\"radio\" name=\"chart_style\" value=\"micro\" onclick=\"updateChart(2)\" checked> Micro \n</form>";
+                }
                 dataset.forEach(function (d) {
                     d.count = +d.count;
                     d.enabled = true;
