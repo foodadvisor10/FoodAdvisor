@@ -79,7 +79,8 @@ function BubbleChart(el, filterField, filters) {
 
     var dottedCross = bubbleSvg.append("g");
 
-    var axisReading = bubbleSvg.append("g");
+    var axisReading = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var rightPanel = svg.append("g")
         .attr("transform", "translate(" + zBrushX + "," + zBrushY + ")");
