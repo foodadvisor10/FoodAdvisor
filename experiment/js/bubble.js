@@ -67,8 +67,16 @@ function BubbleChart(el, filterField, filters) {
     var dottedCross = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    var g2 = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    // Ugly hack
+    var bubbleSvg = g2.append("svg")
+        .attr("class", "bubble-svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
     var focus = svg.append("g")
-        .attr("class", "focus")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var axisReading = svg.append("g")
@@ -109,7 +117,7 @@ function BubbleChart(el, filterField, filters) {
     // var zAxisGroup = rightPanel.append("g");
 
     // Create bubbles
-    var dots = focus.append("g")
+    var dots = bubbleSvg.append("g")
         .attr("class", "dots");
 
     var dot = dots.selectAll(".dot");
