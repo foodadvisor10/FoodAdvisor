@@ -42,6 +42,10 @@ function pieChart(a) {
     if (a == null){
         a = {"Energy (kcal)":"364.6"};
     }
+
+    if(currentlySelectedPieChart == 'Heavy cream fat 40%'){
+        currentlySelectedPieChart = 'hc';
+    }
     currentFood = a;
 
     $("#chart").find("svg").remove();
@@ -120,9 +124,22 @@ function pieChart(a) {
                     return b.count - a.count;
                 });
 
+                if(currentlySelectedPieChart == "hc"){
+                    currentlySelectedPieChart = "Heavy cream fat 40%";
+                }
+
+                var textsize = "20px"                
+                if(currentlySelectedPieChart.length > 14){
+                    textsize = "12px";
+                }
+                if (currentlySelectedPieChart.length > 22){
+                    textsize ="9.5px";
+                }
+                    // console.log(currentlySelectedPieChart.length);
+
                 donut.append("text")
                     .style("text-anchor", "middle")
-                    .style("font-size", "20px")
+                    .style("font-size", textsize)
                     .attr("dy", "0em")
                     .text(currentlySelectedPieChart);
 
@@ -158,6 +175,7 @@ function pieChart(a) {
                     tooltip.select('.count').html(d.data.count + " " + measurement);
                     tooltip.select('.percent').html(percent + '%');
                     tooltip.style('display', 'block');
+                    // tooltip.style('position', 'absolute');
                 });
 
                 path.on('mouseout', function () {
@@ -168,6 +186,7 @@ function pieChart(a) {
                 path.on('mousemove', function (d) {
                     tooltip.style('top', (d3.event.layerY + 10) + 'px')
                         .style('left', (d3.event.layerX + 10) + 'px');
+                        // console.log(d3.event.layerX + " " + window.event.clientX);
                 });
                 var legend = donut.selectAll('.legend')
                     .data(color.domain())
