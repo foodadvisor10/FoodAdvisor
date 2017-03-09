@@ -99,23 +99,37 @@ function BubbleLegend(categories, onLegendClick) {
       .append("div")
       .append("button")
       .attr("id", "select-button")
-      .html("Select All")
+      .html("All Categories")
       .on("click", selectAllCategories);
 
     var deselectButton = d3.select("#select-all-container")
       .append("div")
       .append("button")
       .attr("id", "deselect-button")
-      .html("Deselect All")
+      .html("No Categories")
       .on("click", deselectAllCategories);
   }
 
   function selectAllCategories() {
-
+    //Set all categories to true
+    for(var i = 0; i < categories.length; i++){
+      selectedCategories[categories[i]] = true ;
+    }
+    //Set the "class" attribute for the rect elements
+    d3.select(".bubble-legend")
+      .selectAll("rect")
+      .attr("class", "");
   }
 
   function deselectAllCategories() {
-
+    //Set all categories to true
+    for(var i = 0; i < categories.length; i++){
+      selectedCategories[categories[i]] = false;
+    }
+    //Set the "class" attribute for the rect elements
+    d3.select(".bubble-legend")
+      .selectAll("rect")
+      .attr("class", "disabled");
   }
 
 }
