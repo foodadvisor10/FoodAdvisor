@@ -6,8 +6,6 @@ function BubbleLegend(categories, onLegendClick) {
   var rectSide = 20;
   var legendRowWidth = 150;
   var legendRowHeight = 30;
-  //Add an "all" category
-  categories.push("ALL");
 
   var selectedCategories = {};
 
@@ -57,27 +55,14 @@ function BubbleLegend(categories, onLegendClick) {
         var rect = d3.select(this);
         var category = rect.attr("category");
         //Handle the case of "ALL" separately
-        if(category == "ALL"){
-          //If it was disabled then set all categories to true
-          var selected = (rect.attr("class") == "disabled");
-          for(var i = 0; i < categories.length; i++){
-            selectedCategories[categories[i]] = selected;
-          }
-          //Set the "class" attribute for the rect elements
-          legend.selectAll("rect")
-            .attr("class", function () {
-              return selected ? "" : "disabled";
-            });
-        }else {
-          //Set the category to true if it is not selected and the opposite if selected
-          selectedCategories[category] = !selectedCategories[category];
-          if (selectedCategories[category]) {
-            //Set rect to selected
-            rect.attr("class", "");
-          } else {
-            //Set rect to deselected
-            rect.attr("class", "disabled");
-          }
+        //Set the category to true if it is not selected and the opposite if selected
+        selectedCategories[category] = !selectedCategories[category];
+        if (selectedCategories[category]) {
+          //Set rect to selected
+          rect.attr("class", "");
+        } else {
+          //Set rect to deselected
+          rect.attr("class", "disabled");
         }
         onLegendClick(selectedCategories);
       });
@@ -95,14 +80,14 @@ function BubbleLegend(categories, onLegendClick) {
   }
 
   function createSelectButtons() {
-    var selectButton = d3.select("#select-all-container")
+    d3.select("#select-all-container")
       .append("div")
       .append("button")
       .attr("id", "select-button")
       .html("All Categories")
       .on("click", selectAllCategories);
 
-    var deselectButton = d3.select("#select-all-container")
+    d3.select("#select-all-container")
       .append("div")
       .append("button")
       .attr("id", "deselect-button")
