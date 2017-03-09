@@ -21,6 +21,7 @@ function BubbleLegend(categories, onLegendClick) {
 
 //svg is the group element where the legend should be created
   function drawLegend(svg) {
+
     var color = d3.scaleOrdinal(d3.schemeCategory20);
     color.domain(categories);
 
@@ -88,7 +89,33 @@ function BubbleLegend(categories, onLegendClick) {
       .style("font-size", 13)
       .text(function (d) {
         return d;
-      })
+      });
+
+    createSelectButtons();
+  }
+
+  function createSelectButtons() {
+    var selectButton = d3.select("#select-all-container")
+      .append("div")
+      .append("button")
+      .attr("id", "select-button")
+      .html("Select All")
+      .on("click", selectAllCategories);
+
+    var deselectButton = d3.select("#select-all-container")
+      .append("div")
+      .append("button")
+      .attr("id", "deselect-button")
+      .html("Deselect All")
+      .on("click", deselectAllCategories);
+  }
+
+  function selectAllCategories() {
+
+  }
+
+  function deselectAllCategories() {
+
   }
 
 }

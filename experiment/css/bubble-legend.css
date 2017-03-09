@@ -9,3 +9,11 @@
     stroke-width: 2;
 }
 
+#select-all-container{
+    display: inline-block;
+    vertical-align: top;
+}
+
+#deselect-button{
+    margin-top: 5px;
+}
