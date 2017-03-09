@@ -149,6 +149,22 @@ function BubbleChart(el, filterField, filters) {
         .attr("transform", "rotate(-90)")
         .on("click", d3.contextMenu(menuY));
 
+
+    // Add an x-flip icon
+    var xFlip = focus.append("text")
+        .attr("class", "flip")
+        .text("\uf0ec")
+        .attr("x", width + 5)
+        .attr("y", height + 6);
+
+    // Add an y-flip icon
+    var yFlip = focus.append("text")
+        .attr("class", "flip")
+        .text("\uf0ec")
+        .attr("x", 3)
+        .attr("y", 4)
+        .attr("transform", "rotate(-90)");
+
     // // Add an z-axis label.
     // var zLabel = rightPanel.append("text")
     //     .attr("class", "z label")
@@ -268,6 +284,11 @@ function BubbleChart(el, filterField, filters) {
 
         }
 
+
+        // Add an axis flipping effect
+        xFlip.on("click", onRevertX);
+        yFlip.on("click", onRevertY);
+
         function onRevertX() {
             // alert("mf");
             xScale.domain([xScale.domain()[1], xScale.domain()[0]]);
@@ -297,12 +318,8 @@ function BubbleChart(el, filterField, filters) {
         }
 
 
-        xAxisGroup
-            .on("click", onRevertX)
-            .call(xAxis);
-        yAxisGroup
-            .on("click", onRevertY)
-            .call(yAxis);
+        xAxisGroup.call(xAxis);
+        yAxisGroup.call(yAxis);
 
         xLabel.text(xField);
         yLabel.text(yField);

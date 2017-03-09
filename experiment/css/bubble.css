@@ -1,4 +1,14 @@
+@font-face
+{
+    font-family: FontAwesome;
+    src: url('../css/fontawesome-webfont.ttf');
+}
 
+text.flip {
+    font-size: 16;
+    font-family: FontAwesome;
+    cursor: pointer;
+}
 
 #bubble {
     width: 700px;
