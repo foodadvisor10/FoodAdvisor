@@ -264,14 +264,32 @@ function BubbleChart(el, filterField, filters) {
 
 
             showSelectedDash(selected);
-            dot
-                .attr("cx", function (d) {
-                    return xScale(x(d));
-                })
-                .attr("cy", function (d) {
-                    return yScale(y(d));
-                });
+            dot.call(position)
 
+        }
+
+        function onRevertX() {
+            // alert("mf");
+            xScale.domain([xScale.domain()[1], xScale.domain()[0]]);
+            xScaleB.domain([xScaleB.domain()[1], xScaleB.domain()[0]]);
+
+            xAxisGroup
+                .transition()
+                .call(xAxis);
+
+            animateDots();
+        }
+
+        function onRevertY() {
+            // alert("mf");
+            yScale.domain([yScale.domain()[1], yScale.domain()[0]]);
+            yScaleL.domain([yScaleL.domain()[1], yScaleL.domain()[0]]);
+
+            yAxisGroup
+                .transition()
+                .call(yAxis);
+
+            animateDots();
         }
 
         function onZoomend() {
@@ -279,38 +297,46 @@ function BubbleChart(el, filterField, filters) {
         }
 
 
-        xAxisGroup.call(xAxis);
-        yAxisGroup.call(yAxis);
-
+        xAxisGroup
+            .on("click", onRevertX)
+            .call(xAxis);
+        yAxisGroup
+            .on("click", onRevertY)
+            .call(yAxis);
 
         xLabel.text(xField);
         yLabel.text(yField);
 
-        var s = dots.selectAll(".dot").data(data, key);
-        s.call(setDotEvent)
-            .sort(order)
-            .transition()
-            .call(position);
-        s.enter().append("circle")
-            .attr("class", "dot")
-            .style("fill", function (d) {
-                return colorScale(color(d));
-            })
-            .call(setDotEvent)
-            .sort(order)
-            .attr("cx", function (d) {
-                return xScale(x(d));
-            })
-            .attr("cy", function (d) {
-                return yScale(y(d));
-            })
-            .transition()
-            .attr("r", function (d) {
-                return radiusScale(radius(d));
-            });
-        s.exit().remove();
-        dot = dots.selectAll(".dot");
-        //highlightSelected(currentlySelectedPieChart);
+        function animateDots() {
+            showSelectedDash(selected);
+            var s = dots.selectAll(".dot").data(data, key);
+            s.call(setDotEvent)
+                .sort(order)
+                .transition()
+                .call(position);
+            s.enter().append("circle")
+                .attr("class", "dot")
+                .style("fill", function (d) {
+                    return colorScale(color(d));
+                })
+                .call(setDotEvent)
+                .sort(order)
+                .attr("cx", function (d) {
+                    return xScale(x(d));
+                })
+                .attr("cy", function (d) {
+                    return yScale(y(d));
+                })
+                .transition()
+                .attr("r", function (d) {
+                    return radiusScale(radius(d));
+                });
+            s.exit().remove();
+            dot = dots.selectAll(".dot");
+            //highlightSelected(currentlySelectedPieChart);
+
+        }
+        animateDots();
 
 
         // Setup search box
