@@ -44,18 +44,19 @@
 /*http://codepen.io/qaidj/pen/eKruC*/
 .cssCircle {
     border-radius: 999px;
-    width: 13px;
-    height: 13px;
+    <!-- Made button bigger -->
+    width: 24px;
+    height: 24px;
     padding: 0;
-
-    background: #e83e3e;
-    border: 1px solid #003580;
+    <!-- Changed the background to white -->
+    background: white;
+    <!-- Removed border -->
+    border: 0px solid #003580;
     color: #003580;
     text-align: center;
     transition: background 0.2s linear;
     transition: color 0.2s linear;
-
-    font: 13px Arial, sans-serif
+    font: 13px Arial, sans-serif;
 }
 
 .cssCircle:hover {
@@ -64,8 +65,10 @@
 }
 
 .minusSign {
-    line-height: 0.9em;
-    margin-bottom: 1px;
+line-height: 0.9em;
+margin-bottom: 1px;
+<!-- Added the following to make the button bigger -->
+font-size: x-large;
 }
 
 .plusSign {
