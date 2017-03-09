@@ -1,7 +1,5 @@
 $(document).ready(function () {
     var idMap = {
-        "select-x-axis": "x",
-        "select-y-axis": "y",
         "select-r-axis": "r"
 
     };
@@ -49,21 +47,17 @@ $(document).ready(function () {
             return datum[category.field]
         }));
 
-        //Send the category data to the bubble legend
-        bubbleLegend(groups);
 
-        var bubble = new BubbleChart(d3.select("#bubble"));
-
-        groups.forEach(function (filter) {
-            $("#select-category").append("<option value='" + filter + "'>" + filter + "</option>");
-        });
-
-        $("#select-category")
-            .val(category.value)
-            .on("change", function () {
-                category.value = $(this).val();
-                render();
-            });
+        // groups.forEach(function (filter) {
+        //     $("#select-category").append("<option value='" + filter + "'>" + filter + "</option>");
+        // });
+        //
+        // $("#select-category")
+        //     .val(category.value)
+        //     .on("change", function () {
+        //         category.value = $(this).val();
+        //         render();
+        //     });
 
         // Create axis definition
 
@@ -74,7 +68,7 @@ $(document).ready(function () {
         Object.keys(idMap).forEach(function (id) {
             var axis = idMap[id];
             cols.forEach(function (col) {
-                $("#" + id).append("<option value='" + col + "'>" + col + "</option");
+                $("#" + id).append("<option value='" + col + "'>" + col + "</option>");
             });
             $("#" + id)
                 .val(options[axis])
@@ -84,17 +78,25 @@ $(document).ready(function () {
                 });
         });
 
+
+        var bubble = new BubbleChart(d3.select("#bubble"), category.field, cols);
+
         var multiFilter = new MultiFilter(d3.select("#filter-table"), data, filters, bubble.updateFilter);
         //createLegend(d3.select("#bubble-legend"));
 
+        //Send the category data to the bubble legend
+        var bubbleLegend = new BubbleLegend(groups, bubble.updateGroups);
+
+
         createSearch($("#search-box"), data, options.key, 'Category');
+        bubble.setDB(data);
         render();
 
         function render() {
             console.log("render");
             // $("#bubble").empty();
 
-            bubble.createBubble(data, options, category, groups);
+            bubble.createBubble(data, options, false, groups);
         }
     });
 

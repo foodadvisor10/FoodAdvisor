@@ -48,6 +48,35 @@ rect.disabled {
     text-align: center;
 }
 
+
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@-webkit-keyframes fadeout{
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes fadeout {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+#chart_transition{
+    -webkit-animation: fadeout 0.25s linear 1 normal forwards;
+}
+
+#chart_fadein{
+    -webkit-animation: fadeEffect 0.25s linear 1 normal forwards;
+}
+
 #headerimg img {
     padding-top: 80px;
     display: block;

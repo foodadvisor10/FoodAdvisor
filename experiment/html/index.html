@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/bubble-legend.css">
     <link rel="stylesheet" href="../css/donut.css">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/d3-context-menu.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -22,39 +23,36 @@
          class="floatRight">
 </div>
 <!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+<div id="bubble-legend-container">
+    <svg id="bubble-legend" width="1200" height="130"></svg>
+</div>
+
 <div id="search">
     <select id="search-box">
         <option></option>
     </select>
 </div>
 <div id="bubble">
-
+<svg>
+    <defs>
+        <filter id="dropshadow" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feComponentTransfer in="SourceAlpha">
+                <feFuncR type="discrete" tableValues="0"/>
+                <feFuncG type="discrete" tableValues="0"/>
+                <feFuncB type="discrete" tableValues="0"/>
+            </feComponentTransfer>
+            <feGaussianBlur stdDeviation="2.5"/>
+            <feOffset dx="0" dy="0" result="shadow"/>
+            <feComposite in="SourceGraphic" in2="shadow" operator="over"/>
+        </filter>
+    </defs>
+</svg>
 </div>
-<div id="chart"><b id="titlehead"></b></div>
+<div id="chart"><form>
+<input type="radio" name="chart_style" value="macro" onclick="updateChart(1)" checked> Macro <input type="radio" name="chart_style" value="micro" onclick="updateChart(2)"> Micro 
+</form> <b id="titlehead"></b></div>
 <div id="control">
     <table id="control-table">
-        <tr>
-            <td>Category</td>
-            <td>
-                <select id="select-category">
-                    <option value="ALL">All</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>x axis</td>
-            <td>
-                <select id="select-x-axis">
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>y axis</td>
-            <td>
-                <select id="select-y-axis">
-                </select>
-            </td>
-        </tr>
         <tr>
             <td>Bubble size</td>
             <td>
@@ -77,14 +75,12 @@
     </table>
 </div>
 
-<div id="bubble-legend-container">
-    <svg id="bubble-legend" width="900" height="200"></svg>
-</div>
-
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+
+<script src="../js/d3-context-menu.js"></script>
 
 <script src="../js/piechart.js"></script>
 <script src="../js/bubble.js"></script>

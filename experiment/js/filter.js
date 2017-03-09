@@ -111,7 +111,8 @@ function MultiFilter(filterTable, data, filters, onChange) {
         var brushGroup = svg.append('g')
             .attr("class", "brush")
             .attr("transform", "translate(10, 2)")
-            .call(brush);
+            .call(brush)
+            .call(brush.move, x.range());
 
         brushGroup.selectAll('.overlay')
             .attr("style", "fill: #4b9e9e");
@@ -125,7 +126,7 @@ function MultiFilter(filterTable, data, filters, onChange) {
 
         container.append("div")
             .attr("class", "cssCircle minusSign")
-            .html("&#8211;")
+            .html("x")       //&#8211;
             .on("click", function () {
                 filterTable.select("#" + filter.id).remove();
                 dropdown.select("option[value=\"" + filter.field + "\"]")
