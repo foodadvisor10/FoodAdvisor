@@ -64,8 +64,6 @@ function BubbleChart(el, filterField, filters) {
         .attr("height", height)
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var dottedCross = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var g2 = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -79,8 +77,9 @@ function BubbleChart(el, filterField, filters) {
     var focus = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var axisReading = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var dottedCross = bubbleSvg.append("g");
+
+    var axisReading = bubbleSvg.append("g");
 
     var rightPanel = svg.append("g")
         .attr("transform", "translate(" + zBrushX + "," + zBrushY + ")");
