@@ -5,6 +5,7 @@ function BubbleChart(el, filterField, filters) {
     var data = [];
     var options = {};
     var filter = [];
+    var filters;
     var groups = [];
     var keyword = "";
     var selected;
@@ -25,6 +26,21 @@ function BubbleChart(el, filterField, filters) {
         height = H - margin.top - margin.bottom,
         heightB = H - marginB.top - marginB.bottom,
         heightL = H - marginL.top - marginL.bottom;
+
+
+    var xScale;
+    var xScaleB;
+    var yScale;
+    var yScaleL;
+    var zScale;
+    var radiusScale;
+    var colorScale;
+
+    var xAxis;
+    var yAxis;
+    var yAxisL;
+    var zAxis;
+    var xAxisB;
 
     // Brush dimensions
     var zBrushHeight = height / 2,
@@ -52,6 +68,7 @@ function BubbleChart(el, filterField, filters) {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var focus = svg.append("g")
+        .attr("class", "focus")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var axisReading = svg.append("g")
@@ -173,6 +190,17 @@ function BubbleChart(el, filterField, filters) {
     //     .attr("dy", ".75em")
     //     .attr("transform", "translate(" + (-zBrushWidth - 5) + ", 0) rotate(-90)");
 
+    // TODO: refactor this
+    var x;
+    var y;
+
+    var animateDots;
+
+
+    function scaler(data, accessor) {
+        return data.length === 1 ? [0, 2 * d3.max(data, accessor)] : [0, 1.1 * d3.max(data, accessor)];
+    }
+
     this.setDB = function(data) {
         db = data;
     };
@@ -193,11 +221,11 @@ function BubbleChart(el, filterField, filters) {
 
 
         // Various accessors that specify the dimensions of data to visualize.
-        function x(d) {
+        x = function(d) {
             return +d[xField];
         }
 
-        function y(d) {
+        y = function(d) {
             return +d[yField];
         }
 
@@ -221,9 +249,6 @@ function BubbleChart(el, filterField, filters) {
             return d[filterField];
         }
 
-        function scaler(data, accessor) {
-            return data.length === 1 ? [0, 2 * d3.max(data, accessor)] : [0, 1.1 * d3.max(data, accessor)];
-        }
 
         data = newData.filter(function (d) {
             return !filter || filter[f(d)];
@@ -242,20 +267,20 @@ function BubbleChart(el, filterField, filters) {
         }
 
         // Various scales. These domains make assumptions of data, naturally.
-        var xScale = d3.scaleLinear().domain(scaler(data, x)).range([0, width]),
-            xScaleB = d3.scaleLinear().domain(scaler(data, x)).range([0, width]),
-            yScale = d3.scaleLinear().domain(scaler(data, y)).range([height, 0]),
-            yScaleL = d3.scaleLinear().domain(scaler(data, y)).range([heightL, 0]),
-            zScale = d3.scaleLinear().domain(scaler(data, z)).range([zBrushHeight, 0]),
-            radiusScale = d3.scaleSqrt().domain(scaler(data, radius)).range([0, 40]),
-            colorScale = d3.scaleOrdinal(d3.schemeCategory20).domain(groups);
+        xScale = d3.scaleLinear().domain(scaler(data, x)).range([0, width]),
+        xScaleB = d3.scaleLinear().domain(scaler(data, x)).range([0, width]),
+        yScale = d3.scaleLinear().domain(scaler(data, y)).range([height, 0]),
+        yScaleL = d3.scaleLinear().domain(scaler(data, y)).range([heightL, 0]),
+        zScale = d3.scaleLinear().domain(scaler(data, z)).range([zBrushHeight, 0]),
+        radiusScale = d3.scaleSqrt().domain(scaler(data, radius)).range([0, 40]),
+        colorScale = d3.scaleOrdinal(d3.schemeCategory20).domain(groups);
 
         // The x & y axes.
-        var xAxis = d3.axisBottom(xScale),//.scale(xScale).ticks(12, d3.format(",d")),
-            yAxis = d3.axisLeft(yScale),//.orient("left");
-            yAxisL = d3.axisLeft(yScaleL),//.orient("left");
-            zAxis = d3.axisRight(zScale),
-            xAxisB = d3.axisBottom(xScaleB);
+        xAxis = d3.axisBottom(xScale),//.scale(xScale).ticks(12, d3.format(",d")),
+        yAxis = d3.axisLeft(yScale),//.orient("left");
+        yAxisL = d3.axisLeft(yScaleL),//.orient("left");
+        zAxis = d3.axisRight(zScale),
+        xAxisB = d3.axisBottom(xScaleB);
 
         // Create zoom
         var xZoomOption = d3.zoom()
@@ -324,7 +349,7 @@ function BubbleChart(el, filterField, filters) {
         xLabel.text(xField);
         yLabel.text(yField);
 
-        function animateDots() {
+        animateDots = function() {
             showSelectedDash(selected);
             var s = dots.selectAll(".dot").data(data, key);
             s.call(setDotEvent)
@@ -354,6 +379,8 @@ function BubbleChart(el, filterField, filters) {
 
         }
         animateDots();
+        // if(filters)
+        // that.updateFilter(filters);
 
 
         // Setup search box
@@ -383,17 +410,15 @@ function BubbleChart(el, filterField, filters) {
 
         function search(query) {
             if (!query) return;
-            // dot.each(function (d) {
-            //     if (query && key(d) !== query) {
-            //         d3.select(this)
-            //             .classed("half-transparent", true)
-            //             .classed("search-target", false);
-            //     } else if (key(d) === query) {
-            //         d3.select(this)
-            //             .classed("half-transparent", false)
-            //             .classed("search-target", true);
-            //     }
-            // })
+            dot.each(function (d) {
+                if (query && key(d) !== query) {
+                    d3.select(this)
+                        .classed("search-target", false);
+                } else if (key(d) === query) {
+                    d3.select(this)
+                        .classed("search-target", true);
+                }
+            })
             var searched = db.find(function(d) {
                 return key(d) === query;
             })
@@ -545,17 +570,37 @@ function BubbleChart(el, filterField, filters) {
         }
     };
 
-    this.updateFilter = function (filters) {
+    this.updateFilter = function (filterGroup) {
+        filters = filterGroup;
         dot.classed("invisible", function (d) {
-            var visible = filters.every(function (filter) {
+            var visible = filterGroup.every(function (filter) {
                 return (filter.min <= d[filter.field] && d[filter.field] <= filter.max);
             });
             return !visible;
         });
+        // el.select(".search-target")
+        //     .classed("invisible", false)
 
-        el.select(".search-target")
-            .classed("invisible", true)
+        var filteredData = dot.filter(function(d) {
+            var visible = filterGroup.every(function (filter) {
+                return (filter.min <= d[filter.field] && d[filter.field] <= filter.max);
+            });
+            return visible;
+        }).data();
+        if (!filteredData.length) return;
+        console.log(d3.extent(filteredData, x));
+        xScale.domain(d3.extent(filteredData, x));
+        xScaleB.domain(d3.extent(filteredData, x));
+        yScale.domain(d3.extent(filteredData, y));
+        yScaleL.domain(d3.extent(filteredData, y));
+        xAxisGroup
+            .transition()
+            .call(xAxis);
+        yAxisGroup
+            .transition()
+            .call(yAxis);
 
+        animateDots();
     }
 
     this.updateGroups = function(category) {
