@@ -60,15 +60,14 @@
 }
 
 .cssCircle:hover {
-    background: #f70c0c ;
     cursor: pointer;
 }
 
 .minusSign {
-line-height: 0.9em;
-margin-bottom: 1px;
-<!-- Added the following to make the button bigger -->
-font-size: x-large;
+    line-height: 0.9em;
+    margin-bottom: 1px;
+    <!-- Added the following to make the button bigger -->
+    font-size: x-large;
 }
 
 .plusSign {
@@ -77,5 +76,4 @@ font-size: x-large;
 
 .minusSign:hover,
 .plusSign:hover {
-    color: white;
 }
