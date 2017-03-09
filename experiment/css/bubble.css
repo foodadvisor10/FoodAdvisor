@@ -8,6 +8,8 @@
 
 .dot.selected {
     opacity: 1;
+    stroke: yellow;
+    stroke-width: 2px;
     filter: url(#dropshadow);
 }
 
