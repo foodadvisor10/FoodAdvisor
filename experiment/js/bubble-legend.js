@@ -104,6 +104,8 @@ function BubbleLegend(categories, onLegendClick) {
     d3.select(".bubble-legend")
       .selectAll("rect")
       .attr("class", "");
+
+    onLegendClick(selectedCategories);
   }
 
   function deselectAllCategories() {
@@ -115,6 +117,8 @@ function BubbleLegend(categories, onLegendClick) {
     d3.select(".bubble-legend")
       .selectAll("rect")
       .attr("class", "disabled");
+
+    onLegendClick(selectedCategories);
   }
 
 }
