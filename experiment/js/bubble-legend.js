@@ -84,14 +84,14 @@ function BubbleLegend(categories, onLegendClick) {
       .append("div")
       .append("button")
       .attr("id", "select-button")
-      .html("All Categories")
+      .html("All")
       .on("click", selectAllCategories);
 
     d3.select("#select-all-container")
       .append("div")
       .append("button")
       .attr("id", "deselect-button")
-      .html("No Categories")
+      .html("None")
       .on("click", deselectAllCategories);
   }
 

@@ -1,7 +1,8 @@
 #bubble-legend-container{
     position: relative;
-    margin-left: 40px;
-    margin-top: 20px;
+    left: 20%;
+    display: inline-block;
+    margin: 0 auto;
 }
 
 .legend-row rect{
@@ -16,4 +17,8 @@
 
 #deselect-button{
     margin-top: 5px;
+}
+
+.wrapper-row-legend{
+    margin-top: 10px;
 }

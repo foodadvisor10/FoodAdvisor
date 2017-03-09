@@ -4,10 +4,11 @@
 
 #control {
     position: relative;
-    padding: 20px;
+   /*padding: 20px;*/
     width: 400px;
     display: inline-block;
     vertical-align: top;
+    margin-left: 20px;
 }
 
 #control-table {
