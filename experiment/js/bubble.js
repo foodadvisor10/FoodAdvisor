@@ -246,76 +246,13 @@ function BubbleChart(el, filterField, filters) {
 
         zoomRegion.call(xZoomOption);
 
-
-        // Create y-brush
-        //leftPanel.append("g")
-        //    .call(yAxisL);
-        //
-        //
-        //var yBrushOption = d3.brushY()
-        //    .extent([[-yBrushWidth / 2, 0], [yBrushWidth / 2, height]])
-        //    .on("start brush end", yBrushMove);
-        //
-        //var yBrush = leftPanel.append("g")
-        //    .attr("class", "brush")
-        //    .call(yBrushOption)
-        //    .call(yBrushOption.move, yScale.range());
-
-
-        // Create x-brush
-        //bottomPanel.append("g")
-        //    .call(xAxisB);
-        //
-        //var xBrushOption = d3.brushX()
-        //    .extent([[0, -xBrushWidth / 2], [width, xBrushWidth / 2]])
-        //    .on("start brush end", xBrushMove);
-        //
-        //var xBrush = bottomPanel.append("g")
-        //    .attr("class", "brush")
-        //    .call(xBrushOption)
-        //    .call(xBrushOption.move, xScale.range());
-
-
-        // function xBrushMove() {
-        //     if (d3.event.sourceEvent && d3.event.sourceEvent.type === "zoom") return; // ignore brush-by-zoom
-        //     var s = d3.event.selection || xScaleB.range();
-        //     //s = Math.abs(s[1] - s[0]) > 0.001 ? s : xScale2.range();
-        //     //console.log(s);
-        //     xScale.domain(s.map(xScaleB.invert, xScaleB));
-        //     focus.select(".axis--x").call(xAxis);
-        //     //svg.select(".zoom").call(xZoomOption.transform, d3.zoomIdentity
-        //     //    .scale(width / (s[1] - s[0]))
-        //     //    .translate(-s[0], 0));
-        //
-        // }
-        //
-        //
-        // function yBrushMove() {
-        //     if (d3.event.sourceEvent && d3.event.sourceEvent.type === "zoom") return; // ignore brush-by-zoom
-        //     var s = d3.event.selection || yScaleL.range();
-        //     //s = Math.abs(s[1] - s[0]) > 0.001 ? s : xScale2.range();
-        //     //console.log(s);
-        //     yScale.domain(s.map(yScaleL.invert, yScaleL));
-        //     focus.select(".axis--y").call(yAxis);
-        //     //svg.select(".zoom").call(xZoomOption.transform, d3.zoomIdentity
-        //     //    .scale(height / (s[1] - s[0]))
-        //     //    .translate(-s[0], 0));
-        //
-        // }
-
         function onZoom() {
-            //if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return; // ignore zoom-by-brush
             var t = d3.event.transform;
             if (d3.event.sourceEvent.type === 'mousemove') {
                 zoomRegion.style("cursor", "move");
             }
             xScale.domain(t.rescaleX(xScaleB).domain());
             yScale.domain(t.rescaleY(yScaleL).domain());
-            //svg.selectAll(".dot")
-            //    .attr("cx", function(d) {return xScale(x(d))})
-            //    .attr("cy", function(d) {return yScale(y(d))});
-            //focus.select(".axis--x").call(xAxis);
-            //bottomPanel.select(".brush").call(xBrushOption.move, xScale.range().map(t.invertX, t));
 
             xAxisGroup.call(xAxis);
             yAxisGroup.call(yAxis);
@@ -333,20 +270,6 @@ function BubbleChart(el, filterField, filters) {
             zoomRegion.style("cursor", "zoom-in");
         }
 
-
-        // zAxisGroup.call(zAxis);
-
-
-        // var zBrushOption = d3.brushY()
-        //     .extent([[-zBrushWidth / 2, 0], [zBrushWidth / 2, zBrushHeight]])
-        //     .on("start brush end", zBrushMove);
-        //
-        // zLabel.text(zField);
-
-
-        // var zBrush = rightPanel.append("g")
-        //     .attr("class", "brush")
-        //     .call(zBrushOption);
 
         xAxisGroup.call(xAxis);
         yAxisGroup.call(yAxis);
@@ -422,19 +345,6 @@ function BubbleChart(el, filterField, filters) {
 
         }
 
-
-        // function zBrushMove() {
-        //     var s = d3.event.selection || zScale.range();
-        //     if (s) {
-        //         var sz = s.map(zScale.invert);
-        //         dot.attr('visibility', function (d) {
-        //             return d3.min(sz) <= z(d) && z(d) <= d3.max(sz) ? 'visible' : 'hidden';
-        //         })
-        //         d3.select(".search-target")
-        //             .attr("visibility", true)
-        //     }
-        // }
-
         function setDotEvent(dot) {
             dot.on("mouseenter", highlightDot)
                 .on("mousemove", moveTooltip)
@@ -457,7 +367,7 @@ function BubbleChart(el, filterField, filters) {
             d3.select(this)
                 .classed("half-transparent", false);
 
-            showDash(d);
+            showSelectedDash(d);
 
             tooltip.transition()
                 .duration(200)
@@ -472,7 +382,7 @@ function BubbleChart(el, filterField, filters) {
             dot
                 .classed("half-transparent", false);
 
-            hideDash(d);
+            hideSelectedDash(d);
 
             tooltip.transition()
                 .duration(50)
@@ -506,11 +416,18 @@ function BubbleChart(el, filterField, filters) {
                 .text(v);
         }
 
-        function showDash(d) {
+        function showSelectedDash(d) {
             hoverHint = dottedCross.append("g");
             hoverReading = axisReading.append("g");
+            createDash(d, hoverHint, hoverReading)
+        }
 
-            hoverHint.append("line")
+        function hideSelectedDash(d) {
+            hideDash(d, hoverHint, hoverReading);
+        }
+
+        function createDash(d, lineGroup, readingGroup) {
+            lineGroup.append("line")
                     .style("stroke-dasharray", "3, 3")
                     .attr("class", "h-line")
                     .style("stroke", "gray")
@@ -519,7 +436,7 @@ function BubbleChart(el, filterField, filters) {
                     .attr("x2", xScale.range()[1])
                     .attr("y2", yScale(y(d)));
 
-            hoverHint.append("line")
+            lineGroup.append("line")
                 .style("stroke-dasharray", "3, 3")
                 .attr("class", "v-line")
                 .style("stroke", "gray")
@@ -528,30 +445,16 @@ function BubbleChart(el, filterField, filters) {
                 .attr("x2", xScale(x(d)))
                 .attr("y2", yScale.range()[1]);
 
-            hoverReading.append("g")
+            readingGroup.append("g")
                 .call(drawTextbox, xScale.range()[0], yScale(y(d)), y(d), true);
 
-            hoverReading.append("g")
+            readingGroup.append("g")
             .call(drawTextbox, xScale(x(d)), yScale.range()[0], x(d), false);
-
-            // vText.remove();
-            // vText = focus.append('text')
-            //     .style('font-weight', 'bold');
-            //
-            // vText.classed("invisible", false)
-            //     .attr('x', xScale.range()[0] - 28)
-            //     .attr('y', yScale(y(d)))
-            //     .text(y(d));
-            //
-            // hText.classed("invisible", false)
-            //     .attr('x', xScale(x(d)))
-            //     .attr('y', yScale.range()[0] + 16)
-            //     .text(x(d));
         }
 
-        function hideDash(d) {
-            hoverHint.remove();
-            hoverReading.remove();
+        function hideDash(d, lineGroup, readingGroup) {
+            lineGroup.remove();
+            readingGroup.remove();
         }
 
         // Positions the dots based on data.
