@@ -7,6 +7,7 @@ function BubbleChart(el, filterField, filters) {
     var filter = [];
     var groups = [];
     var keyword = "";
+    var selected;
 
     //TODO: move this to its rightful place
     function onSearch() {
@@ -71,8 +72,12 @@ function BubbleChart(el, filterField, filters) {
         .style("opacity", 0);
 
     // container for hover dotted cross and their axis reading
-    var hoverHint;
+    var hoverCross;
     var hoverReading;
+
+    // container for selected dotted cross and their axis reading
+    var selectedCross;
+    var selectedReading;
 
     // Add the x-axis.
     var xAxisGroup = focus.append("g")
@@ -256,6 +261,9 @@ function BubbleChart(el, filterField, filters) {
 
             xAxisGroup.call(xAxis);
             yAxisGroup.call(yAxis);
+
+
+            showSelectedDash(selected);
             dot
                 .attr("cx", function (d) {
                     return xScale(x(d));
@@ -313,7 +321,7 @@ function BubbleChart(el, filterField, filters) {
         search(searchBox.val());
 
         function highlightSelected(selected) {
-            toggleTransparency(dot, true);
+            // toggleTransparency(dot, true);
             dot.filter(function (d) {
                 return key(d) === selected;
             }).classed('selected', true);
@@ -331,18 +339,22 @@ function BubbleChart(el, filterField, filters) {
         }
 
         function search(query) {
-            dot.each(function (d) {
-                if (query && key(d) !== query) {
-                    d3.select(this)
-                        .classed("half-transparent", true)
-                        .classed("search-target", false);
-                } else if (key(d) === query) {
-                    d3.select(this)
-                        .classed("half-transparent", false)
-                        .classed("search-target", true);
-                }
+            if (!query) return;
+            // dot.each(function (d) {
+            //     if (query && key(d) !== query) {
+            //         d3.select(this)
+            //             .classed("half-transparent", true)
+            //             .classed("search-target", false);
+            //     } else if (key(d) === query) {
+            //         d3.select(this)
+            //             .classed("half-transparent", false)
+            //             .classed("search-target", true);
+            //     }
+            // })
+            var searched = db.find(function(d) {
+                return key(d) === query;
             })
-
+            selectDot(searched);
         }
 
         function setDotEvent(dot) {
@@ -353,11 +365,13 @@ function BubbleChart(el, filterField, filters) {
         }
 
         function selectDot(d) {
+            selected = d;
             console.log(currentlySelectedPieChart);
             unhighlightSelected(currentlySelectedPieChart);
             firstLoad = true;
             currentlySelectedPieChart = key(d);
             highlightSelected(currentlySelectedPieChart);
+            showSelectedDash(d);
             pieChart(d);
         }
 
@@ -367,7 +381,7 @@ function BubbleChart(el, filterField, filters) {
             d3.select(this)
                 .classed("half-transparent", false);
 
-            showSelectedDash(d);
+            showHoverDash(d);
 
             tooltip.transition()
                 .duration(200)
@@ -382,12 +396,11 @@ function BubbleChart(el, filterField, filters) {
             dot
                 .classed("half-transparent", false);
 
-            hideSelectedDash(d);
+            hideHoverDash(d);
 
             tooltip.transition()
                 .duration(50)
                 .style("opacity", 0);
-            search(searchBox.val());
         }
 
 
@@ -416,17 +429,28 @@ function BubbleChart(el, filterField, filters) {
                 .text(v);
         }
 
-        function showSelectedDash(d) {
-            hoverHint = dottedCross.append("g");
+        function showHoverDash(d) {
+            hideDash(d, hoverCross, hoverReading);
+            hoverCross = dottedCross.append("g");
             hoverReading = axisReading.append("g");
-            createDash(d, hoverHint, hoverReading)
+            createDash(d, hoverCross, hoverReading)
         }
 
-        function hideSelectedDash(d) {
-            hideDash(d, hoverHint, hoverReading);
+        function showSelectedDash(d) {
+            hideDash(d, selectedCross, selectedReading);
+            selectedCross = dottedCross.append("g");
+            selectedReading = axisReading.append("g");
+            createDash(d, selectedCross, selectedReading)
+        }
+
+        function hideHoverDash(d) {
+            hideDash(d, hoverCross, hoverReading);
         }
 
         function createDash(d, lineGroup, readingGroup) {
+            if (!d || !lineGroup || !readingGroup) {
+                return;
+            }
             lineGroup.append("line")
                     .style("stroke-dasharray", "3, 3")
                     .attr("class", "h-line")
@@ -453,8 +477,10 @@ function BubbleChart(el, filterField, filters) {
         }
 
         function hideDash(d, lineGroup, readingGroup) {
-            lineGroup.remove();
-            readingGroup.remove();
+            if (lineGroup)
+                lineGroup.remove();
+            if (readingGroup)
+                readingGroup.remove();
         }
 
         // Positions the dots based on data.
