@@ -47,6 +47,9 @@ function BubbleChart(el, filterField, filters) {
         .attr("height", height)
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    var dottedLayer = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
     var focus = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -64,17 +67,7 @@ function BubbleChart(el, filterField, filters) {
         .attr("class", "bubble-tooltip")
         .style("opacity", 0);
 
-    // Dashed data reading
-    var hLine = focus.append("line")
-            .style("stroke-dasharray", "3, 3")
-            .attr("class", "h-line")
-            .style("stroke", "gray"),
-        vLine = focus.append("line")
-            .style("stroke-dasharray", "3, 3")
-            .attr("class", "v-line")
-            .style("stroke", "gray"),
-        vText,
-        hText;
+    var hoverHint = dottedLayer.append("g");
 
     // Add the x-axis.
     var xAxisGroup = focus.append("g")
@@ -115,12 +108,24 @@ function BubbleChart(el, filterField, filters) {
     });
 
 
-
+    function setupLabel(s) {
+        s.attr("text-anchor", "end")
+            .style("fill", "blue")
+            .on("mouseover", function() {
+                d3.select(this)
+                    .style("text-decoration", "underline")
+            })
+            .on("mouseleave", function() {
+                d3.select(this)
+                    .style("text-decoration", null)
+            })
+    }
 
     // Add an x-axis label.
     var xLabel = focus.append("text")
         .attr("class", "x label")
         .attr("text-anchor", "end")
+        .call(setupLabel)
         .attr("x", width)
         .attr("y", height - 6)
         .on("click", d3.contextMenu(menuX));
@@ -128,9 +133,9 @@ function BubbleChart(el, filterField, filters) {
     // Add a y-axis label.
     var yLabel = focus.append("text")
         .attr("class", "y label")
-        .attr("text-anchor", "end")
         .attr("y", 6)
         .attr("dy", ".75em")
+        .call(setupLabel)
         .attr("transform", "rotate(-90)")
         .on("click", d3.contextMenu(menuY));
 
@@ -497,22 +502,26 @@ function BubbleChart(el, filterField, filters) {
         }
 
         function showDash(d) {
-            vLine.classed("invisible", false)
-                .attr("x1", xScale(x(d)))
-                .attr("y1", yScale.range()[0])
-                .attr("x2", xScale(x(d)))
-                .attr("y2", yScale.range()[1]);
-
-            hLine.classed("invisible", false)
-                .attr("x1", xScale.range()[0])
-                .attr("y1", yScale(y(d)))
-                .attr("x2", xScale.range()[1])
-                .attr("y2", yScale(y(d)));
-
-            vText = focus.append("g")
-                .call(drawTextbox, xScale.range()[0], yScale(y(d)), y(d), true);
-
-            hText = focus.append("g")
+            hoverHint = dottedLayer.append("g");
+            var hLine = hoverHint.append("line")
+                    .style("stroke-dasharray", "3, 3")
+                    .attr("class", "h-line")
+                    .style("stroke", "gray")
+                    .attr("x1", xScale.range()[0])
+                    .attr("y1", yScale(y(d)))
+                    .attr("x2", xScale.range()[1])
+                    .attr("y2", yScale(y(d))),
+                vLine = hoverHint.append("line")
+                    .style("stroke-dasharray", "3, 3")
+                    .attr("class", "v-line")
+                    .style("stroke", "gray")
+                    .attr("x1", xScale(x(d)))
+                    .attr("y1", yScale.range()[0])
+                    .attr("x2", xScale(x(d)))
+                    .attr("y2", yScale.range()[1]),
+                vText = hoverHint.append("g")
+                    .call(drawTextbox, xScale.range()[0], yScale(y(d)), y(d), true),
+                hText = hoverHint.append("g")
                 .call(drawTextbox, xScale(x(d)), yScale.range()[0], x(d), false);
 
             // vText.remove();
@@ -531,11 +540,7 @@ function BubbleChart(el, filterField, filters) {
         }
 
         function hideDash(d) {
-            vLine.classed("invisible", true);
-            hLine.classed("invisible", true);
-
-            vText.remove();
-            hText.remove();
+            hoverHint.remove();
         }
 
         // Positions the dots based on data.
