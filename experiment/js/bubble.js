@@ -6,13 +6,20 @@ function BubbleChart(el, filterField, filters) {
     var options = {};
     var filter = [];
     var groups = [];
+    var keyword = "";
+
+    //TODO: move this to its rightful place
+    function onSearch() {
+        console.log("on change");
+        that.createBubble(data, options, filter, groups, this.value);
+    }
 
     var W = parseInt(el.style('width')), H = parseInt(el.style('height'));
 
     // Chart dimensions.
-    var margin = {top: 19.5, right: 19.5, bottom: 30, left: 39.5},
-        marginL = {top: 19.5, right: 19.5, bottom: 120, left: 29.5},
-        marginB = {top: 430, right: 19.5, bottom: 30, left: 79.5},
+    var margin = {top: 19.5, right: 19.5, bottom: 30, left: 49.5},
+        marginL = {top: 19.5, right: 19.5, bottom: 120, left: 39.5},
+        marginB = {top: 430, right: 19.5, bottom: 30, left: 89.5},
         width = W - margin.right,
         height = H - margin.top - margin.bottom,
         heightB = H - marginB.top - marginB.bottom,
@@ -53,7 +60,7 @@ function BubbleChart(el, filterField, filters) {
         .attr("transform", "translate(" + marginB.left + "," + marginB.top + ")");
 
     // Define the div for the tooltip
-    var tooltip = d3.select("body").append("div")
+    var tooltip = el.append("div")
         .attr("class", "bubble-tooltip")
         .style("opacity", 0);
 
@@ -66,10 +73,8 @@ function BubbleChart(el, filterField, filters) {
             .style("stroke-dasharray", "3, 3")
             .attr("class", "v-line")
             .style("stroke", "gray"),
-        vText = focus.append('text')
-            .style('font-weight', 'bold'),
-        hText = focus.append('text')
-            .style('font-weight', 'bold');
+        vText,
+        hText;
 
     // Add the x-axis.
     var xAxisGroup = focus.append("g")
@@ -141,10 +146,11 @@ function BubbleChart(el, filterField, filters) {
         db = data;
     };
 
-    this.createBubble = function (newData, opt, fil, grps, keyword) {
+    this.createBubble = function (newData, opt, fil, grps, kw) {
         options = opt;
         filter = fil;
         groups = grps;
+        keyword = kw;
         console.log("redrawn");
         // Axis definition
         var keyField = options.key,
@@ -369,11 +375,8 @@ function BubbleChart(el, filterField, filters) {
         // Setup search box
         // TODO: change to d3 selection
         var searchBox = $("#search-box")
-            .unbind("change")
-            .on("change", function () {
-                console.log("on change");
-                that.createBubble(data, options, filter, groups, this.value);
-            });
+            .off("change", onSearch)
+            .on("change", onSearch);
         search(searchBox.val());
 
         function highlightSelected(selected) {
@@ -474,6 +477,25 @@ function BubbleChart(el, filterField, filters) {
                 .style("top", (d3.event.pageY - 28) + "px")
         }
 
+        function drawTextbox(s, x, y, v, isV) {
+            var w = 40, h = 20;
+            var pad = 1;
+            var g = s.append("g")
+                .attr("transform", "translate(" + x + "," + y + ")");
+            g.append('rect')
+                .attr("x", isV ? -w - pad : -0.5 * w)
+                .attr("y", isV ? -0.5 * h : pad)
+                .attr("width", w)
+                .attr("height", h)
+                .style("fill", "white")
+                .style("opacity", 0.8);
+            g.append("text")
+                .attr("x", isV ? -10 : 0)
+                .attr("y", isV ? 4: 16)
+                .attr("text-anchor", isV ? "end" : "middle")
+                .text(v);
+        }
+
         function showDash(d) {
             vLine.classed("invisible", false)
                 .attr("x1", xScale(x(d)))
@@ -487,23 +509,33 @@ function BubbleChart(el, filterField, filters) {
                 .attr("x2", xScale(x(d)))
                 .attr("y2", yScale(y(d)));
 
-            vText.classed("invisible", false)
-                .attr('x', xScale.range()[0] - 28)
-                .attr('y', yScale(y(d)))
-                .text(y(d));
+            vText = focus.append("g")
+                .call(drawTextbox, xScale.range()[0], yScale(y(d)), y(d), true);
 
-            hText.classed("invisible", false)
-                .attr('x', xScale(x(d)))
-                .attr('y', yScale.range()[0] + 16)
-                .text(x(d));
+            hText = focus.append("g")
+                .call(drawTextbox, xScale(x(d)), yScale.range()[0], x(d), false);
+
+            // vText.remove();
+            // vText = focus.append('text')
+            //     .style('font-weight', 'bold');
+            //
+            // vText.classed("invisible", false)
+            //     .attr('x', xScale.range()[0] - 28)
+            //     .attr('y', yScale(y(d)))
+            //     .text(y(d));
+            //
+            // hText.classed("invisible", false)
+            //     .attr('x', xScale(x(d)))
+            //     .attr('y', yScale.range()[0] + 16)
+            //     .text(x(d));
         }
 
         function hideDash(d) {
             vLine.classed("invisible", true);
             hLine.classed("invisible", true);
 
-            vText.classed("invisible", true);
-            hText.classed("invisible", true);
+            vText.remove();
+            hText.remove();
         }
 
         // Positions the dots based on data.
@@ -533,12 +565,16 @@ function BubbleChart(el, filterField, filters) {
             return !visible;
         });
 
-        d3.select(".search-target")
+        el.select(".search-target")
             .classed("invisible", true)
 
     }
 
     this.updateGroups = function(category) {
-        that.createBubble(db, options, category, groups);
+        that.createBubble(db, options, category, groups, keyword);
+    }
+
+    this.updateOptions = function(options) {
+        that.createBubble(db, options, filter, groups, keyword);
     }
 }

@@ -1,4 +1,4 @@
-var currentlySelectedPieChart = 'rice';
+var currentlySelectedPieChart = 'Apple';
 var firstLoad = true;
 //1 == macro
 //2 == micro
@@ -103,8 +103,13 @@ function pieChart(a) {
 
             //console.log(dataset);
             if (error) {
-                document.getElementById("chart").innerHTML = "This is not supposed to happen! No data was found for this food.";
+                document.getElementById("titlehead").innerHTML = "This is not supposed to happen! No data was found for this food.";
             } else {
+                if(currentlySelectedSizing == 1){
+                    document.getElementById("titlehead").innerHTML = "<form><input type=\"radio\" name=\"chart_style\" value=\"macro\" onclick=\"updateChart(1)\" checked> Macro <input type=\"radio\" name=\"chart_style\" value=\"micro\" onclick=\"updateChart(2)\"> Micro \n</form>";
+                } else {
+                    document.getElementById("titlehead").innerHTML = "<form><input type=\"radio\" name=\"chart_style\" value=\"macro\" onclick=\"updateChart(1)\"> Macro <input type=\"radio\" name=\"chart_style\" value=\"micro\" onclick=\"updateChart(2)\" checked> Micro \n</form>";
+                }
                 dataset.forEach(function (d) {
                     d.count = +d.count;
                     d.enabled = true;
@@ -242,8 +247,10 @@ function updateChart(chart){
 
 }
 function updateChart2(){
+    // document.getElementByClass().innerHTML = "";
     pieChart(currentFood);
     $("#chart svg").attr("id","chart_fadein");
+
 }
 
 

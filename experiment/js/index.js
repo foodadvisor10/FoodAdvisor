@@ -40,13 +40,13 @@ $(document).ready(function () {
         }
     ];
 
+
 // Load the data.
     d3.csv("../data/food.csv", function (data) {
         // Create filter selection
         var groups = _.uniqBy(data.map(function (datum) {
             return datum[category.field]
         }));
-
 
         // groups.forEach(function (filter) {
         //     $("#select-category").append("<option value='" + filter + "'>" + filter + "</option>");
@@ -64,6 +64,7 @@ $(document).ready(function () {
         var cols = data.columns.filter(function (col) {
             return !isNaN(data[0][col]);
         });
+        var bubble = new BubbleChart(d3.select("#bubble"), category.field, cols);
 
         Object.keys(idMap).forEach(function (id) {
             var axis = idMap[id];
@@ -73,15 +74,27 @@ $(document).ready(function () {
             $("#" + id)
                 .val(options[axis])
                 .on('change', function () {
+                    // TODO: fetch option from obj
                     options[axis] = $(this).val();
-                    render();
+                    bubble.updateOptions(options);
                 });
         });
 
+        var allFilters = [];
+        var removeString = "fatty";
+        for(var i = 0; i < cols.length; i++){
+          //Dont add the stings containing "fatty"
+           if(cols[i].toLowerCase().indexOf(removeString) == -1){
+             var filterObj = {
+               id: changeSpacesToHyphens(cols[i]),
+               label: cols[i],
+               field: cols[i]
+             };
+             allFilters.push(filterObj);
+           }
+        }
 
-        var bubble = new BubbleChart(d3.select("#bubble"), category.field, cols);
-
-        var multiFilter = new MultiFilter(d3.select("#filter-table"), data, filters, bubble.updateFilter);
+        var multiFilter = new MultiFilter(d3.select("#filter-table"), data, allFilters, bubble.updateFilter);
         //createLegend(d3.select("#bubble-legend"));
 
         //Send the category data to the bubble legend
@@ -90,17 +103,12 @@ $(document).ready(function () {
 
         createSearch($("#search-box"), data, options.key, 'Category');
         bubble.setDB(data);
-        render();
 
-        function render() {
-            console.log("render");
-            // $("#bubble").empty();
+        bubble.createBubble(data, options, false, groups);
 
-            bubble.createBubble(data, options, false, groups);
-        }
     });
-
-    function loadDonut() {
-
+    function changeSpacesToHyphens(str){
+        str = str.replace(/\W+/g, '-').toLowerCase();
+        return str;
     }
-})
+});

@@ -6,6 +6,8 @@
     position: relative;
     padding: 20px;
     width: 400px;
+    display: inline-block;
+    vertical-align: top;
 }
 
 #control-table {
