@@ -501,12 +501,12 @@ function BubbleChart(el, filterField, filters) {
                 .attr("x1", xScale(x(d)))
                 .attr("y1", yScale.range()[0])
                 .attr("x2", xScale(x(d)))
-                .attr("y2", yScale(y(d)));
+                .attr("y2", yScale.range()[1]);
 
             hLine.classed("invisible", false)
                 .attr("x1", xScale.range()[0])
                 .attr("y1", yScale(y(d)))
-                .attr("x2", xScale(x(d)))
+                .attr("x2", xScale.range()[1])
                 .attr("y2", yScale(y(d)));
 
             vText = focus.append("g")
