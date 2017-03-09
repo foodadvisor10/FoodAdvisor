@@ -11,34 +11,11 @@ $(document).ready(function () {
 
     var options = {
         key: "Food",
-        x: "Fat (g)",
-        y: "Fat (g)",
+        x: "CO2 footprint",
+        y: "Energy (kcal)",
         r: "CO2 footprint",
         color: "Category"
     };
-
-    var filters = [
-        {
-            id: 'fat-filter',
-            label: 'Fat (g)',
-            field: 'Fat (g)'
-        },
-        {
-            id: 'carbohydrates-filter',
-            label: 'Carbohydrate (g)',
-            field: 'Carbohydrate (g)'
-        },
-        {
-            id: 'proteins-filter',
-            label: 'Protein (g)',
-            field: 'Protein (g)'
-        },
-        {
-            id: 'calories-filter',
-            label: 'Energy (kcal)',
-            field: 'Energy (kcal)'
-        }
-    ];
 
 
 // Load the data.
