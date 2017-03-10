@@ -184,6 +184,7 @@ function pieChart(a) {
 
                 // Mouse over funciton
                 path.on('mousemove', function (d) {
+//                    console.log(d3.event.layerX);
                     tooltip.style('top', (d3.event.layerY + 10) + 'px')
                         .style('left', (d3.event.layerX + 10) + 'px');
                         // console.log(d3.event.layerX + " " + window.event.clientX);
