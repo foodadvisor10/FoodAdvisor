@@ -604,7 +604,7 @@ function BubbleChart(el, filterField, filters) {
         // Defines a sort order so that the smallest dots are drawn on top.
         function order(a, b) {
             // second term as tie breaker
-            return radius(b) - radius(a) + (key(b) > key(a) ? 0.00001 : 0);
+            return radius(b) - radius(a) + (y(b) > y(a) ? 0.001 : -0.001) + (x(b) > x(a) ? 0.0001 : -0.0001) + (key(b) > key(a) ? 0.00001 : -0.00001);
         }
     };
 
