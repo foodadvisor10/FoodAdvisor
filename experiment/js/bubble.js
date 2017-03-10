@@ -383,9 +383,11 @@ function BubbleChart(el, filterField, filters, groups, colors) {
         xAxisGroup.call(xAxis);
         yAxisGroup.call(yAxis);
 
-        xLabel.text(xField + " \u22BB");
-        yLabel.text(yField + " \u22BB");
-        rLabel.text("Bubble size: " + radiusField + " \u22BB");
+        var dropIcon = '\u25BC';
+
+        xLabel.text(xField + " " + dropIcon);
+        yLabel.text(yField + " " + dropIcon);
+        rLabel.text("Bubble size: " + radiusField + " " + dropIcon);
 
         animateDots = function() {
             var s = dots.selectAll(".dot").data(data, key);
