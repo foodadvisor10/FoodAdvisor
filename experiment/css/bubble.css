@@ -4,6 +4,10 @@
     src: url('../css/fontawesome-webfont.ttf');
 }
 
+.bubble-svg {
+    overflow: hidden;
+}
+
 text.flip {
     font-size: 16;
     font-family: FontAwesome;
@@ -26,6 +30,7 @@ text.flip {
 svg {
     overflow: hidden;
 }
+
 
 text {
     font: 10px sans-serif;
@@ -85,6 +90,7 @@ div.bubble-tooltip {
     cursor: default;
     fill: none;
     pointer-events: all;
+    overflow:hidden;
 }
 
 #search {
