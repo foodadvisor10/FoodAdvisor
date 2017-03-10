@@ -7,7 +7,7 @@ d3.selection.prototype.moveToFront = function() {
 NodeList.prototype.find = Array.prototype.find;
 d3.selection.prototype.moveAfter = function(condition) {
     return this.each(function() {
-        var firstChild = this.parentNode.childNodes.find(condition);
+        var firstChild = this.parentNode.childNodes.find(condition.bind(d3.select(this)));
         if (firstChild) {
             this.parentNode.insertBefore(this, firstChild);
         }
@@ -429,7 +429,7 @@ function BubbleChart(el, filterField, filters) {
                 return key(d) === selected;
             }).classed('selected', false);
             s.moveAfter(function(node) {
-                    return order(d3.select(node).data()[0], s.data()[0]) > 0;
+                    return order(d3.select(node).data()[0], this.data()[0]) > 0;
                 });
         }
 
