@@ -603,11 +603,21 @@ function BubbleChart(el, filterField, filters) {
     };
 
     this.updateFilter = function (filterGroup) {
+        function f(filter, d) {
+            return +d[filter.field]
+        }
         filters = filterGroup;
         dot.classed("invisible", function (d) {
             var visible = filterGroup.every(function (filter) {
-                return (filter.min <= d[filter.field] && d[filter.field] <= filter.max);
+                var res = (filter.min <= f(filter, d) && f(filter, d) <= filter.max);
+                if (!res) {
+                    console.log(filter.min + ' ' + f(filter, d) + ' ' + filter.max);
+                }
+                return res;
             });
+            if (!visible) {
+                console.log(d);
+            }
             return !visible;
         });
         // el.select(".search-target")
@@ -615,16 +625,22 @@ function BubbleChart(el, filterField, filters) {
 
         var filteredData = dot.filter(function(d) {
             var visible = filterGroup.every(function (filter) {
-                return (filter.min <= d[filter.field] && d[filter.field] <= filter.max);
+                return (filter.min <= f(filter, d) && f(filter, d) <= filter.max);
             });
             return visible;
         }).data();
         if (!filteredData.length) return;
-        console.log(d3.extent(filteredData, x));
-        xScale.domain(d3.extent(filteredData, x));
-        xScaleB.domain(d3.extent(filteredData, x));
-        yScale.domain(d3.extent(filteredData, y));
-        yScaleL.domain(d3.extent(filteredData, y));
+
+        function filterScaler(data, accessor) {
+            var min = d3.min(data, accessor) * 0.9;
+            var max = d3.max(data, accessor) * 1.1;
+            return [min < 0.1 && (max - min) > 1 ? 0 : min, max];
+        }
+        console.log(d3.extent(filterScaler(filteredData, x)));
+        xScale.domain(d3.extent(filterScaler(filteredData, x)));
+        xScaleB.domain(d3.extent(filterScaler(filteredData, x)));
+        yScale.domain(d3.extent(filterScaler(filteredData, y)));
+        yScaleL.domain(d3.extent(filterScaler(filteredData, y)));
         xAxisGroup
             .transition()
             .call(xAxis);
