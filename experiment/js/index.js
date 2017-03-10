@@ -16,6 +16,19 @@ $(document).ready(function () {
         r: "CO2 footprint",
         color: "Category"
     };
+      // Scroll animation
+      
+    $("a").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+      window.location.hash = hash;
+      });
+    }
+  });
 
 
 // Load the data.
