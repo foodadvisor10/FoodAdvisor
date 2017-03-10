@@ -161,7 +161,7 @@ function BubbleChart(el, filterField, filters) {
 
     function setupLabel(s) {
         s.attr("text-anchor", "end")
-            .style("fill", "blue")
+            .style("fill", "black")
             .on("mouseover", function() {
                 d3.select(this)
                     .style("text-decoration", "underline")
