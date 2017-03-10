@@ -10,6 +10,8 @@ d3.selection.prototype.moveAfter = function(condition) {
         var firstChild = this.parentNode.childNodes.find(condition.bind(d3.select(this)));
         if (firstChild) {
             this.parentNode.insertBefore(this, firstChild);
+        } else {
+            this.parentNode.appendChild(this);
         }
     });
 };
@@ -401,7 +403,8 @@ function BubbleChart(el, filterField, filters) {
                 .attr("r", 0)
                 .remove();
             dot = dots.selectAll(".dot:not(.removed)");
-            dot.moveAfter(reorderNode)
+            dot.moveAfter(reorderNode);
+            getSelectedDot(selected).moveToFront();
             //highlightSelected(currentlySelectedPieChart);
 
         }
@@ -467,6 +470,12 @@ function BubbleChart(el, filterField, filters) {
                 .on("mousewheel", function() {
                     d3.event.preventDefault();
                 })
+        }
+
+        function getSelectedDot(data) {
+            return dot.filter(function(d) {
+                return data && key(data) === key(d)
+            });
         }
 
         function selectDot(d) {
