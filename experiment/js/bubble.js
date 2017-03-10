@@ -4,6 +4,15 @@ d3.selection.prototype.moveToFront = function() {
         this.parentNode.appendChild(this);
     });
 };
+NodeList.prototype.find = Array.prototype.find;
+d3.selection.prototype.moveAfter = function(condition) {
+    return this.each(function() {
+        var firstChild = this.parentNode.childNodes.find(condition);
+        if (firstChild) {
+            this.parentNode.insertBefore(this, firstChild);
+        }
+    });
+};
 
 function BubbleChart(el, filterField, filters) {
     var that = this;
@@ -415,9 +424,13 @@ function BubbleChart(el, filterField, filters) {
 
 
         function unhighlightSelected(selected) {
-            dot.filter(function (d) {
+            if (!selected) return;
+            var s = dot.filter(function (d) {
                 return key(d) === selected;
             }).classed('selected', false);
+            s.moveAfter(function(node) {
+                    return order(d3.select(node).data()[0], s.data()[0]) > 0;
+                });
         }
 
         function toggleTransparency(s, hidden) {
@@ -582,7 +595,8 @@ function BubbleChart(el, filterField, filters) {
 
         // Defines a sort order so that the smallest dots are drawn on top.
         function order(a, b) {
-            return radius(b) - radius(a);
+            // second term as tie breaker
+            return radius(b) - radius(a) + (key(b) > key(a) ? 0.00001 : 0);
         }
     };
 
