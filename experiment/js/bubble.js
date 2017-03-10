@@ -489,7 +489,6 @@ function BubbleChart(el, filterField, filters) {
             showHoverDash(d);
 
             tooltip
-                .style("width", (key(d).length * 12) + "px")
                 .transition()
                 .duration(200)
                 .style("opacity", 0.9);
