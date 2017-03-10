@@ -318,7 +318,7 @@ function BubbleChart(el, filterField, filters) {
 
         function onZoom() {
             var t = d3.event.transform;
-            if (d3.event.sourceEvent.type === 'mousemove') {
+            if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'mousemove') {
                 zoomRegion.style("cursor", "move");
             }
             xScale.domain(t.rescaleX(xScaleB).domain());
