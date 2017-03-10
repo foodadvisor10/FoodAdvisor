@@ -1,3 +1,10 @@
+// Dirty hack again
+d3.selection.prototype.moveToFront = function() {
+    return this.each(function(){
+        this.parentNode.appendChild(this);
+    });
+};
+
 function BubbleChart(el, filterField, filters) {
     var that = this;
 
@@ -402,7 +409,8 @@ function BubbleChart(el, filterField, filters) {
             // toggleTransparency(dot, true);
             dot.filter(function (d) {
                 return key(d) === selected;
-            }).classed('selected', true);
+            }).classed('selected', true)
+                .moveToFront();
         }
 
 
