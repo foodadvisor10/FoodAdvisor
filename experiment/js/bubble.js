@@ -16,7 +16,7 @@ d3.selection.prototype.moveAfter = function(condition) {
     });
 };
 
-function BubbleChart(el, filterField, filters, groups) {
+function BubbleChart(el, filterField, filters, groups, colors) {
     var that = this;
 
     var db = [];
@@ -310,7 +310,7 @@ function BubbleChart(el, filterField, filters, groups) {
         yScaleL = d3.scaleLinear().domain(scaler(data, y)).range([heightL, 0]),
         zScale = d3.scaleLinear().domain(scaler(data, z)).range([zBrushHeight, 0]),
         radiusScale = d3.scaleSqrt().domain(scaler(data, radius)).range([0, 40]),
-        colorScale = d3.scaleOrdinal(d3.schemeCategory20).domain(groups);
+        colorScale = d3.scaleOrdinal(colors).domain(groups);
 
         // The x & y axes.
         xAxis = d3.axisBottom(xScale),//.scale(xScale).ticks(12, d3.format(",d")),
@@ -415,7 +415,7 @@ function BubbleChart(el, filterField, filters, groups) {
                 .remove();
             dot = dots.selectAll(".dot:not(.removed)");
             dot.moveAfter(reorderNode);
-            console.log(getSelectedDot(selected).data());
+            // console.log(getSelectedDot(selected).data());
             getSelectedDot(selected).moveToFront();
             if (selected) highlightSelected(key(selected));
             showSelectedDash(selected);

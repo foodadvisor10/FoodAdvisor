@@ -55,7 +55,7 @@ $(document).ready(function () {
         var cols = data.columns.filter(function (col) {
             return !isNaN(data[0][col]);
         });
-        var bubble = new BubbleChart(d3.select("#bubble"), category.field, cols, groups);
+        var bubble = new BubbleChart(d3.select("#bubble"), category.field, cols, groups, newColors);
 
         // Object.keys(idMap).forEach(function (id) {
         //     var axis = idMap[id];
