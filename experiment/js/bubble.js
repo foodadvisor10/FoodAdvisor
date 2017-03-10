@@ -161,7 +161,7 @@ function BubbleChart(el, filterField, filters) {
 
     function setupLabel(s) {
         s.attr("text-anchor", "end")
-            .style("fill", "black")
+            // I think grey is more subtle .style("fill", "black")
             .on("mouseover", function() {
                 d3.select(this)
                     .style("text-decoration", "underline")
@@ -370,8 +370,8 @@ function BubbleChart(el, filterField, filters) {
         xAxisGroup.call(xAxis);
         yAxisGroup.call(yAxis);
 
-        xLabel.text(xField);
-        yLabel.text(yField);
+        xLabel.text(xField + " \u22BB");
+        yLabel.text(yField + " \u22BB");
 
         animateDots = function() {
             showSelectedDash(selected);
