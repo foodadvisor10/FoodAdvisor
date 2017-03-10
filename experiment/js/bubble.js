@@ -37,10 +37,10 @@ function BubbleChart(el, filterField, filters) {
     var W = parseInt(el.style('width')), H = parseInt(el.style('height'));
 
     // Chart dimensions.
-    var margin = {top: 39.5, right: 19.5, bottom: 30, left: 49.5},
-        marginL = {top: 39.5, right: 19.5, bottom: 120, left: 39.5},
+    var margin = {top: 29.5, right: 19.5, bottom: 30, left: 49.5},
+        marginL = {top: 29.5, right: 19.5, bottom: 120, left: 39.5},
         marginB = {top: 430, right: 19.5, bottom: 30, left: 89.5},
-        marginT = {top: 19.5, right: 19.5, bottom: 39.5, left: 49.5},
+        marginT = {top: 25.5, right: 19.5, bottom: 39.5, left: 49.5},
         width = W - margin.right,
         height = H - margin.top - margin.bottom,
         heightB = H - marginB.top - marginB.bottom,
