@@ -25,6 +25,20 @@ $(document).ready(function () {
             return datum[category.field]
         }));
 
+        var newColors = [
+          "#a6cee3",       //Dairy
+          "#b2df8a",       //Fruits and berries
+          "#fb9a99",       //Sweets
+          "#33a02c",       //Vegetables
+          "#e31a1c",       //Meat
+          "#fdbf6f",       //Grains
+          "#d9d9d9",       //Oils
+          "#ff7f00",       //Cheese
+          "#6a3d9a",       //Root vegetables
+          "#543005",       //Legumes
+          "#1f78b4"       //Fish and seafood
+        ];
+
         // groups.forEach(function (filter) {
         //     $("#select-category").append("<option value='" + filter + "'>" + filter + "</option>");
         // });
@@ -75,7 +89,7 @@ $(document).ready(function () {
         //createLegend(d3.select("#bubble-legend"));
 
         //Send the category data to the bubble legend
-        var bubbleLegend = new BubbleLegend(groups, bubble.updateGroups);
+        var bubbleLegend = new BubbleLegend(groups, bubble.updateGroups, newColors);
 
 
         createSearch($("#search-box"), data, options.key, 'Category');

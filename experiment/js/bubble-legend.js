@@ -2,7 +2,7 @@
  * Created by martin on 2017-03-03.
  */
 
-function BubbleLegend(categories, onLegendClick) {
+function BubbleLegend(categories, onLegendClick, colors) {
   var rectSide = 20;
   var legendRowWidth = 150;
   var legendRowHeight = 30;
@@ -20,7 +20,8 @@ function BubbleLegend(categories, onLegendClick) {
 //svg is the group element where the legend should be created
   function drawLegend(svg) {
 
-    var color = d3.scaleOrdinal(d3.schemeCategory20);
+//    var color = d3.scaleOrdinal(d3.schemeCategory20);
+    var color = d3.scaleOrdinal(colors);
     color.domain(categories);
 
     var width = svg.attr("width"),
