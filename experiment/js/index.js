@@ -55,7 +55,7 @@ $(document).ready(function () {
         var cols = data.columns.filter(function (col) {
             return !isNaN(data[0][col]);
         });
-        var bubble = new BubbleChart(d3.select("#bubble"), category.field, cols);
+        var bubble = new BubbleChart(d3.select("#bubble"), category.field, cols, groups);
 
         // Object.keys(idMap).forEach(function (id) {
         //     var axis = idMap[id];
@@ -95,7 +95,7 @@ $(document).ready(function () {
         createSearch($("#search-box"), data, options.key, 'Category');
         bubble.setDB(data);
 
-        bubble.createBubble(data, options, false, groups);
+        bubble.createBubble(data, options, false);
 
     });
     function changeSpacesToHyphens(str){

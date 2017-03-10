@@ -16,15 +16,13 @@ d3.selection.prototype.moveAfter = function(condition) {
     });
 };
 
-function BubbleChart(el, filterField, filters) {
+function BubbleChart(el, filterField, filters, groups) {
     var that = this;
 
     var db = [];
     var data = [];
     var options = {};
     var filter = [];
-    var filters;
-    var groups = [];
     var keyword = "";
     var selected;
 
@@ -252,10 +250,9 @@ function BubbleChart(el, filterField, filters) {
         db = data;
     };
 
-    this.createBubble = function (newData, opt, fil, grps, kw) {
+    this.createBubble = function (newData, opt, fil, kw) {
         options = opt;
         filter = fil;
-        groups = grps;
         keyword = kw;
         console.log("redrawn");
         // Axis definition
