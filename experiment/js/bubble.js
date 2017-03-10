@@ -398,10 +398,11 @@ function BubbleChart(el, filterField, filters) {
                     return radiusScale(radius(d));
                 });
             s.exit()
+                .classed("removed", true)
                 .transition()
                 .attr("r", 0)
                 .remove();
-            dot = dots.selectAll(".dot");
+            dot = dots.selectAll(".dot:not(.removed)");
             //highlightSelected(currentlySelectedPieChart);
 
         }
