@@ -461,6 +461,9 @@ function BubbleChart(el, filterField, filters) {
                 .on("mousemove", moveTooltip)
                 .on("mouseleave", unhighlightDot)
                 .on("click", selectDot)
+                .on("mousewheel", function() {
+                    d3.event.preventDefault();
+                })
         }
 
         function selectDot(d) {
