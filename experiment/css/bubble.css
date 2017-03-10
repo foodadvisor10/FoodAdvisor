@@ -111,6 +111,6 @@ div.bubble-tooltip {
     visibility: hidden;
 }
 
-.x.label, .y.label {
+.x.label, .y.label, .r.label{
     cursor: pointer;
 }
