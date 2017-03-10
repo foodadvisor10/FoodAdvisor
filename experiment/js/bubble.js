@@ -432,8 +432,8 @@ function BubbleChart(el, filterField, filters, groups, colors) {
         // Setup search box
         // TODO: change to d3 selection
         var searchBox = $("#search-box")
-            .off("change", onSearch)
-            .on("change", onSearch);
+            .off("select2:close", onSearch)
+            .on("select2:close", onSearch);
         search(searchBox.val());
 
         function highlightSelected(selected) {
