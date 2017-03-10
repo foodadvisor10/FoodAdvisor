@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    var idMap = {
-        "select-r-axis": "r"
-
-    };
+    // var idMap = {
+    //     "select-r-axis": "r"
+    //
+    // };
 
     var category = {
         field: 'Category',
@@ -55,21 +55,21 @@ $(document).ready(function () {
         var cols = data.columns.filter(function (col) {
             return !isNaN(data[0][col]);
         });
-        var bubble = new BubbleChart(d3.select("#bubble"), category.field, cols);
+        var bubble = new BubbleChart(d3.select("#bubble"), category.field, cols, groups, newColors);
 
-        Object.keys(idMap).forEach(function (id) {
-            var axis = idMap[id];
-            cols.forEach(function (col) {
-                $("#" + id).append("<option value='" + col + "'>" + col + "</option>");
-            });
-            $("#" + id)
-                .val(options[axis])
-                .on('change', function () {
-                    // TODO: fetch option from obj
-                    options[axis] = $(this).val();
-                    bubble.updateOptions(options);
-                });
-        });
+        // Object.keys(idMap).forEach(function (id) {
+        //     var axis = idMap[id];
+        //     cols.forEach(function (col) {
+        //         $("#" + id).append("<option value='" + col + "'>" + col + "</option>");
+        //     });
+        //     $("#" + id)
+        //         .val(options[axis])
+        //         .on('change', function () {
+        //             // TODO: fetch option from obj
+        //             options[axis] = $(this).val();
+        //             bubble.updateOptions(options);
+        //         });
+        // });
 
         var allFilters = [];
         var removeString = "fatty";
@@ -95,7 +95,7 @@ $(document).ready(function () {
         createSearch($("#search-box"), data, options.key, 'Category');
         bubble.setDB(data);
 
-        bubble.createBubble(data, options, false, groups);
+        bubble.createBubble(data, options, false);
 
     });
     function changeSpacesToHyphens(str){

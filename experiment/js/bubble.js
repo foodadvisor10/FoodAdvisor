@@ -10,19 +10,19 @@ d3.selection.prototype.moveAfter = function(condition) {
         var firstChild = this.parentNode.childNodes.find(condition.bind(d3.select(this)));
         if (firstChild) {
             this.parentNode.insertBefore(this, firstChild);
+        } else {
+            this.parentNode.appendChild(this);
         }
     });
 };
 
-function BubbleChart(el, filterField, filters) {
+function BubbleChart(el, filterField, filters, groups, colors) {
     var that = this;
 
     var db = [];
     var data = [];
     var options = {};
     var filter = [];
-    var filters;
-    var groups = [];
     var keyword = "";
     var selected;
 
@@ -35,9 +35,10 @@ function BubbleChart(el, filterField, filters) {
     var W = parseInt(el.style('width')), H = parseInt(el.style('height'));
 
     // Chart dimensions.
-    var margin = {top: 19.5, right: 19.5, bottom: 30, left: 49.5},
-        marginL = {top: 19.5, right: 19.5, bottom: 120, left: 39.5},
+    var margin = {top: 29.5, right: 19.5, bottom: 30, left: 49.5},
+        marginL = {top: 29.5, right: 19.5, bottom: 120, left: 39.5},
         marginB = {top: 430, right: 19.5, bottom: 30, left: 89.5},
+        marginT = {top: 25.5, right: 19.5, bottom: 39.5, left: 49.5},
         width = W - margin.right,
         height = H - margin.top - margin.bottom,
         heightB = H - marginB.top - marginB.bottom,
@@ -89,6 +90,9 @@ function BubbleChart(el, filterField, filters) {
         .attr("width", width)
         .attr("height", height)
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var title = svg.append("g")
+        .attr("transform", "translate(" + marginT.left + "," + marginT.top + ")");
 
     var focus = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -158,10 +162,20 @@ function BubbleChart(el, filterField, filters) {
         }
     });
 
+    var menuR = filters.map(function(d) {
+        return {
+            title: d,
+            action: function() {
+                options.r = d;
+                that.createBubble(data, options, filter, groups);
+            }
+        }
+    });
 
-    function setupLabel(s) {
-        s.attr("text-anchor", "end")
-            // I think grey is more subtle .style("fill", "black")
+
+    function setupLabel(s, textAnchor) {
+        s.attr("text-anchor", textAnchor || "end")
+            .style("fill", "black")
             .on("mouseover", function() {
                 d3.select(this)
                     .style("text-decoration", "underline")
@@ -175,7 +189,6 @@ function BubbleChart(el, filterField, filters) {
     // Add an x-axis label.
     var xLabel = focus.append("text")
         .attr("class", "x label")
-        .attr("text-anchor", "end")
         .call(setupLabel)
         .attr("x", width)
         .attr("y", height - 6)
@@ -189,6 +202,13 @@ function BubbleChart(el, filterField, filters) {
         .call(setupLabel)
         .attr("transform", "rotate(-90)")
         .on("click", d3.contextMenu(menuY));
+
+    // Add a r-axis label
+    var rLabel = title.append("text")
+        .attr("class", "r label")
+        .attr("x", width / 2)
+        .call(setupLabel, "middle")
+        .on("click", d3.contextMenu(menuR));
 
 
     // Add an x-flip icon
@@ -217,6 +237,7 @@ function BubbleChart(el, filterField, filters) {
     // TODO: refactor this
     var x;
     var y;
+    var radius;
 
     var animateDots;
 
@@ -229,10 +250,9 @@ function BubbleChart(el, filterField, filters) {
         db = data;
     };
 
-    this.createBubble = function (newData, opt, fil, grps, kw) {
+    this.createBubble = function (newData, opt, fil, kw) {
         options = opt;
         filter = fil;
-        groups = grps;
         keyword = kw;
         console.log("redrawn");
         // Axis definition
@@ -257,7 +277,7 @@ function BubbleChart(el, filterField, filters) {
             return +d[zField];
         }
 
-        function radius(d) {
+        radius = function(d) {
             return +d[radiusField];
         }
 
@@ -279,15 +299,8 @@ function BubbleChart(el, filterField, filters) {
         });
 
         // additional search item
-        if (keyword && data.filter(function(d) {
-                return key(d) === keyword;
-            }).length === 0) {
-            var d = db.filter(function(d) {
-                return key(d) === keyword;
-            });
-            if (d) {
-                data.push(d[0]);
-            }
+        if (selected) {
+            data.push(selected);
         }
 
         // Various scales. These domains make assumptions of data, naturally.
@@ -297,7 +310,7 @@ function BubbleChart(el, filterField, filters) {
         yScaleL = d3.scaleLinear().domain(scaler(data, y)).range([heightL, 0]),
         zScale = d3.scaleLinear().domain(scaler(data, z)).range([zBrushHeight, 0]),
         radiusScale = d3.scaleSqrt().domain(scaler(data, radius)).range([0, 40]),
-        colorScale = d3.scaleOrdinal(d3.schemeCategory20).domain(groups);
+        colorScale = d3.scaleOrdinal(colors).domain(groups);
 
         // The x & y axes.
         xAxis = d3.axisBottom(xScale),//.scale(xScale).ticks(12, d3.format(",d")),
@@ -372,9 +385,9 @@ function BubbleChart(el, filterField, filters) {
 
         xLabel.text(xField + " \u22BB");
         yLabel.text(yField + " \u22BB");
+        rLabel.text("Bubble size: " + radiusField + " \u22BB");
 
         animateDots = function() {
-            showSelectedDash(selected);
             var s = dots.selectAll(".dot").data(data, key);
             s.call(setDotEvent)
                 .transition()
@@ -401,7 +414,11 @@ function BubbleChart(el, filterField, filters) {
                 .attr("r", 0)
                 .remove();
             dot = dots.selectAll(".dot:not(.removed)");
-            dot.moveAfter(reorderNode)
+            dot.moveAfter(reorderNode);
+            // console.log(getSelectedDot(selected).data());
+            getSelectedDot(selected).moveToFront();
+            if (selected) highlightSelected(key(selected));
+            showSelectedDash(selected);
             //highlightSelected(currentlySelectedPieChart);
 
         }
@@ -469,6 +486,12 @@ function BubbleChart(el, filterField, filters) {
                 })
         }
 
+        function getSelectedDot(data) {
+            return dot.filter(function(d) {
+                return data && key(data) === key(d)
+            });
+        }
+
         function selectDot(d) {
             selected = d;
             console.log(currentlySelectedPieChart);
@@ -489,7 +512,6 @@ function BubbleChart(el, filterField, filters) {
             showHoverDash(d);
 
             tooltip
-                .style("width", (key(d).length * 12) + "px")
                 .transition()
                 .duration(200)
                 .style("opacity", 0.9);
