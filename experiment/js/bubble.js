@@ -302,15 +302,8 @@ function BubbleChart(el, filterField, filters) {
         });
 
         // additional search item
-        if (keyword && data.filter(function(d) {
-                return key(d) === keyword;
-            }).length === 0) {
-            var d = db.filter(function(d) {
-                return key(d) === keyword;
-            });
-            if (d) {
-                data.push(d[0]);
-            }
+        if (selected) {
+            data.push(selected);
         }
 
         // Various scales. These domains make assumptions of data, naturally.
@@ -398,7 +391,6 @@ function BubbleChart(el, filterField, filters) {
         rLabel.text("Bubble size: " + radiusField + " \u22BB");
 
         animateDots = function() {
-            showSelectedDash(selected);
             var s = dots.selectAll(".dot").data(data, key);
             s.call(setDotEvent)
                 .transition()
@@ -426,7 +418,10 @@ function BubbleChart(el, filterField, filters) {
                 .remove();
             dot = dots.selectAll(".dot:not(.removed)");
             dot.moveAfter(reorderNode);
+            console.log(getSelectedDot(selected).data());
             getSelectedDot(selected).moveToFront();
+            if (selected) highlightSelected(key(selected));
+            showSelectedDash(selected);
             //highlightSelected(currentlySelectedPieChart);
 
         }
