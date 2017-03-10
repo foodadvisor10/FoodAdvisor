@@ -177,7 +177,7 @@ function BubbleChart(el, filterField, filters) {
 
     function setupLabel(s, textAnchor) {
         s.attr("text-anchor", textAnchor || "end")
-            // I think grey is more subtle .style("fill", "black")
+            .style("fill", "black")
             .on("mouseover", function() {
                 d3.select(this)
                     .style("text-decoration", "underline")
