@@ -1,8 +1,8 @@
-var currentlySelectedPieChart = 'Apple';
+var currentlySelectedPieChart = 'Apples';
 var firstLoad = true;
 //1 == macro
 //2 == micro
-var currentlySelectedSizing = 1;
+var currentlySelectedSizing = 2;
 var currentFood;
 
 var colorsize = {   "Potassium (mg)" : "#5061fb",
@@ -109,10 +109,10 @@ function pieChart(a) {
             if (error) {
                 document.getElementById("titlehead").innerHTML = "This is not supposed to happen! No data was found for this food.";
             } else {
-                if(currentlySelectedSizing == 1){
-                    document.getElementById("titlehead").innerHTML = "<form><input type=\"radio\" name=\"chart_style\" value=\"macro\" onclick=\"updateChart(1)\" checked> Macro <input type=\"radio\" name=\"chart_style\" value=\"micro\" onclick=\"updateChart(2)\"> Micro \n</form>";
+                if(currentlySelectedSizing == 2){
+                    document.getElementById("titlehead").innerHTML = "<form><input type=\"radio\" name=\"chart_style\" value=\"macro\" onclick=\"updateChart(2)\" checked> Macro <input type=\"radio\" name=\"chart_style\" value=\"micro\" onclick=\"updateChart(1)\"> Micro \n</form>";
                 } else {
-                    document.getElementById("titlehead").innerHTML = "<form><input type=\"radio\" name=\"chart_style\" value=\"macro\" onclick=\"updateChart(1)\"> Macro <input type=\"radio\" name=\"chart_style\" value=\"micro\" onclick=\"updateChart(2)\" checked> Micro \n</form>";
+                    document.getElementById("titlehead").innerHTML = "<form><input type=\"radio\" name=\"chart_style\" value=\"macro\" onclick=\"updateChart(2)\"> Macro <input type=\"radio\" name=\"chart_style\" value=\"micro\" onclick=\"updateChart(1)\" checked> Micro \n</form>";
                 }
                 dataset.forEach(function (d) {
                     d.count = +d.count;
@@ -184,6 +184,7 @@ function pieChart(a) {
 
                 // Mouse over funciton
                 path.on('mousemove', function (d) {
+//                    console.log(d3.event.layerX);
                     tooltip.style('top', (d3.event.layerY + 10) + 'px')
                         .style('left', (d3.event.layerX + 10) + 'px');
                         // console.log(d3.event.layerX + " " + window.event.clientX);

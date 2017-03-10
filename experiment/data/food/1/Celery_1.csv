@@ -1,12 +1,16 @@
 label,count
-Carbohydrate (g),1.5
-Fat (g),0.1
-Protein (g),0.7
-Fibre (g),1.8
-Water (g),95
-Monosaccharides (g),0.9
-Disaccharides (g),0.3
-Sucrose (g),0.3
-Wholegrain total (g),0
-Sugar total (g),
-Salt (g),0.16
+Cholesterol (mg),0.00
+Vitamin D (µg),0.00
+Vitamin E (mg),0.20
+Vitamin K (µg),
+Vitamin C (mg),7.00
+Vitamin B-6 (mg),0.09
+Vitamin B-12 (µg),0.00
+Phosphorus (mg),26.00
+Iodide (µg),1.90
+Iron (mg),0.40
+Potassium (mg),320.00
+Magnesium (mg),8.00
+Sodium (mg),62.00
+Selenium (µg),1.00
+Zinc (mg),0.40

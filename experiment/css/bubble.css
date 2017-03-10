@@ -1,4 +1,18 @@
+@font-face
+{
+    font-family: FontAwesome;
+    src: url('../css/fontawesome-webfont.ttf');
+}
 
+.bubble-svg {
+    overflow: hidden;
+}
+
+text.flip {
+    font-size: 16;
+    font-family: FontAwesome;
+    cursor: pointer;
+}
 
 #bubble {
     width: 700px;
@@ -8,12 +22,15 @@
 
 .dot.selected {
     opacity: 1;
+    stroke: yellow;
+    stroke-width: 2px;
     filter: url(#dropshadow);
 }
 
 svg {
     overflow: hidden;
 }
+
 
 text {
     font: 10px sans-serif;
@@ -73,6 +90,7 @@ div.bubble-tooltip {
     cursor: default;
     fill: none;
     pointer-events: all;
+    overflow:hidden;
 }
 
 #search {
