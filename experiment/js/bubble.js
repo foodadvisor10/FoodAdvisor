@@ -386,7 +386,7 @@ function BubbleChart(el, filterField, filters) {
                     return colorScale(color(d));
                 })
                 .call(setDotEvent)
-                .sort(order)
+                .moveAfter(reorderNode)
                 .attr("cx", function (d) {
                     return xScale(x(d));
                 })
@@ -428,9 +428,11 @@ function BubbleChart(el, filterField, filters) {
             var s = dot.filter(function (d) {
                 return key(d) === selected;
             }).classed('selected', false);
-            s.moveAfter(function(node) {
-                    return order(d3.select(node).data()[0], this.data()[0]) > 0;
-                });
+            s.moveAfter(reorderNode);
+        }
+
+        function reorderNode(node) {
+            return order(d3.select(node).data()[0], this.data()[0]) > 0;
         }
 
         function toggleTransparency(s, hidden) {
