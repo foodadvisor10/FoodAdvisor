@@ -397,7 +397,10 @@ function BubbleChart(el, filterField, filters) {
                 .attr("r", function (d) {
                     return radiusScale(radius(d));
                 });
-            s.exit().remove();
+            s.exit()
+                .transition()
+                .attr("r", 0)
+                .remove();
             dot = dots.selectAll(".dot");
             //highlightSelected(currentlySelectedPieChart);
 
