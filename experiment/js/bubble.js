@@ -610,14 +610,8 @@ function BubbleChart(el, filterField, filters) {
         dot.classed("invisible", function (d) {
             var visible = filterGroup.every(function (filter) {
                 var res = (filter.min <= f(filter, d) && f(filter, d) <= filter.max);
-                if (!res) {
-                    console.log(filter.min + ' ' + f(filter, d) + ' ' + filter.max);
-                }
                 return res;
             });
-            if (!visible) {
-                console.log(d);
-            }
             return !visible;
         });
         // el.select(".search-target")
@@ -636,7 +630,6 @@ function BubbleChart(el, filterField, filters) {
             var max = d3.max(data, accessor) * 1.1;
             return [min < 0.1 && (max - min) > 1 ? 0 : min, max];
         }
-        console.log(d3.extent(filterScaler(filteredData, x)));
         xScale.domain(d3.extent(filterScaler(filteredData, x)));
         xScaleB.domain(d3.extent(filterScaler(filteredData, x)));
         yScale.domain(d3.extent(filterScaler(filteredData, y)));
