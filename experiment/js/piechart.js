@@ -87,7 +87,7 @@ function pieChart(a) {
             })
             .sort(null);
 
-        var tooltip = d3.select('#chart')
+        var tooltip = d3/*.select('body')*/.select("#chart")
             .append('div')
             .attr('class', 'tooltip');
 
@@ -184,10 +184,14 @@ function pieChart(a) {
 
                 // Mouse over funciton
                 path.on('mousemove', function (d) {
-//                    console.log(d3.event.layerX);
-                    tooltip.style('top', (d3.event.layerY + 10) + 'px')
-                        .style('left', (d3.event.layerX + 10) + 'px');
-                        // console.log(d3.event.layerX + " " + window.event.clientX);
+                    console.log();
+                    var coords = d3.mouse(svg.node());
+                    tooltip
+                     // .style('top', (d3.event.layerY + 10) + 'px')
+                     // .style('left', (d3.event.layerX + 10) + 'px');
+                     .style('top', (coords[1] + 10) + 'px')
+                     .style('left', (coords[0] + 10) + 'px');
+        //   //            console.log(d3.event.layerX + " " + window.event.clientX);
                 });
                 var legend = donut.selectAll('.legend')
                     .data(color.domain())
