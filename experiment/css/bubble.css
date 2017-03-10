@@ -51,6 +51,10 @@ text {
     fill: #777;
 }
 
+.icon {
+    font-family: FontAwesome;
+}
+
 .hidden {
     opacity: 0;
 }

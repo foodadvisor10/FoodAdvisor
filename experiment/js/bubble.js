@@ -161,7 +161,7 @@ function BubbleChart(el, filterField, filters) {
 
     function setupLabel(s) {
         s.attr("text-anchor", "end")
-            .style("fill", "black")
+            // I think grey is more subtle .style("fill", "black")
             .on("mouseover", function() {
                 d3.select(this)
                     .style("text-decoration", "underline")
@@ -370,8 +370,8 @@ function BubbleChart(el, filterField, filters) {
         xAxisGroup.call(xAxis);
         yAxisGroup.call(yAxis);
 
-        xLabel.text(xField);
-        yLabel.text(yField);
+        xLabel.text(xField + " \u22BB");
+        yLabel.text(yField + " \u22BB");
 
         animateDots = function() {
             showSelectedDash(selected);
@@ -488,7 +488,9 @@ function BubbleChart(el, filterField, filters) {
 
             showHoverDash(d);
 
-            tooltip.transition()
+            tooltip
+                .style("width", (key(d).length * 12) + "px")
+                .transition()
                 .duration(200)
                 .style("opacity", 0.9);
             tooltip
@@ -604,7 +606,7 @@ function BubbleChart(el, filterField, filters) {
         // Defines a sort order so that the smallest dots are drawn on top.
         function order(a, b) {
             // second term as tie breaker
-            return radius(b) - radius(a) + (key(b) > key(a) ? 0.00001 : 0);
+            return radius(b) - radius(a) + (y(b) > y(a) ? 0.001 : -0.001) + (x(b) > x(a) ? 0.0001 : -0.0001) + (key(b) > key(a) ? 0.00001 : -0.00001);
         }
     };
 

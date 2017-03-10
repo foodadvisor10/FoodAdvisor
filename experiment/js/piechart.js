@@ -186,7 +186,7 @@ function pieChart(a) {
                 path.on('mousemove', function (d) {
                     var coords = d3.mouse(svg.node());
                     tooltip
-                     .style('top', (coords[1] + 10) + 'px')
+                     .style('top', (coords[1] - 40) + 'px')
                      .style('left', (coords[0] + 10) + 'px');
                 });
                 var legend = donut.selectAll('.legend')
