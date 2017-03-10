@@ -377,7 +377,6 @@ function BubbleChart(el, filterField, filters) {
             showSelectedDash(selected);
             var s = dots.selectAll(".dot").data(data, key);
             s.call(setDotEvent)
-                .sort(order)
                 .transition()
                 .call(position);
             s.enter().append("circle")
@@ -386,7 +385,6 @@ function BubbleChart(el, filterField, filters) {
                     return colorScale(color(d));
                 })
                 .call(setDotEvent)
-                .moveAfter(reorderNode)
                 .attr("cx", function (d) {
                     return xScale(x(d));
                 })
@@ -403,6 +401,7 @@ function BubbleChart(el, filterField, filters) {
                 .attr("r", 0)
                 .remove();
             dot = dots.selectAll(".dot:not(.removed)");
+            dot.moveAfter(reorderNode)
             //highlightSelected(currentlySelectedPieChart);
 
         }
