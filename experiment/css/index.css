@@ -18,7 +18,9 @@
     width: 400px;
     display: inline-block;
     vertical-align: top;
-    margin-left: 20px;
+    margin-left: 50px;
+    /*margin-top: 250px;*/
+    margin-top: 275px;
 }
 
 #control-table {
