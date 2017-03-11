@@ -43,19 +43,19 @@ function pieChart(a) {
         a = {"Energy (kcal)":"364.6"};
     }
 
-    if(currentlySelectedPieChart == 'Heavy cream fat 40%'){
-        currentlySelectedPieChart = 'hc';
-    }
+    // if(currentlySelectedPieChart == 'Heavy cream fat 40%'){
+    //     currentlySelectedPieChart = 'hc';
+    // }
     currentFood = a;
 
     $("#chart").find("svg").remove();
     (function (d3) {
         'use strict';
 
-        var width = 440;
-        var height = 840;
+        var width = 440 *0.7;
+        var height = 840 *.7;
         var radius = Math.min(width, 420) / 3;
-        var donutWidth = 75;
+        var donutWidth = 39;//75;
         var legendRectSize = 18;
         var legendSpacing = 3;
 
@@ -128,7 +128,7 @@ function pieChart(a) {
                     currentlySelectedPieChart = "Heavy cream fat 40%";
                 }
 
-                var textsize = "20px"                
+                var textsize = "19px"                
                 if(currentlySelectedPieChart.length > 14){
                     textsize = "12px";
                 }
@@ -201,7 +201,7 @@ function pieChart(a) {
                     // .style('width', 100)
                     .attr('transform', function (d, i) {
                         var height = legendRectSize + legendSpacing;
-                        var offset = height * dataset.length / 2;
+                        var offset = height * dataset.length / 2  + 22; 
                         var horz = -2 * legendRectSize + 220;
                         var vert = i * height - offset + 30;
                         return 'translate(' + horz + ',' + vert + ')';
