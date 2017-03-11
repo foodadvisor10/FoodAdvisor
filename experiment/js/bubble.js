@@ -329,7 +329,8 @@ function BubbleChart(el, filterField, filters, groups, colors) {
             .on("zoom", onZoom)
             .on("end", onZoomend);
 
-        zoomRegion.call(xZoomOption);
+        zoomRegion.call(xZoomOption)
+            .on("wheel", function() { d3.event.preventDefault(); });;
 
         function onZoom() {
             if (resetZoom) {
