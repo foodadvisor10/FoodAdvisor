@@ -18,7 +18,7 @@ d3.selection.prototype.moveAfter = function(condition) {
 
 function BubbleChart(el, filterField, filters, groups, colors) {
     var that = this;
-
+    var fg;
     var db = [];
     var data = [];
     var options = {};
@@ -29,11 +29,13 @@ function BubbleChart(el, filterField, filters, groups, colors) {
     //TODO: move this to its rightful place
     function onSearch() {
         var kw = this.value;
+        if (!kw) return;
         console.log("on change");
         selected = db.find(function(d) {
             return kw === d[options.key];
         })
-        that.updateFilter(filters);
+        if (fg)
+            that.updateFilter(fg);
         that.createBubble(data, options, filter, groups, kw);
     }
 
@@ -311,9 +313,6 @@ function BubbleChart(el, filterField, filters, groups, colors) {
                 return key(d) === key(selected);
                 }))
             data.push(selected);
-            else {
-                console.log(data);
-            }
         }
 
         // Various scales. These domains make assumptions of data, naturally.
@@ -670,7 +669,7 @@ function BubbleChart(el, filterField, filters, groups, colors) {
                 return res;
             })
         }
-        filters = filterGroup;
+        fg = filterGroup;
         dot.classed("invisible", function (d) {
             return !visible(d);
         });
