@@ -4,6 +4,8 @@
 
 .center-view {
     text-align: center;
+    /*extra height for scroll in large screen*/
+    height: 1500px;
 }
 
 .left-panel {
