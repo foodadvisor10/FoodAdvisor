@@ -55,7 +55,7 @@ function pieChart(a) {
         var width = 440 *0.7;
         var height = 840 *.7;
         var radius = Math.min(width, 420) / 3;
-        var donutWidth = 50;//75;
+        var donutWidth = 39;//75;
         var legendRectSize = 18;
         var legendSpacing = 3;
 
