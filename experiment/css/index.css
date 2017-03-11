@@ -2,6 +2,26 @@
     font-family: Roboto, sans-serif;
 }
 
+#filter-table {
+    margin-top: 20px;
+}
+
+.center-view {
+    text-align: center;
+    /*extra height for scroll in large screen*/
+    height: 1500px;
+}
+
+.left-panel {
+    text-align: left;
+    width: 950px;
+    display: inline-block;
+    border-right: 1px solid #e2e2e2;
+}
+.right-panel {
+    display: inline-block;
+}
+
 #control {
     position: relative;
    /*padding: 20px;*/

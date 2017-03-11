@@ -14,12 +14,8 @@ text.flip {
     cursor: pointer;
 }
 
-.removed {
-    display: none;
-}
-
 #bubble {
-    width: 700px;
+    width: 880px;
     height: 500px;
     display: inline-block;
 }
