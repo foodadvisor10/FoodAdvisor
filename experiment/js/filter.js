@@ -80,7 +80,7 @@ function MultiFilter(filterTable, data, filters, onChange) {
     var f = function(d) {return +d[filter.field]};
     var svgHeight = 50,
       brushHeight = 30,
-      width = 150;
+      width = 180;
 
     var svg = container.append('svg')
       .attr("height", svgHeight)
