@@ -2,6 +2,17 @@
     font-family: Roboto, sans-serif;
 }
 
+.center-view {
+    margin: 0 auto;
+}
+
+.left-panel {
+    display: inline-block;
+}
+.right-panel {
+    display: inline-block;
+}
+
 #control {
     position: relative;
    /*padding: 20px;*/

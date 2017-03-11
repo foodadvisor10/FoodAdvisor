@@ -47,34 +47,33 @@
 <a id="charts"></a>
 
 <div class="panel" id="charts">
-  <div class="wrapper-row-legend">
-      <div id="bubble-legend-container">
-          <svg id="bubble-legend" width="850" height="70"></svg>
-          <div id="select-all-container"></div>
-      </div>
-  </div>
   <div class="wrapper-row">
-
-      <div id="bubble">
-          <div id="search">
-              <select id="search-box">
-                  <option></option>
-              </select>
+      <div class="left-panel">
+          <div id="bubble-legend-container">
+              <svg id="bubble-legend" width="850" height="70"></svg>
+              <div id="select-all-container"></div>
           </div>
-          <svg>
-              <defs>
-                  <filter id="dropshadow" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                      <feComponentTransfer in="SourceAlpha">
-                          <feFuncR type="discrete" tableValues="0"/>
-                          <feFuncG type="discrete" tableValues="0"/>
-                          <feFuncB type="discrete" tableValues="0"/>
-                      </feComponentTransfer>
-                      <feGaussianBlur stdDeviation="2.5"/>
-                      <feOffset dx="0" dy="0" result="shadow"/>
-                      <feComposite in="SourceGraphic" in2="shadow" operator="over"/>
-                  </filter>
-              </defs>
-          </svg>
+          <div id="bubble">
+              <div id="search">
+                  <select id="search-box">
+                      <option></option>
+                  </select>
+              </div>
+              <svg>
+                  <defs>
+                      <filter id="dropshadow" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                          <feComponentTransfer in="SourceAlpha">
+                              <feFuncR type="discrete" tableValues="0"/>
+                              <feFuncG type="discrete" tableValues="0"/>
+                              <feFuncB type="discrete" tableValues="0"/>
+                          </feComponentTransfer>
+                          <feGaussianBlur stdDeviation="2.5"/>
+                          <feOffset dx="0" dy="0" result="shadow"/>
+                          <feComposite in="SourceGraphic" in2="shadow" operator="over"/>
+                      </filter>
+                  </defs>
+              </svg>
+          </div>
       </div>
       <div id="chart"><div id="titlehead"></div></div>
             <div id="control">
