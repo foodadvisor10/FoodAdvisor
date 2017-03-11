@@ -43,15 +43,7 @@ nav {
     font-size: 1.1em;
     margin-left: 50px;
 }
-.navlist li a:active {
-    color: #000000;
-}
-.navlist li a:visited {
-    color: #000000;
-}
-.navlist li a:hover {
-    color: #ff9933;
-}
+
 
 
 

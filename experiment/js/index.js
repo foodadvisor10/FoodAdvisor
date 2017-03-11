@@ -17,7 +17,7 @@ $(document).ready(function () {
         color: "Category"
     };
       // Scroll animation
-      
+
     $("a").on('click', function(event) {
     if (this.hash !== "") {
       event.preventDefault();
