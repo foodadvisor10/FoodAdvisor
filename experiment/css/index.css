@@ -7,7 +7,9 @@
 }
 
 .left-panel {
+    width: 950px;
     display: inline-block;
+    border-right: 1px solid #e2e2e2;
 }
 .right-panel {
     display: inline-block;
