@@ -28,8 +28,13 @@ function BubbleChart(el, filterField, filters, groups, colors) {
 
     //TODO: move this to its rightful place
     function onSearch() {
+        var kw = this.value;
         console.log("on change");
-        that.createBubble(data, options, filter, groups, this.value);
+        selected = db.find(function(d) {
+            return kw === d[options.key];
+        })
+        that.updateFilter(filters);
+        that.createBubble(data, options, filter, groups, kw);
     }
 
     var W = parseInt(el.style('width')), H = parseInt(el.style('height'));
@@ -302,7 +307,13 @@ function BubbleChart(el, filterField, filters, groups, colors) {
 
         // additional search item
         if (selected) {
+            if (!data.find(function(d) {
+                return key(d) === key(selected);
+                }))
             data.push(selected);
+            else {
+                console.log(data);
+            }
         }
 
         // Various scales. These domains make assumptions of data, naturally.
@@ -402,6 +413,8 @@ function BubbleChart(el, filterField, filters, groups, colors) {
 
         animateDots = function() {
             var s = dots.selectAll(".dot").data(data, key);
+            s.selectAll(".removed")
+                .remove();
             s.call(setDotEvent)
                 .transition()
                 .call(position);
