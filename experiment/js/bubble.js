@@ -663,7 +663,7 @@ function BubbleChart(el, filterField, filters, groups, colors) {
         function f(filter, d) {
             return +d[filter.field]
         }
-        console.log(selected);
+        // console.log(selected);
         function visible(d) {
             return filterGroup.every(function (filter) {
                 var res = (filter.min <= f(filter, d) && f(filter, d) <= filter.max) || (selected && d[options.key] === selected[options.key]);
@@ -683,7 +683,7 @@ function BubbleChart(el, filterField, filters, groups, colors) {
         if (!filteredData.length) return;
 
         function filterScaler(data, accessor) {
-            var min = d3.min(data, accessor) * 0.9;
+            var min = d3.min(data, accessor) * 0.8;
             var max = d3.max(data, accessor) * 1.1;
             return [min < 0.1 && (max - min) > 1 ? 0 : min, max];
         }
