@@ -28,8 +28,13 @@ function BubbleChart(el, filterField, filters, groups, colors) {
 
     //TODO: move this to its rightful place
     function onSearch() {
+        var kw = this.value;
         console.log("on change");
-        that.createBubble(data, options, filter, groups, this.value);
+        selected = db.find(function(d) {
+            return kw === d[options.key];
+        })
+        that.updateFilter(filters);
+        that.createBubble(data, options, filter, groups, kw);
     }
 
     var W = parseInt(el.style('width')), H = parseInt(el.style('height'));
@@ -240,6 +245,8 @@ function BubbleChart(el, filterField, filters, groups, colors) {
     var radius;
 
     var animateDots;
+    var xZoomOption;
+    var resetZoom = 0;
 
 
     function scaler(data, accessor) {
@@ -300,7 +307,13 @@ function BubbleChart(el, filterField, filters, groups, colors) {
 
         // additional search item
         if (selected) {
+            if (!data.find(function(d) {
+                return key(d) === key(selected);
+                }))
             data.push(selected);
+            else {
+                console.log(data);
+            }
         }
 
         // Various scales. These domains make assumptions of data, naturally.
@@ -320,17 +333,26 @@ function BubbleChart(el, filterField, filters, groups, colors) {
         xAxisB = d3.axisBottom(xScaleB);
 
         // Create zoom
-        var xZoomOption = d3.zoom()
+        xZoomOption = d3.zoom()
             .scaleExtent([1, Infinity])
             .translateExtent([[0, 0], [width, height]])
             .extent([[0, 0], [width, height]])
             .on("zoom", onZoom)
             .on("end", onZoomend);
 
-        zoomRegion.call(xZoomOption);
+        zoomRegion.call(xZoomOption)
+            .on("wheel", function() { d3.event.preventDefault(); });;
 
         function onZoom() {
+            if (resetZoom) {
+                // this is really dirty
+                d3.event.transform.k = 1;
+                d3.event.transform.x = 0;
+                d3.event.transform.y = 0;
+                resetZoom = 0;
+            }
             var t = d3.event.transform;
+
             if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'mousemove') {
                 zoomRegion.style("cursor", "move");
             }
@@ -383,12 +405,16 @@ function BubbleChart(el, filterField, filters, groups, colors) {
         xAxisGroup.call(xAxis);
         yAxisGroup.call(yAxis);
 
-        xLabel.text(xField + " \u25BC");
-        yLabel.text(yField + " \u25BC");
-        rLabel.text("Bubble size: " + radiusField + " \u25BC");
+        var dropIcon = '\u25BC';
+
+        xLabel.text(xField + " " + dropIcon);
+        yLabel.text(yField + " " + dropIcon);
+        rLabel.text("Bubble size: " + radiusField + " " + dropIcon);
 
         animateDots = function() {
             var s = dots.selectAll(".dot").data(data, key);
+            s.selectAll(".removed")
+                .remove();
             s.call(setDotEvent)
                 .transition()
                 .call(position);
@@ -430,8 +456,8 @@ function BubbleChart(el, filterField, filters, groups, colors) {
         // Setup search box
         // TODO: change to d3 selection
         var searchBox = $("#search-box")
-            .off("change", onSearch)
-            .on("change", onSearch);
+            .off("select2:close", onSearch)
+            .on("select2:close", onSearch);
         search(searchBox.val());
 
         function highlightSelected(selected) {
@@ -633,30 +659,31 @@ function BubbleChart(el, filterField, filters, groups, colors) {
     };
 
     this.updateFilter = function (filterGroup) {
+        resetZoom = 1;
         function f(filter, d) {
             return +d[filter.field]
         }
+        // console.log(selected);
+        function visible(d) {
+            return filterGroup.every(function (filter) {
+                var res = (filter.min <= f(filter, d) && f(filter, d) <= filter.max) || (selected && d[options.key] === selected[options.key]);
+                return res;
+            })
+        }
         filters = filterGroup;
         dot.classed("invisible", function (d) {
-            var visible = filterGroup.every(function (filter) {
-                var res = (filter.min <= f(filter, d) && f(filter, d) <= filter.max);
-                return res;
-            });
-            return !visible;
+            return !visible(d);
         });
         // el.select(".search-target")
         //     .classed("invisible", false)
 
         var filteredData = dot.filter(function(d) {
-            var visible = filterGroup.every(function (filter) {
-                return (filter.min <= f(filter, d) && f(filter, d) <= filter.max);
-            });
-            return visible;
+            return visible(d);
         }).data();
         if (!filteredData.length) return;
 
         function filterScaler(data, accessor) {
-            var min = d3.min(data, accessor) * 0.9;
+            var min = d3.min(data, accessor) * 0.8;
             var max = d3.max(data, accessor) * 1.1;
             return [min < 0.1 && (max - min) > 1 ? 0 : min, max];
         }
@@ -675,6 +702,7 @@ function BubbleChart(el, filterField, filters, groups, colors) {
     }
 
     this.updateGroups = function(category) {
+        resetZoom = 1;
         that.createBubble(db, options, category, groups, keyword);
     }
 
