@@ -650,22 +650,22 @@ function BubbleChart(el, filterField, filters, groups, colors) {
         function f(filter, d) {
             return +d[filter.field]
         }
+        console.log(selected);
+        function visible(d) {
+            return filterGroup.every(function (filter) {
+                var res = (filter.min <= f(filter, d) && f(filter, d) <= filter.max) || (selected && d[options.key] === selected[options.key]);
+                return res;
+            })
+        }
         filters = filterGroup;
         dot.classed("invisible", function (d) {
-            var visible = filterGroup.every(function (filter) {
-                var res = (filter.min <= f(filter, d) && f(filter, d) <= filter.max);
-                return res;
-            });
-            return !visible;
+            return !visible(d);
         });
         // el.select(".search-target")
         //     .classed("invisible", false)
 
         var filteredData = dot.filter(function(d) {
-            var visible = filterGroup.every(function (filter) {
-                return (filter.min <= f(filter, d) && f(filter, d) <= filter.max);
-            });
-            return visible;
+            return visible(d);
         }).data();
         if (!filteredData.length) return;
 
