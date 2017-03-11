@@ -2,6 +2,10 @@
     font-family: Roboto, sans-serif;
 }
 
+#filter-table {
+    margin-top: 20px;
+}
+
 .center-view {
     text-align: center;
     /*extra height for scroll in large screen*/
