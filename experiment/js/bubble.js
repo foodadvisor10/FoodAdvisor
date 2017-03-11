@@ -240,6 +240,8 @@ function BubbleChart(el, filterField, filters, groups, colors) {
     var radius;
 
     var animateDots;
+    var xZoomOption;
+    var resetZoom = 0;
 
 
     function scaler(data, accessor) {
@@ -320,7 +322,7 @@ function BubbleChart(el, filterField, filters, groups, colors) {
         xAxisB = d3.axisBottom(xScaleB);
 
         // Create zoom
-        var xZoomOption = d3.zoom()
+        xZoomOption = d3.zoom()
             .scaleExtent([1, Infinity])
             .translateExtent([[0, 0], [width, height]])
             .extent([[0, 0], [width, height]])
@@ -330,7 +332,15 @@ function BubbleChart(el, filterField, filters, groups, colors) {
         zoomRegion.call(xZoomOption);
 
         function onZoom() {
+            if (resetZoom) {
+                // this is really dirty
+                d3.event.transform.k = 1;
+                d3.event.transform.x = 0;
+                d3.event.transform.y = 0;
+                resetZoom = 0;
+            }
             var t = d3.event.transform;
+
             if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'mousemove') {
                 zoomRegion.style("cursor", "move");
             }
@@ -635,6 +645,7 @@ function BubbleChart(el, filterField, filters, groups, colors) {
     };
 
     this.updateFilter = function (filterGroup) {
+        resetZoom = 1;
         function f(filter, d) {
             return +d[filter.field]
         }
@@ -677,6 +688,7 @@ function BubbleChart(el, filterField, filters, groups, colors) {
     }
 
     this.updateGroups = function(category) {
+        resetZoom = 1;
         that.createBubble(db, options, category, groups, keyword);
     }
 
