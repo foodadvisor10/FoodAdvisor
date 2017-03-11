@@ -128,7 +128,7 @@ function pieChart(a) {
                     currentlySelectedPieChart = "Heavy cream fat 40%";
                 }
 
-                var textsize = "20px"                
+                var textsize = "19px"                
                 if(currentlySelectedPieChart.length > 14){
                     textsize = "12px";
                 }
