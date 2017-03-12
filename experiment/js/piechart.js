@@ -202,7 +202,7 @@ function pieChart(a) {
                     .attr('transform', function (d, i) {
                         var height = legendRectSize + legendSpacing;
                         var offset = height * dataset.length / 2  + 22; 
-                        var horz = -2 * legendRectSize + 170;
+                        var horz = -2 * legendRectSize + 220;
                         var vert = i * height - offset + 30;
                         return 'translate(' + horz + ',' + vert + ')';
                     });
