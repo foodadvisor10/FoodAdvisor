@@ -9,12 +9,12 @@
 }
 
 body {
-    background-color: #f9f9f9;
+    background-color: #f4f3f3;
 
 }
 
 .nav {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.6);
     position: fixed;
     left: 0; top: 0;
     width: 100%;
@@ -34,7 +34,6 @@ nav {
     line-height: 1.5;
     display: inline;
 
-
 }
 
 .navlist li a {
@@ -43,6 +42,7 @@ nav {
     font-size: 0.9em;
     margin-left: 40px;
 }
+
 
 
 
@@ -78,10 +78,23 @@ nav {
 
 }
 
-#charts {
-  padding-top: 50px;
+#video {
 
-}/*
+}
+
+#how {
+
+}
+
+#charts {
+  padding-top: 100px;
+
+}
+
+#about {
+
+
+  }/*
 
 /*
  *Scrolling

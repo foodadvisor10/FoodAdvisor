@@ -2,6 +2,9 @@
     font-family: Roboto, sans-serif;
 }
 
+.navlist li a:link {
+    color: #000000;
+}
 .navlist li a:active {
     color: #000000;
 }
@@ -11,6 +14,47 @@
 .navlist li a:hover {
     color: #ff9933;
 }
+
+li a img {
+  height:10;
+  width:70;
+}
+
+.paragraph {
+  text-align: left;
+  max-width: 70%;
+  font-size: 1.2em;
+  margin-right: 15%;
+  margin-left: 15%;
+  font-family: open sans, sans-serif;
+-webkit-font-smoothing: antialiased;
+  margin-top: 200px;
+  margin-bottom: 200px;
+
+  padding: 40px 60px 40px 60px;
+
+  background-color: #f9f9f9;
+
+
+}
+
+hr {
+  border: 2px solid #ff9933;
+}
+
+.paragraph h2 {
+  text-align: center;
+  font-family: open roboto, sans-serif;
+
+}
+
+#film {
+  text-align: center;
+
+  padding-top: 150px;
+  padding-bottom: 150px;
+}
+
 
 #control {
     position: relative;
@@ -33,4 +77,10 @@
 
 #control-table select{
     width:300px;
+}
+
+footer {
+  background-color: #DDDDDD;
+  padding-left: 100px;
+  padding-top: 30px;
 }

@@ -18,18 +18,19 @@ $(document).ready(function () {
     };
       // Scroll animation
 
-    $("a").on('click', function(event) {
-    if (this.hash !== "") {
-      event.preventDefault();
-      var hash = this.hash;
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 800, function(){
-      window.location.hash = hash;
-      });
-    }
-  });
+    /*  $(document).ready(function () {
+           $('a[href^="#"]').on('click', function (e) {
+               e.preventDefault();
 
+               var target = this.hash,
+                   $target = $(target);
+
+               $('html, body').stop().animate({
+                   'scrollTop': $target.offset().top - 80
+               }, 900, 'swing', function () {
+               });
+           });
+       }); */
 
 // Load the data.
     d3.csv("../data/food.csv", function (data) {
