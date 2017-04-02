@@ -1,8 +1,10 @@
-﻿<!DOCTYPE html>
+ ﻿<!DOCTYPE html>
 <html>
 <head>
     <title>Food Advisor</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="icon" href="../img/favicon.ico" type="image/gif" sizes="16x16">
+
 
     <link rel="stylesheet" href="../css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="../css/bubble.css"/>
@@ -26,9 +28,12 @@
   <header class="nav">
     <nav>
         <ul class="navlist">
-            <li><a href="#intro"><img src="../img/logo.png" alt="Food Advisor" style="height:8%;width:8%;"></a></li>
+            <li><a href="#intro"><img src="../img/logo.png" alt="Food Advisor"></a></li>
+            <li><a href="#video"> video </a> </li>
+            <li><a href="#how"> how it works </a> </li>
             <li><a href="#charts">visualization</a></li>
-            <!-- <li><a href="#about"> about </a> </li> -->
+            <li><a href="#about"> about </a> </li>
+
         </ul>
     </nav>
   </header>
@@ -43,38 +48,73 @@
             <img src="../img/headerimg.png" alt="Food Advisor - for a healthier life &amp; a healthier planet">
         </div>
     </div>
-<!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+
+
+    <a id="video"></a>
+
+    <div id="film">
+
+      <iframe width="420" height="315"
+    src="https://www.youtube.com/embed/XGSy3_Czz8k">
+    </iframe>
+    <p>
+      This is just the W3 example. Our film will obviously be larger...
+    </p>
+  </div>
+
+    <a id="how"></a>
+    <p></p>
+    <div class="paragraph">
+    <h2> Let's get started! </h2>
+    <hr width="10%">
+    <br>
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+      dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+      sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+        sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+    </div>
+
 <a id="charts"></a>
 
 <div class="panel" id="charts">
+  <div class="wrapper-row-legend">
+      <div id="bubble-legend-container">
+          <svg id="bubble-legend" width="850" height="70"></svg>
+          <div id="select-all-container"></div>
+      </div>
+  </div>
   <div class="wrapper-row">
-      <div class="center-view">
-      <div class="left-panel">
-          <div id="bubble-legend-container">
-              <svg id="bubble-legend" width="850" height="70"></svg>
-              <div id="select-all-container"></div>
+
+      <div id="bubble">
+          <div id="search">
+              <select id="search-box">
+                  <option></option>
+              </select>
           </div>
-          <div id="bubble">
-              <div id="search">
-                  <select id="search-box">
-                      <option></option>
-                  </select>
-              </div>
-              <svg>
-                  <defs>
-                      <filter id="dropshadow" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                          <feComponentTransfer in="SourceAlpha">
-                              <feFuncR type="discrete" tableValues="0"/>
-                              <feFuncG type="discrete" tableValues="0"/>
-                              <feFuncB type="discrete" tableValues="0"/>
-                          </feComponentTransfer>
-                          <feGaussianBlur stdDeviation="2.5"/>
-                          <feOffset dx="0" dy="0" result="shadow"/>
-                          <feComposite in="SourceGraphic" in2="shadow" operator="over"/>
-                      </filter>
-                  </defs>
-              </svg>
-          </div>
+          <svg>
+              <defs>
+                  <filter id="dropshadow" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                      <feComponentTransfer in="SourceAlpha">
+                          <feFuncR type="discrete" tableValues="0"/>
+                          <feFuncG type="discrete" tableValues="0"/>
+                          <feFuncB type="discrete" tableValues="0"/>
+                      </feComponentTransfer>
+                      <feGaussianBlur stdDeviation="2.5"/>
+                      <feOffset dx="0" dy="0" result="shadow"/>
+                      <feComposite in="SourceGraphic" in2="shadow" operator="over"/>
+                  </filter>
+              </defs>
+          </svg>
       </div>
       <div id="chart"><div id="titlehead"></div></div>
             <div id="control">
@@ -100,10 +140,36 @@
 
           </table>
       </div>
-  </div></div>
+  </div>
 
 </div>
 </section>
+
+<a id="about"></a>
+<p></p>
+<div class="paragraph">
+<h2> About </h2>
+<hr width="10%">
+<br>
+<p style="font-weight: 100;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+  sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+<p>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+    sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+
+  <p>
+    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.
+  </p>
+</div>
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -119,5 +185,30 @@
 <script src="../js/search-box.js"></script>
 <script src="../js/index.js"></script>
 </body>
+
+<footer>
+  <h3> Data sources:</h3>
+  <p>
+    <ul>
+      <li>
+         <a href="https://www.livsmedelsverket.se" target="_blank">The National Food Agency food database, retrieved 2016-02-17</a>
+      </li>
+      <li>
+       <a href="http://lcafdb.org" target="_blank">Life Cycle Assesment of Food Database from The School of Computer Science and Communication, retrieved 2017-02-13</a>
+      </li>
+      <li>
+         <a href="https://ndb.nal.usda.gov/ndb/nutrients/" target="_blank">USDA Food Composition Databases, v.3.7 2017-02-22</a>
+      </li>
+      <li>
+         <a href="http://www.bonpourleclimat.org/calcul-empreinte-carbone/" target="_blank">Bon Pour le Climat, retrieved February 2017</a>
+      </li>
+      <li>
+         <a href="http://www.foodemissions.com/foodemissions/Calculator.aspx" target="_blank">CleanMetrics Corp,, retrieved February 2017</a>
+      </li>
+    </ul>
+    A special thanks to Björn Hedin and LCAFD of KTH for // something about hosting the website, answering questions etc.
+  </p>
+
+</footer>
 
 </html>

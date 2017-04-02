@@ -2,25 +2,60 @@
     font-family: Roboto, sans-serif;
 }
 
-#filter-table {
-    margin-top: 20px;
+li a:link {
+    color: #000000;
+}
+li a:active {
+    color: #000000;
+}
+li a:visited {
+    color: #000000;
+}
+li a:hover {
+    color: #ff9933;
 }
 
-.center-view {
-    text-align: center;
-    /*extra height for scroll in large screen*/
-    height: 1500px;
+li a img {
+  height:15;
+  width:105;
 }
 
-.left-panel {
-    text-align: left;
-    width: 950px;
-    display: inline-block;
-    border-right: 1px solid #e2e2e2;
+.paragraph {
+  text-align: left;
+  max-width: 70%;
+  font-size: 1.2em;
+  color: #474747;
+
+  font-family: open sans, sans-serif;
+  margin-top: 200px ;
+  margin-bottom: 200px;
+
+  padding: 50px 15% 50px 15%;
+
+  background-color: #f1f3f4;
+
+
 }
-.right-panel {
-    display: inline-block;
+
+hr {
+  border: 2px solid #ff9933;
+
 }
+
+.paragraph h2 {
+  font-size: 2em;
+  text-align: center;
+  font-family: open roboto, sans-serif;
+
+}
+
+#film {
+  text-align: center;
+
+  padding-top: 150px;
+  padding-bottom: 150px;
+}
+
 
 #control {
     position: relative;
@@ -43,4 +78,13 @@
 
 #control-table select{
     width:300px;
+}
+
+footer {
+  background-color: #DDDDDD;
+  padding-left: 100px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 0.4em;
+  font-family: open sans, sans-serif;
 }
