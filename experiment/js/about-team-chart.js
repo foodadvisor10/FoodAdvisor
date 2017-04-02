@@ -1,68 +1,4 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  width: 960px;
-  height: 500px;
-  position: relative;
-}
-
-svg {
-	width: 100%;
-	height: 100%;
-}
-
-path.slice{
-	stroke-width:2px;
-}
-
-polyline{
-	opacity: .3;
-	stroke: black;
-	stroke-width: 2px;
-	fill: none;
-}
-
-.labelValue
-{
-	font-size: 60%;
-	opacity: .5;
-
-}
-
-.toolTip {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    position: absolute;
-    display: none;
-    width: auto;
-    height: auto;
-    background: none repeat scroll 0 0 white;
-    border: 0 none;
-    border-radius: 8px 8px 8px 8px;
-    box-shadow: -3px 3px 15px #888888;
-    color: black;
-    font: 12px sans-serif;
-    padding: 5px;
-    text-align: center;
-}
-text {
-  font: 12px sans-serif;
-}
-</style>
-<body>
-<form>
-<label><input type="radio" name="dataset" id="dataset" value="total" checked> Total</label>
-<label><input type="radio" name="dataset" id="dataset" value="option1"> Option 1</label>
-<label><input type="radio" name="dataset" id="dataset" value="option2"> Option 2</label>
-</form>
-
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
-
-
-d3.select("input[value=\"total\"]").property("checked", true);
+/* Source for the donut chart: http://bl.ocks.org/juan-cb/1984c7f2b446fffeedde */
 
 var svg = d3.select("body")
 	.append("svg")
@@ -95,9 +31,6 @@ var outerArc = d3.svg.arc()
 	.innerRadius(radius * 0.9)
 	.outerRadius(radius * 0.9);
 
-var legendRectSize = (radius * 0.05);
-var legendSpacing = radius * 0.02;
-
 
 var div = d3.select("body").append("div").attr("class", "toolTip");
 
@@ -107,55 +40,126 @@ var colorRange = d3.scale.category20();
 var color = d3.scale.ordinal()
 	.range(colorRange.range());
 
+  datasetHaisheng = [
+    {label:"Meetings", value:18}
+  ];
 
-datasetTotal = [
-		{label:"Category 1", value:19},
-        {label:"Category 2", value:5},
-        {label:"Category 3", value:13},
-        {label:"Category 4", value:17},
-        {label:"Category 5", value:19},
-        {label:"Category 6", value:27}
-        ];
+  datasetJoaquin = [
+    {label:"Research", value:35},
+    {label:"Data handling", value:15},
+    {label:"Tests", value:2},
+    {label:"Presentations", value:4},
+    {label:"Website", value:1},
+    {label:"Coordination", value:35},
+    {label:"Meetings", value:18}
+  ];
 
-datasetOption1 = [
-		{label:"Category 1", value:22},
-        {label:"Category 2", value:33},
-        {label:"Category 3", value:4},
-        {label:"Category 4", value:15},
-        {label:"Category 5", value:36},
-        {label:"Category 6", value:0}
-        ];
+  datasetJori = [
+    {label:"Meetings", value:15},
+    {label:"Research", value:12},
+    {label:"Data handling", value:10},
+    {label:"Website", value:3},
+    {label:"Graphic design", value:10},
+    {label:"Presentations", value:4},
+    {label:"Video production", value:8},
+    {label:"Tests", value:24},
+    {label:"Coordination", value:6}
+  ];
 
-datasetOption2 = [
-		{label:"Category 1", value:10},
-        {label:"Category 2", value:20},
-        {label:"Category 3", value:30},
-        {label:"Category 4", value:5},
-        {label:"Category 5", value:12},
-        {label:"Category 6", value:23}
-        ];
+  datasetLeung = [
+    {label:"Meetings", value:17},
+    {label:"Development", value:65},
+    {label:"Presentations", value:2}
+  ];
 
-change(datasetTotal);
+  datasetMans = [
+    {label:"Meetings", value:14}
+  ];
+
+  datasetMartin = [
+    {label:"Meetings", value:16}
+  ];
+  datasetThea = [
+    {label:"Meetings", value:18},
+    {label:"Research", value:15},
+    {label:"Data handling", value:15},
+    {label:"Development", value:2},
+    {label:"Presentations", value:2},
+    {label:"Website", value:15},
+    {label:"Graphic design", value:6},
+    {label:"Video production", value:4},
+    {label:"Tests", value:4}
+  ];
+  datasetVictor = [
+    {label:"Meetings", value:12},
+    {label:"Development", value:50},
+    {label:"Research", value:5},
+    {label:"Tests", value:10},
+    {label:"Presentations", value:1},
+    {label:"Website", value:12},
+    {label:"Coordination", value:15},
+    {label:"Data handling", value:20}
+  ];
+
+change(datasetHaisheng);
 
 
-d3.selectAll("input")
-	.on("change", selectDataset);
+/*d3.selectAll("tablinks")
+	.on("click", selectDataset);*/
 
-function selectDataset()
-{
-	var value = this.value;
-	if (value == "total")
+  /* Source for the tab navigator: https://www.w3schools.com/howto/howto_js_tabs.asp*/
+  function openTeamMember(evt, teamMember) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(teamMember).style.display = "block";
+      evt.currentTarget.className += " active";
+
+	if (teamMember == "Haisheng")
 	{
-		change(datasetTotal);
+		change(datasetHaisheng);
 	}
-	else if (value == "option1")
+	else if (teamMember == "Joaquin")
 	{
-		change(datasetOption1);
+		change(datasetJoaquin);
 	}
-	else if (value == "option2")
+	else if (teamMember == "Jori")
 	{
-		change(datasetOption2);
+		change(datasetJori);
 	}
+  else if (teamMember == "Leung")
+	{
+		change(datasetLeung);
+	}
+  else if (teamMember == "Mans")
+  {
+    change(datasetMans);
+  }
+  else if (teamMember == "Martin")
+  {
+    change(datasetMartin);
+  }
+  else if (teamMember == "Thea")
+  {
+    change(datasetThea);
+  }
+  else if (teamMember == "Victor")
+  {
+    change(datasetVictor);
+  }
 }
 
 function change(data) {
@@ -193,30 +197,6 @@ function change(data) {
 
     slice.exit()
         .remove();
-
-    var legend = svg.selectAll('.legend')
-        .data(color.domain())
-        .enter()
-        .append('g')
-        .attr('class', 'legend')
-        .attr('transform', function(d, i) {
-            var height = legendRectSize + legendSpacing;
-            var offset =  height * color.domain().length / 2;
-            var horz = -3 * legendRectSize;
-            var vert = i * height - offset;
-            return 'translate(' + horz + ',' + vert + ')';
-        });
-
-    legend.append('rect')
-        .attr('width', legendRectSize)
-        .attr('height', legendRectSize)
-        .style('fill', color)
-        .style('stroke', color);
-
-    legend.append('text')
-        .attr('x', legendRectSize + legendSpacing)
-        .attr('y', legendRectSize - legendSpacing)
-        .text(function(d) { return d; });
 
     /* ------- TEXT LABELS -------*/
 
@@ -288,6 +268,3 @@ function change(data) {
     polyline.exit()
         .remove();
 };
-
-</script>
-</body>

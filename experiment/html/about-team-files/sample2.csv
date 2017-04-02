@@ -1,5 +1,0 @@
-Area,Effort (hours),Description,Lessons learnt,Tasks that did not pass the final cut.
-Meetings,15 h,,,
-Development,40 h,Develpment of the X chart.,I learnt how to develop new types of visualizations with D3.,I performed some enhancements that were later reverted such as A and B.
-Tests,10 h,Test of my own develpments for bug detection.,,
-Coordination,2 h,Online conversations using Slack for the collaborative development with other teammates. ,,
