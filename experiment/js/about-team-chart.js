@@ -13,8 +13,8 @@ svg.append("g")
 svg.append("g")
 	.attr("class", "lines");
 
-var width = 960,
-    height = 450,
+var width = 430,
+    height = 225,
 	radius = Math.min(width, height) / 2;
 
 var pie = d3.layout.pie()
@@ -40,9 +40,21 @@ var colorRange = d3.scale.category20();
 var color = d3.scale.ordinal()
 	.range(colorRange.range());
 
-  datasetHaisheng = [
-    {label:"Meetings", value:18}
+  datasetTeam = [
+		{label:"Meetings", value:125},
+		{label:"Research", value:57},
+		{label:"Data handling", value:60},
+		{label:"Website", value:31},
+		{label:"Graphic design", value:16},
+		{label:"Presentations", value:13},
+		{label:"Video production", value:12},
+		{label:"Tests", value:40},
+		{label:"Coordination", value:56}
   ];
+
+	datasetHaisheng = [
+		{label:"Meetings", value:18}
+	];
 
   datasetJoaquin = [
     {label:"Research", value:35},
@@ -101,11 +113,8 @@ var color = d3.scale.ordinal()
     {label:"Data handling", value:20}
   ];
 
-change(datasetHaisheng);
-
-
-/*d3.selectAll("tablinks")
-	.on("click", selectDataset);*/
+change(datasetTeam);
+document.getElementById("defaultOpen").click();
 
   /* Source for the tab navigator: https://www.w3schools.com/howto/howto_js_tabs.asp*/
   function openTeamMember(evt, teamMember) {
@@ -128,7 +137,11 @@ change(datasetHaisheng);
       document.getElementById(teamMember).style.display = "block";
       evt.currentTarget.className += " active";
 
-	if (teamMember == "Haisheng")
+	if (teamMember == "Team")
+	{
+		change(datasetTeam);
+	}
+	else if (teamMember == "Haisheng")
 	{
 		change(datasetHaisheng);
 	}

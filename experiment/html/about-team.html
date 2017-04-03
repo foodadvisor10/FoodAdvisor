@@ -10,42 +10,43 @@ body {
 }
 
 svg {
-	width: 100%;
-	height: 100%;
+  width: 50%;
+  height: 50%;
+  padding-left: 20px;
 }
 
 path.slice{
-	stroke-width:2px;
+  stroke-width:2px;
 }
 
 polyline{
-	opacity: .3;
-	stroke: black;
-	stroke-width: 2px;
-	fill: none;
+  opacity: .3;
+  stroke: black;
+  stroke-width: 2px;
+  fill: none;
 }
 
 .labelValue
 {
-	font-size: 60%;
-	opacity: .5;
+  font-size: 60%;
+  opacity: .5;
 
 }
 
 .toolTip {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    position: absolute;
-    display: none;
-    width: auto;
-    height: auto;
-    background: none repeat scroll 0 0 white;
-    border: 0 none;
-    border-radius: 8px 8px 8px 8px;
-    box-shadow: -3px 3px 15px #888888;
-    color: black;
-    font: 12px sans-serif;
-    padding: 5px;
-    text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: absolute;
+  display: none;
+  width: auto;
+  height: auto;
+  background: none repeat scroll 0 0 white;
+  border: 0 none;
+  border-radius: 8px 8px 8px 8px;
+  box-shadow: -3px 3px 15px #888888;
+  color: black;
+  font: 12px sans-serif;
+  padding: 5px;
+  text-align: center;
 }
 text {
   font: 12px sans-serif;
@@ -53,112 +54,142 @@ text {
 
 /* Style the tab */
 div.tab {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
 }
 
 /* Style the buttons inside the tab */
 div.tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
 }
 
 /* Change background color of buttons on hover */
 div.tab button:hover {
-    background-color: #ddd;
+  background-color: #ddd;
 }
 
 /* Create an active/current tablink class */
 div.tab button.active {
-    background-color: #ccc;
+  background-color: #ccc;
+  border-color: #FF9933;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
 }
 
 /* Style the tab content */
 .tabcontent {
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
 }
 
 /*For animation of the tabs*/
 .tabcontent {
-    -webkit-animation: fadeEffect 1s;
-    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s; /* Fading effect takes 1 second */
 }
 
 @-webkit-keyframes fadeEffect {
-    from {opacity: 0;}
-    to {opacity: 1;}
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 
 @keyframes fadeEffect {
-    from {opacity: 0;}
-    to {opacity: 1;}
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.about-team-container{
+  width: 100%;
+  vertical-align: top;
+}
+
+.about-team-text {
+  float: right;
+  width: 45%;
+}
+
+.about-team-chart {
+  float: left;
+  width: 45%;
 }
 </style>
 <body>
-<div class = "about-team-container">
-  <div class="tab">
-  <button class="tablinks" onclick="openTeamMember(event, 'Haisheng')">Haisheng</button>
-  <button class="tablinks" onclick="openTeamMember(event, 'Joaquin')">Joaquin</button>
-  <button class="tablinks" onclick="openTeamMember(event, 'Jori')">Jori</button>
-  <button class="tablinks" onclick="openTeamMember(event, 'Leung')">Leung</button>
-  <button class="tablinks" onclick="openTeamMember(event, 'Mans')">Måns</button>
-  <button class="tablinks" onclick="openTeamMember(event, 'Martin')">Martin</button>
-  <button class="tablinks" onclick="openTeamMember(event, 'Thea')">Thea</button>
-  <button class="tablinks" onclick="openTeamMember(event, 'Victor')">Victor</button>
-</div>
+  <div class = "about-team-container">
+    <div class="tab">
+      <button class="tablinks" value="Team" onclick="openTeamMember(event, 'Team')" id="defaultOpen">Team</button>
+      <button class="tablinks" value="Haisheng" onclick="openTeamMember(event, 'Haisheng')">Haisheng</button>
+      <button class="tablinks" value="Joaquin" onclick="openTeamMember(event, 'Joaquin')">Joaquin</button>
+      <button class="tablinks" value="Jori" onclick="openTeamMember(event, 'Jori')">Jori</button>
+      <button class="tablinks" value="Leung" onclick="openTeamMember(event, 'Leung')">Leung</button>
+      <button class="tablinks" value="Mans" onclick="openTeamMember(event, 'Mans')">Måns</button>
+      <button class="tablinks" value="Martin" onclick="openTeamMember(event, 'Martin')">Martin</button>
+      <button class="tablinks" value="Thea" onclick="openTeamMember(event, 'Thea')">Thea</button>
+      <button class="tablinks" value="Victor" onclick="openTeamMember(event, 'Victor')">Victor</button>
+    </div>
 
-<div id="Haisheng" class="tabcontent">
-  <h3>Haisheng</h3>
-  <p>Haisheng has done...</p>
-</div>
+    <div class="about-team-text">
+      <div id="Team" class="tabcontent">
+        <h3>Team</h3>
+        <h2>Lessons learned</h2>
+        <p>The team has done...</p>
+        <h2>Tasks that did not pass the final cut.</h2>
+        Blablabla
+      </div>
 
-<div id="Joaquin" class="tabcontent">
-  <h3>Joaquin</h3>
-  <p>Joaquin has done.</p>
-</div>
+      <div id="Haisheng" class="tabcontent">
+        <h3>Haisheng</h3>
+        <p>Haisheng has done...</p>
+      </div>
 
-<div id="Jori" class="tabcontent">
-  <h3>Jori</h3>
-  <p>Jori has done...</p>
-</div>
+      <div id="Joaquin" class="tabcontent">
+        <h3>Joaquin</h3>
+        <p>Joaquin has done.</p>
+      </div>
 
-<div id="Leung" class="tabcontent">
-  <h3>Leung</h3>
-  <p>Leung has done...</p>
-</div>
+      <div id="Jori" class="tabcontent">
+        <h3>Jori</h3>
+        <p>Jori has done...</p>
+      </div>
 
-<div id="Mans" class="tabcontent">
-  <h3>Måns</h3>
-  <p>Måns has done...</p>
-</div>
+      <div id="Leung" class="tabcontent">
+        <h3>Leung</h3>
+        <p>Leung has done...</p>
+      </div>
 
-<div id="Martin" class="tabcontent">
-  <h3>Martin</h3>
-  <p>Martin has done...</p>
-</div>
+      <div id="Mans" class="tabcontent">
+        <h3>Måns</h3>
+        <p>Måns has done...</p>
+      </div>
 
-<div id="Thea" class="tabcontent" style="background-color: solid black">
-  <h3>Thea</h3>
-  <p>Thea has done...</p>
-</div>
+      <div id="Martin" class="tabcontent">
+        <h3>Martin</h3>
+        <p>Martin has done...</p>
+      </div>
 
-<div id="Victor" class="tabcontent">
-  <h3>Victor</h3>
-  <p>Victor has done...</p>
-</div>
+      <div id="Thea" class="tabcontent" style="background-color: solid black">
+        <h3>Thea</h3>
+        <p>Thea has done...</p>
+      </div>
 
-  <div class ="about-team-chart">
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="../js/about-team-chart.js"></script>
+      <div id="Victor" class="tabcontent">
+        <h3>Victor</h3>
+        <p>Victor has done...</p>
+      </div>
+    </div>
+
+    <div class ="about-team-chart">
+      <script src="http://d3js.org/d3.v3.min.js"></script>
+      <script src="../js/about-team-chart.js"></script>
+    </div>
+
   </div>
-</div>
 </body>
