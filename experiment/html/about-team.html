@@ -121,6 +121,10 @@ div.tab button.active {
   float: left;
   width: 45%;
 }
+
+.area {
+  display: none;
+}
 </style>
 <body>
   <div class = "about-team-container">
@@ -163,49 +167,75 @@ div.tab button.active {
         <h3>Joaquin</h3>
         <i>Role</i>: <b>team leader</b>
         <h4>Tasks</h4>
-        <h5>Research</h5>
-        <li>Search for datasources, information about nutrition, research papers and different kinds of visualizations.</li>
-        <h5>Data handling</h5>
-        <li>Merge of datasets.</li>
-        <li>Cleaning of data.</li>
-        <h5>Tests</h5>
-        <li>Bug detection.</li>
-        <li>Expert users testing.</li>
-        <h5>Presentations</h5>
-        <li>Creation of content for the slides.</li>
-        <li>Search for images and sources of information.</li>
-        <h5>Website</h5>
-        <li>Creation of the "About the team" section.</li>
-        <h5>Coordination</h5>
-        <li>Asignation of tasks.</li>
-        <li>Follow up of assignations.</li>
-        <h5>Meetings</h5>
-        <li>Scheduling of meetings.</li>
-        <li>Creation of an order of the day for each session.</li>
-        <li>Role of project manager.</li>
-        <li>Debrief all team with a summary of the team.</li>
-        <h5>Development</h5>
-        <li>Creation of the visualization for the 'About the team'.</li>
+        <div id="Research" class="area">
+          <h5>Research</h5>
+          <li>Search for datasources, information about nutrition, research papers and different kinds of visualizations.</li>
+        </div>
+        <div id="Data handling" class="area">
+            <h5>Data handling</h5>
+          <li>Merge of datasets.</li>
+          <li>Cleaning of data.</li>
+        </div>
+        <div id="Tests" class="area">
+          <h5 >Tests</h5>
+          <li>Bug detection.</li>
+          <li>Expert users testing.</li>
+        </div>
+        <div  id="Presentations" class="area">
+          <h5>Presentations</h5>
+          <li>Creation of content for the slides.</li>
+          <li>Search for images and sources of information.</li>
+        </div>
+        <div id="Website" class="area">
+          <h5>Website</h5>
+          <li>Creation of the "About the team" section.</li>
+        </div>
+        <div id="Coordination" class="area">
+          <h5>Coordination</h5>
+          <li>Asignation of tasks.</li>
+          <li>Follow up of assignations.</li>
+        </div>
+        <div id="Meetings" class="area">
+          <h5>Meetings</h5>
+          <li>Scheduling of meetings.</li>
+          <li>Creation of an order of the day for each session.</li>
+          <li>Role of project manager.</li>
+          <li>Debrief all team with a summary of the team.</li>
+        </div>
+        <div id="Development" class="area">
+          <h5>Development</h5>
+          <li>Creation of the visualization for the 'About the team'.</li>
+        </div>
         <h4>Lessons learned</h4>
-        <h5>Research</h5>
+        <div id="Research" class="area">
+          <h5>Research</h5>
         <li>I thought I had a better understanding of nutrition and was proven to be wrong.</li>
         <li>The complexity of the calculation of the carbon footprint of products.</li>
         <li>The importance of making precise searches.</li>
+      </div>
+      <div id="Data handling" class="area">
         <h5>Data handling</h5>
         <li>Reliable methods to crossmatch information from different datasources.</li>
         <li>The lack of convention in the naming of foods.</li>
+      </div>
+      <div id="Tests" class="area">
         <h5>Tests</h5>
         <li>Users willl fantasies with functionalities rather than critique the visualization.</li>
         <li>It is necessary to incentivate users with tasks and questions.</li>
+      </div>
+      <div id="Development" class="area">
         <h5>Development</h5>
         <li>Basics understanding of the D3 library.</li>
         <li>Data handling.</li>
         <li>Layout definition with CSS.</li>
-        <h4>Tasks that did not pass the cut</h4>
-        <h5>Research</h5>
+      </div>
+      <h4>Tasks that did not pass the cut</h4>
+        <div id="Research" class="area">
+          <h5>Research</h5>
         <li>Research of a method to calculate the nutrient density.</li>
         <li>Search of a way to find similar ingredients. It turned out to be too complex.</li>
         <li>Combining ingredients to create a dish.</li>
+      </div>
       </div>
 
       <div id="Jori" class="tabcontent">
@@ -329,7 +359,7 @@ div.tab button.active {
 
                               <div id="Victor" class="tabcontent">
                                 <h3>Victor</h3>
-                                <i>Role</i>: <b>backend developer</b>
+                                <i>Role</i>: <b>back-end developer</b>
                                 <p>Victor has done...</p>
                                 <h4>Lessons learned</h4>
                                 <h4>Tasks that did not pass the cut</h4>
