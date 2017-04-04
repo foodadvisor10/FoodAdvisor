@@ -41,34 +41,34 @@ var color = d3.scale.ordinal()
 	.range(colorRange.range());
 
   datasetTeam = [
-		{label:"Meetings", value:125},
-		{label:"Research", value:69},
-		{label:"Data handling", value:81},
-		{label:"Website", value:36},
-		{label:"Graphic design", value:16},
+                {label:"Data handling", value:81},
+		{label:"Research", value:67},		
+                {label:"Graphic design", value:16},
 		{label:"Presentations", value:13},
 		{label:"Video production", value:12},
-		{label:"Tests", value:59},
+		{label:"Meetings", value:125},		
+		{label:"Website", value:36},
+		{label:"Tests", value:62},
 		{label:"Coordination", value:67}
   ];
 
 	datasetHaisheng = [
 		{label:"Meetings", value:18},
-		{label:"Research", value:12},
-		{label:"Coordination", value:11},
-		{label:"Data handling", value:21},
-		{label:"Testing", value:19},
 		{label:"Website", value:5},
+		{label:"Data handling", value:21},
+		{label:"Research", value:12},
+		{label:"Testing", value:22},
+		{label:"Coordination", value:11}
 	];
 
   datasetJoaquin = [
     {label:"Research", value:35},
+		{label:"Website", value:1},
     {label:"Data handling", value:15},
-    {label:"Tests", value:2},
     {label:"Presentations", value:4},
-    {label:"Website", value:1},
     {label:"Coordination", value:35},
-    {label:"Meetings", value:18}
+    {label:"Meetings", value:18},
+		{label:"Tests", value:2}
   ];
 
   datasetJori = [
@@ -97,25 +97,26 @@ var color = d3.scale.ordinal()
     {label:"Meetings", value:16}
   ];
   datasetThea = [
-    {label:"Meetings", value:18},
-    {label:"Research", value:15},
+
     {label:"Data handling", value:15},
     {label:"Development", value:2},
     {label:"Presentations", value:2},
-    {label:"Website", value:15},
     {label:"Graphic design", value:6},
     {label:"Video production", value:4},
-    {label:"Tests", value:4}
+    {label:"Tests", value:4},
+    {label:"Website", value:15},
+    {label:"Meetings", value:18},
+    {label:"Research", value:15}
   ];
   datasetVictor = [
-    {label:"Meetings", value:12},
+    {label:"Data handling", value:20}, 
     {label:"Development", value:50},
     {label:"Research", value:5},
     {label:"Tests", value:10},
     {label:"Presentations", value:1},
     {label:"Website", value:12},
     {label:"Coordination", value:15},
-    {label:"Data handling", value:20}
+    {label:"Meetings", value:12}
   ];
 
 change(datasetTeam);
@@ -213,8 +214,23 @@ function change(data) {
             div.style("display", "none");
         });
 
+/* Makes slices clickeable so you only see the description of the area clicked */
+/*		slice
+				.on("click", function(d){
+					toggle_visibility(d.data.label);
+				});*/
+
     slice.exit()
         .remove();
+
+/* This function hides or shows the text of the areas when a slice is clicked */
+/*				function toggle_visibility(id) {
+					var e = document.getElementById(id);
+					if(e.style.display == 'block')
+					e.style.display = 'none';
+					else
+					e.style.display = 'block';
+				}*/
 
     /* ------- TEXT LABELS -------*/
 
