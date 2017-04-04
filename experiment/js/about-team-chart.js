@@ -2,7 +2,6 @@
 var svg = d3.select("body")
 	.append("svg")
 	.append("g")
-var picture = svg.append('g');
 
 svg.append("g")
 	.attr("class", "slices");
@@ -160,6 +159,7 @@ document.getElementById("defaultOpen").click();
       evt.currentTarget.className += " active";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (teamMember == "Team")
 	{
 		change(datasetTeam);
@@ -171,59 +171,67 @@ var picturePath;
 		change(datasetTeam);
 		picturePath = "Team";
 >>>>>>> team-donut-chart
+=======
+	if (teamMember == "Team")
+	{
+		change(datasetTeam);
+>>>>>>> Collapsible-headers-jquerymobile
 	}
 	else if (teamMember == "Haisheng")
 	{
 		change(datasetHaisheng);
-		picturePath	 = "Haisheng";
 	}
 	else if (teamMember == "Joaquin")
 	{
 		change(datasetJoaquin);
-		picturePath	 = "Joaquin";
 	}
 	else if (teamMember == "Jori")
 	{
 		change(datasetJori);
-		picturePath	 = "Jori";
 	}
   else if (teamMember == "Leung")
 	{
 		change(datasetLeung);
-		picturePath	 = "Leung";
 	}
   else if (teamMember == "Mans")
   {
     change(datasetMans);
-		picturePath	 = "Mans";
   }
   else if (teamMember == "Martin")
   {
     change(datasetMartin);
-		picturePath	 = "Martin";
   }
   else if (teamMember == "Thea")
   {
     change(datasetThea);
-		picturePath	 = "Thea";
   }
   else if (teamMember == "Victor")
   {
     change(datasetVictor);
-		picturePath	 = "Victor";
   }
 
-	/* Append image */
-picture.append('image')
-	//  .attr('d',path)
-	  .attr('xlink:href', './about-team-files/' + picturePath + '.jpg')
-	  .attr('class', 'pico')
-	  .attr('height', '120')
-	  .attr('width', '120')
+/* The following places a picture inside the donut chart */
+	var imgurl = './about-team-files/' + teamMember + '.jpg'
 
-	  // while adding an image to an svg these are the coordinates i think of the top left
-	  .attr('x', '-60')
-	  .attr('y', '-55')
+	var defs = svg.append("defs").attr("id", "imgdefs")
+
+	var picture = defs.append("pattern")
+		.attr("id", "picture")
+		.attr("height", 1)
+		.attr("width", 1)
+		.attr("x", "0")
+		.attr("y", "0")
+	picture.append("image")
+		.attr("x", -15)
+		.attr("y", 0)
+		.attr("height", 120)
+		.attr("width", 120)
+		.attr("xlink:href", imgurl)
+	svg.append("circle")
+		.attr("r", 45)
+		.attr("cy", 0)
+		.attr("cx", 0)
+		.attr("fill", "url(#picture)")
 }
 
 function change(data) {
@@ -258,6 +266,7 @@ function change(data) {
         .on("mouseout", function(d){
             div.style("display", "none");
         });
+<<<<<<< HEAD
 
 /* Makes slices clickeable so you only see the description of the area clicked */
 /*		slice
@@ -265,6 +274,8 @@ function change(data) {
 					toggle_visibility(d.data.label);
 				});*/
 
+=======
+>>>>>>> team-donut-chart
     slice.exit()
         .remove();
 
