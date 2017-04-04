@@ -7,9 +7,10 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
-    $( "#accordion" ).accordion();
-    collapsible: true;
-    heightStyle: "content"
+    $( "#accordion" ).accordion({
+      collapsible: true,
+      heightStyle: "content"
+    });
   } );
   </script>
 </head>
@@ -190,32 +191,24 @@ div.tab button.active {
         <div id="accordion">
           <h4>Tasks</h4>
           <div>
-            <h5>Research</h5>
-            <ul>
-              <li>Test test test.</li>
-            </ul>
-            <h5>Data handling</h5>
-            <ul>
-              <li>Test test test.</li>
-              <li>Test test test.</li>
-            </ul>
+            <p>Mauris mauris ante, blandit et, ultrices a, susceros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
           </div>
           <h4>Lessons learned</h4>
           <div>
             <p>
-            Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-            purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-            velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-            suscipit faucibus urna.
+              Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+              purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+              velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+              suscipit faucibus urna.
             </p>
           </div>
           <h4>Tasks that did not pass the cut</h4>
           <div>
             <p>
-            Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-            Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-            ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-            lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+              Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+              Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+              ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+              lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
             </p>
             <ul>
               <li>List item one</li>
@@ -231,51 +224,57 @@ div.tab button.active {
         <i>Role</i>: <b>team leader</b>
         <div id="accordion">
           <h4>Tasks</h4>
+          <div>
             <h5>Research</h5>
-              <li>Search for datasources, information about nutrition, research papers and different kinds of visualizations.</li>
+            <li>Search for datasources, information about nutrition, research papers and different kinds of visualizations.</li>
             <h5>Data handling</h5>
-              <li>Merge of datasets.</li>
-              <li>Cleaning of data.</li>
+            <li>Merge of datasets.</li>
+            <li>Cleaning of data.</li>
             <h5 >Tests</h5>
-              <li>Bug detection.</li>
-              <li>Expert users testing.</li>
+            <li>Bug detection.</li>
+            <li>Expert users testing.</li>
             <h5>Presentations</h5>
-              <li>Creation of content for the slides.</li>
-              <li>Search for images and sources of information.</li>
+            <li>Creation of content for the slides.</li>
+            <li>Search for images and sources of information.</li>
             <h5>Website</h5>
-              <li>Creation of the "About the team" section.</li>
+            <li>Creation of the "About the team" section.</li>
             <h5>Coordination</h5>
-              <li>Asignation of tasks.</li>
-              <li>Follow up of assignations.</li>
+            <li>Asignation of tasks.</li>
+            <li>Follow up of assignations.</li>
             <h5>Meetings</h5>
-              <li>Scheduling of meetings.</li>
-              <li>Creation of an order of the day for each session.</li>
-              <li>Role of project manager.</li>
-              <li>Debrief all team with a summary of the team.</li>
+            <li>Scheduling of meetings.</li>
+            <li>Creation of an order of the day for each session.</li>
+            <li>Role of project manager.</li>
+            <li>Debrief all team with a summary of the team.</li>
             <h5>Development</h5>
-              <li>Creation of the visualization for the 'About the team'.</li>
+            <li>Creation of the visualization for the 'About the team'.</li>
+          </div>
           <h4>Lessons learned</h4>
+          <div>
             <h5>Research</h5>
-              <li>I thought I had a better understanding of nutrition and was proven to be wrong.</li>
-              <li>The complexity of the calculation of the carbon footprint of products.</li>
-              <li>The importance of making precise searches.</li>
+            <li>I thought I had a better understanding of nutrition and was proven to be wrong.</li>
+            <li>The complexity of the calculation of the carbon footprint of products.</li>
+            <li>The importance of making precise searches.</li>
             <h5>Data handling</h5>
-              <li>Reliable methods to crossmatch information from different datasources.</li>
-              <li>The lack of convention in the naming of foods.</li>
+            <li>Reliable methods to crossmatch information from different datasources.</li>
+            <li>The lack of convention in the naming of foods.</li>
             <h5>Tests</h5>
-              <li>Users willl fantasies with functionalities rather than critique the visualization.</li>
-              <li>It is necessary to incentivate users with tasks and questions.</li>
+            <li>Users willl fantasies with functionalities rather than critique the visualization.</li>
+            <li>It is necessary to incentivate users with tasks and questions.</li>
             <h5>Development</h5>
-              <li>Basics understanding of the D3 library.</li>
-              <li>Data handling.</li>
-              <li>Layout definition with CSS.</li>
+            <li>Basics understanding of the D3 library.</li>
+            <li>Data handling.</li>
+            <li>Layout definition with CSS.</li>
+          </div>
           <h4>Tasks that did not pass the cut</h4>
+          <div>
             <h5>Research</h5>
-              <li>Research of a method to calculate the nutrient density.</li>
-              <li>Search of a way to find similar ingredients. It turned out to be too complex.</li>
-              <li>Combining ingredients to create a dish is a  feature that researched how to implement but was never develop.</li>
+            <li>Research of a method to calculate the nutrient density.</li>
+            <li>Search of a way to find similar ingredients. It turned out to be too complex.</li>
+            <li>Combining ingredients to create a dish is a  feature that researched how to implement but was never develop.</li>
+          </div>
+        </div>
       </div>
-    </div>
 
       <div id="Jori" class="tabcontent">
         <h3>Jori</h3>

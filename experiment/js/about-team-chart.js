@@ -58,12 +58,12 @@ var color = d3.scale.ordinal()
 
   datasetJoaquin = [
     {label:"Research", value:35},
+		{label:"Website", value:1},
     {label:"Data handling", value:15},
-    {label:"Tests", value:2},
     {label:"Presentations", value:4},
-    {label:"Website", value:1},
     {label:"Coordination", value:35},
-    {label:"Meetings", value:18}
+    {label:"Meetings", value:18},
+		{label:"Tests", value:2}
   ];
 
   datasetJori = [
