@@ -1,8 +1,8 @@
 /* Source for the donut chart: http://bl.ocks.org/juan-cb/1984c7f2b446fffeedde */
-
 var svg = d3.select("body")
 	.append("svg")
 	.append("g")
+var picture = svg.append('g');
 
 svg.append("g")
 	.attr("class", "slices");
@@ -42,11 +42,11 @@ var color = d3.scale.ordinal()
 
   datasetTeam = [
                 {label:"Data handling", value:81},
-		{label:"Research", value:67},		
+		{label:"Research", value:67},
                 {label:"Graphic design", value:16},
 		{label:"Presentations", value:13},
 		{label:"Video production", value:12},
-		{label:"Meetings", value:125},		
+		{label:"Meetings", value:125},
 		{label:"Website", value:36},
 		{label:"Tests", value:62},
 		{label:"Coordination", value:67}
@@ -109,7 +109,7 @@ var color = d3.scale.ordinal()
     {label:"Research", value:15}
   ];
   datasetVictor = [
-    {label:"Data handling", value:20}, 
+    {label:"Data handling", value:20},
     {label:"Development", value:50},
     {label:"Research", value:5},
     {label:"Tests", value:10},
@@ -143,42 +143,65 @@ document.getElementById("defaultOpen").click();
       document.getElementById(teamMember).style.display = "block";
       evt.currentTarget.className += " active";
 
+var picturePath;
+
 	if (teamMember == "Team")
 	{
 		change(datasetTeam);
+		picturePath = "Team";
 	}
 	else if (teamMember == "Haisheng")
 	{
 		change(datasetHaisheng);
+		picturePath	 = "Haisheng";
 	}
 	else if (teamMember == "Joaquin")
 	{
 		change(datasetJoaquin);
+		picturePath	 = "Joaquin";
 	}
 	else if (teamMember == "Jori")
 	{
 		change(datasetJori);
+		picturePath	 = "Jori";
 	}
   else if (teamMember == "Leung")
 	{
 		change(datasetLeung);
+		picturePath	 = "Leung";
 	}
   else if (teamMember == "Mans")
   {
     change(datasetMans);
+		picturePath	 = "Mans";
   }
   else if (teamMember == "Martin")
   {
     change(datasetMartin);
+		picturePath	 = "Martin";
   }
   else if (teamMember == "Thea")
   {
     change(datasetThea);
+		picturePath	 = "Thea";
   }
   else if (teamMember == "Victor")
   {
     change(datasetVictor);
+		picturePath	 = "Victor";
   }
+
+	/* Append image */
+picture.append('image')
+	//  .attr('d',path)
+	  .attr('xlink:href', './about-team-files/' + picturePath + '.jpg')
+	  .attr('class', 'pico')
+	  .attr('height', '120')
+	  .attr('width', '120')
+
+	  // while adding an image to an svg these are the coordinates i think of the top left
+	  .attr('x', '-60')
+	  .attr('y', '-55')
 }
 
 function change(data) {
