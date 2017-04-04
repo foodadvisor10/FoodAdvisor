@@ -158,9 +158,24 @@ document.getElementById("defaultOpen").click();
       document.getElementById(teamMember).style.display = "block";
       evt.currentTarget.className += " active";
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 	if (teamMember == "Team")
 	{
 		change(datasetTeam);
+=======
+var picturePath;
+
+	if (teamMember == "Team")
+	{
+		change(datasetTeam);
+		picturePath = "Team";
+>>>>>>> team-donut-chart
+=======
+	if (teamMember == "Team")
+	{
+		change(datasetTeam);
+>>>>>>> Collapsible-headers-jquerymobile
 	}
 	else if (teamMember == "Haisheng")
 	{
