@@ -1,5 +1,4 @@
 /* Source for the donut chart: http://bl.ocks.org/juan-cb/1984c7f2b446fffeedde */
-
 var svg = d3.select("body")
 	.append("svg")
 	.append("g")
@@ -41,6 +40,7 @@ var color = d3.scale.ordinal()
 	.range(colorRange.range());
 
   datasetTeam = [
+<<<<<<< HEAD
 		{label:"Meetings", value:125},
 		{label:"Research", value:57},
 		{label:"Data handling", value:60},
@@ -54,6 +54,26 @@ var color = d3.scale.ordinal()
 
 	datasetHaisheng = [
 		{label:"Meetings", value:18}
+=======
+                {label:"Data handling", value:81},
+		{label:"Research", value:67},
+                {label:"Graphic design", value:16},
+		{label:"Presentations", value:13},
+		{label:"Video production", value:12},
+		{label:"Meetings", value:125},
+		{label:"Website", value:36},
+		{label:"Tests", value:62},
+		{label:"Coordination", value:67}
+  ];
+
+	datasetHaisheng = [
+		{label:"Meetings", value:18},
+		{label:"Website", value:5},
+		{label:"Data handling", value:21},
+		{label:"Research", value:12},
+		{label:"Testing", value:22},
+		{label:"Coordination", value:11}
+>>>>>>> team-donut-chart
 	];
 
   datasetJoaquin = [
@@ -92,25 +112,26 @@ var color = d3.scale.ordinal()
     {label:"Meetings", value:16}
   ];
   datasetThea = [
-    {label:"Meetings", value:18},
-    {label:"Research", value:15},
+
     {label:"Data handling", value:15},
     {label:"Development", value:2},
     {label:"Presentations", value:2},
-    {label:"Website", value:15},
     {label:"Graphic design", value:6},
     {label:"Video production", value:4},
-    {label:"Tests", value:4}
+    {label:"Tests", value:4},
+    {label:"Website", value:15},
+    {label:"Meetings", value:18},
+    {label:"Research", value:15}
   ];
   datasetVictor = [
-    {label:"Meetings", value:12},
+    {label:"Data handling", value:20},
     {label:"Development", value:50},
     {label:"Research", value:5},
     {label:"Tests", value:10},
     {label:"Presentations", value:1},
     {label:"Website", value:12},
     {label:"Coordination", value:15},
-    {label:"Data handling", value:20}
+    {label:"Meetings", value:12}
   ];
 
 change(datasetTeam);
@@ -173,6 +194,29 @@ document.getElementById("defaultOpen").click();
   {
     change(datasetVictor);
   }
+
+/* The following places a picture inside the donut chart */
+	var imgurl = './about-team-files/' + teamMember + '.jpg'
+
+	var defs = svg.append("defs").attr("id", "imgdefs")
+
+	var picture = defs.append("pattern")
+		.attr("id", "picture")
+		.attr("height", 1)
+		.attr("width", 1)
+		.attr("x", "0")
+		.attr("y", "0")
+	picture.append("image")
+		.attr("x", -15)
+		.attr("y", 0)
+		.attr("height", 120)
+		.attr("width", 120)
+		.attr("xlink:href", imgurl)
+	svg.append("circle")
+		.attr("r", 45)
+		.attr("cy", 0)
+		.attr("cx", 0)
+		.attr("fill", "url(#picture)")
 }
 
 function change(data) {
@@ -207,6 +251,7 @@ function change(data) {
         .on("mouseout", function(d){
             div.style("display", "none");
         });
+<<<<<<< HEAD
 
 /* Makes slices clickeable so you only see the description of the area clicked */
 /*		slice
@@ -214,6 +259,8 @@ function change(data) {
 					toggle_visibility(d.data.label);
 				});*/
 
+=======
+>>>>>>> team-donut-chart
     slice.exit()
         .remove();
 
