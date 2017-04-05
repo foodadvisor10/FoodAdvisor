@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $(function() {
+      $( "#accordion:nth-child(1n)" ).accordion({
+        heightStyle: "content",
+     active: false,
+        collapsible: true
+      });
+
+    });
+  </script>
+</head>
+</head>
+<style>
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 960px;
+  height: 500px;
+  position: relative;
+}
+
+svg {
+  width: 50%;
+  height: 50%;
+  padding-left: 20px;
+}
+
+path.slice{
+  stroke-width:2px;
+}
+
+polyline{
+  opacity: .3;
+  stroke: black;
+  stroke-width: 2px;
+  fill: none;
+}
+
+.labelValue
+{
+  font-size: 60%;
+  opacity: .5;
+
+}
+
+.toolTip {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: absolute;
+  display: none;
+  width: auto;
+  height: auto;
+  background: none repeat scroll 0 0 white;
+  border: 0 none;
+  border-radius: 8px 8px 8px 8px;
+  box-shadow: -3px 3px 15px #888888;
+  color: black;
+  font: 12px sans-serif;
+  padding: 5px;
+  text-align: center;
+}
+text {
+  font: 12px sans-serif;
+}
+
+/* Style the tab */
+div.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+  background-color: #ccc;
+  border-color: #FF9933;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+/*For animation of the tabs*/
+.tabcontent {
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.about-team-container{
+  width: 100%;
+  vertical-align: top;
+}
+
+.about-team-text {
+  float: right;
+  width: 45%;
+}
+
+.about-team-chart {
+  float: left;
+  width: 45%;
+}
+
+.area {
+  display: none;
+}
+</style>
+<body>
+  <div class = "about-team-container">
+    <div class="tab">
+      <button class="tablinks" value="Team" onclick="openTeamMember(event, 'Team')" id="defaultOpen">Team</button>
+      <button class="tablinks" value="Haisheng" onclick="openTeamMember(event, 'Haisheng')">Haisheng</button>
+      <button class="tablinks" value="Joaquin" onclick="openTeamMember(event, 'Joaquin')">Joaquin</button>
+      <button class="tablinks" value="Jori" onclick="openTeamMember(event, 'Jori')">Jori</button>
+      <button class="tablinks" value="Leung" onclick="openTeamMember(event, 'Leung')">Leung</button>
+      <button class="tablinks" value="Mans" onclick="openTeamMember(event, 'Mans')">Måns</button>
+      <button class="tablinks" value="Martin" onclick="openTeamMember(event, 'Martin')">Martin</button>
+      <button class="tablinks" value="Thea" onclick="openTeamMember(event, 'Thea')">Thea</button>
+      <button class="tablinks" value="Victor" onclick="openTeamMember(event, 'Victor')">Victor</button>
+    </div>
+
+    <div class="about-team-text">
+      <div id="Team" class="tabcontent">
+        <h3>Team</h3>
+        <div id="accordion">
+          <h4>Tools</h4>
+          <div>
+            <ul>
+              <li><a href="http://www.trello.com">Trello</a></li>
+              <li><a href="http://www.slack.com">Slack</a></li>
+              <li><a href="http://www.github.com">Github</a></li>
+            </ul>
+          </div>
+          <h4>Techonologies</h4>
+          <div>
+            <ul>
+              <li><a href="https://d3js.org">D3</a></li>
+              <li><a href="https://jqueryui.com">jQuery UI</a></li>
+            </ul>
+          </div>
+          <h4>Methodology</h4>
+          <div>
+            <p>We used an Agile methodology for fast prototyping and an incremental development. We run weekly meetings for tasks assignation, review of the latests developments and brainstorming.</p>
+          </div>
+          <h4>Coordination</h4>
+          <div>
+            <p>The team was divided into several roles. The team leader was in charge of setting up the meetings, debriefing the team, tasks assignation and motivation. The decisions making was done by majority vote. In case of tie the Team Leader had the decision vote.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="Haisheng" class="tabcontent">
+        <h3>Haisheng</h3>
+        <i>Role</i>: <b>tester</b>
+        <div id="accordion">
+          <h4>Tasks</h4>
+          <div>            
+            <h5>Research</h5>
+            <li>Literature search.</li>
+            <li>Article retrieval.</li>
+            <li>Reading and digest publications.</li>
+            <li>Summarize key message.</li>
+            <h5>Coordination</h5>
+            <li>Using Online tools such like slack, github, trello etc. to accept tasks, handling data and code, and coordinate time to have meetings with group members.</li>
+            <h5>Data handling</h5>
+            <li>Create and update csv files for datasets.</li>
+            <li>Test and evaluate datasets.</li>
+            <li>Cleaning of data.</li>
+            <h5>Meetings</h5>
+            <li>Meet with other group members to discuss the further steps.</li>
+            <h5>Testing</h5>
+            <li>Debugs the project.</li>
+            <li>Create online survey.</li>
+            <li>Normal user testing.</li>
+            <li>Collecting and analyzing results.</li> 
+            <h5>Development</h5>
+            <li>Work on to visualize the part of “About the team”</li>
+          </div>
+          <h4>Lessons learned</h4>
+          <div>
+            <h5>Research</h5>
+            <li>Research literature is a good way to learn new stuffs, have a good understanding of nutrition. Also trying the different products enriched the knowledge of html js css etc, this is good for a beginner.</li>
+            <h5>Coordination</h5>
+            <li>How to efficiently use Github, Slack and Trello.</li>
+            <li>How to efficiently modular programming and communication between teams.</li>
+            <h5>Data handling</h5>
+            <li>Patient and patient when create the csv file and input the data.</li>
+            <li>Learn to question, the data from outside datasets are not 100% correct.</li>
+            <li>Filtering the datasets, extract the required data.</li>
+            <h5>Meetings</h5>
+            <li>Actively participate the meeting and coordinate my time-slots with others.</li>
+            <h5>Testing</h5>
+            <h6>Program tests</h6>
+            <li>Testing the program is a useful way for learning, not only for testing where is the bugs but also to learn what the bugs is , how does it happened, and how to fix it.</li>
+            <li>The graphic design is important.</li>
+            <h6>User test</h6>
+            <li>Design a good survey is an art, need to know which questions is really you want to get the answers and how to arouse users interest.</li>
+            <li>Don’t ask technical questions or questions that will take minutes to think, they won’t answer it.</li>
+            <li>Don’t ask the questions that let the user type in the words. Don’t ask too much opening answer questions that solicit personal opinions, they will only say no.</li>
+            <li>If you insist to get their opinions, try to use suggestive method and leading the questions.</li>
+            <h5>Development</h5>
+            <li>Together with Joaquin, we created a donut chart to visualize the individual contribution for each of our group members, this is an extra opportunity for me to practice my skills. I learned so much about how to create tabs and collapsible lists.</li>
+            <h5>Others?</h5>
+            <li>I am more patient after this course.</li>
+          </div>
+          
+        </div>
+      </div>
+
+      <div id="Joaquin" class="tabcontent">
+        <h3>Joaquin</h3>
+        <i>Role</i>: <b>team leader</b>
+        <div id="accordion">
+          <h4>Tasks</h4>
+          <div>
+            <h5>Research</h5>
+            <li>Search for datasources, information about nutrition, research papers and different kinds of visualizations.</li>
+            <h5>Data handling</h5>
+            <li>Merge of datasets.</li>
+            <li>Cleaning of data.</li>
+            <h5>Development</h5>
+            <li>Creation of the visualization for the 'About the team'.</li>
+            <h5 >Tests</h5>
+            <li>Bug detection.</li>
+            <li>Expert users testing.</li>
+            <h5>Presentations</h5>
+            <li>Creation of content for the slides.</li>
+            <li>Search for images and sources of information.</li>
+            <h5>Website</h5>
+            <li>Creation of the "About the team" section.</li>
+            <h5>Coordination</h5>
+            <li>Asignation of tasks.</li>
+            <li>Follow up of assignations.</li>
+            <h5>Meetings</h5>
+            <li>Scheduling of meetings.</li>
+            <li>Creation of an order of the day for each session.</li>
+            <li>Role of project manager.</li>
+            <li>Debrief all team with a summary of the team.</li>
+            <h5>Development</h5>
+            <li>Creation of the visualization for the 'About the team'.</li>
+          </div>
+          <h4>Lessons learned</h4>
+          <div>
+            <h5>Research</h5>
+            <li>I thought I had a better understanding of nutrition and was proven to be wrong.</li>
+            <li>The complexity of the calculation of the carbon footprint of products.</li>
+            <li>The importance of making precise searches.</li>
+            <h5>Data handling</h5>
+            <li>Reliable methods to crossmatch information from different datasources.</li>
+            <li>The lack of convention in the naming of foods.</li>
+            <h5>Development</h5>
+            <li>Basics understanding of the D3 library.</li>
+            <li>Data handling.</li>
+            <li>Layout definition with CSS.</li>
+            <h5>Tests</h5>
+            <li>Users willl fantasies with functionalities rather than critique the visualization.</li>
+            <li>It is necessary to incentivate users with tasks and questions.</li>
+            <h5>Development</h5>
+            <li>Basics understanding of the D3 library.</li>
+            <li>Data handling.</li>
+            <li>Layout definition with CSS.</li>
+          </div>
+          <h4>Tasks that did not pass the cut</h4>
+          <div>
+            <h5>Research</h5>
+            <li>A method to calculate the nutrient density. A lack of a standard made us discard this idea.</li>
+            <li>A way to relate similar ingredients. It turned out to be too complex.</li>
+            <li>Combining ingredients to create a dish is a 'nice-to-have' feature planned from the begining but was not developed due to its complexity.</li>
+          </div>
+        </div>
+      </div>
+
+      <div id="Jori" class="tabcontent">
+        <h3>Jori</h3>
+        <i>Role</i>: <b>tester</b>
+        <div id="accordion">
+        <h4>Tasks</h4>
+        <div>
+        <h5>Meetings</h5>
+        <h>Team meetings</li>
+          <li>Bilateral meetings with Haisheng in order to prepare user testing.</li>
+          <h5>Research</h5>
+          <li>Literature search.</li>
+          <li>Article retrieval.</li>
+          <li>Reading and digest publications.</li>
+          <li>Summarize key message.</li>
+          <h5>Data handling</h5>
+          <li>Examine and evaluate online databases.</li>
+          <li>Contact responsible persons.</li>
+          <li>Document responses.</li>
+          <li>Exploration of raw data wrt plausibility.</li>
+          <h5>Website</h5>
+          <li>Data cleaning.</li>
+          <li>Created early version of website.</li>
+          <h5>Graphic design</h5>
+          <li>Research for favicon creation.</li>
+          <li>Actual blueprint and design.</li>
+          <h5>Presentations</h5>
+          <li>Preparation of test result report.</li>
+          <li>Proof-reading of all presentations.</li>
+          <h5>Video production</h5>
+          <li>Write how-to section for website.</li>
+          <h5>Tests</h5>
+          <li>Preparation of suitable approach.</li>
+          <li>Literature research.</li>
+          <li>Decision to follow Analytic Task Taxonomy (Stasko et al.).</li>
+          <li>Development of suitable user tasks.</li>
+          <li>Creation of Online Survey.</li>
+          <li>Distribution of Online Survey.</li>
+          <li>Development of improved survey version.</li>
+          <li>Collection and handling of user data.</li>
+          <li>Recruitment of test user sample.</li>
+          <h5>Coordination</h5>
+          <li>Use Online Project Management tools.</li>
+          <li>Use Online Chat Tools.</li>
+          <li>Use Google Docs.</li>
+          <li>Stay up-to-date.</li>
+          <li>Participate in team polls.</li>
+          <li>Find and agree on time-slots for in-person meetings.</li>
+          </div>
+          
+          <h4>Lessons learned</h4>
+          <div>
+          <h5>Meetings</h5>
+          <li>Finding time-slots that fits in everyones schedule not easy.</li>
+          <li>Agreeing on one tool to support scheduling difficult.</li>
+          <li>Building sub-groups of two was a pleasurable experience.</li>
+          <li>Joaquín did a great job documenting meetings.</li>
+          <li>Due to large team-size and time constraints I kept myself quiet and didn't bring up every aspect I would have liked to.</li>
+          <h5>Data handling</h5>
+          <li>Raw data base is scarce and fragmented.</li>
+          <li>Existant data sources not always carefully maintained.</li>
+          <li>Lack of publicly available database.</li>
+          <li>Lack of Open Data in intersection of nutrition and environment.</li>
+          <li>Raw data divert a lot wrt to scope and apporach.</li>
+          <li>Data sources covering ""all relevant issues"" missing.</li>
+          <li>Standards and requirements/scope vary a lot between countries and geographic regions.</li>
+          <li>Postive: requests for support to EFSA, e.g., were attended in kind and fast manner, mostly helpful.</li>
+          <li>Accessibility not always easy investigate.</li>
+          <h5>Website</h5>
+          <li>Data preparation is crucial (compilation/presentation of special characters).</li>
+          <h5>Graphic design</h5>
+          <li>Immediate idea not always suitable.</li>
+          <li>Individual differences in taste and esthetic preferences.</li>
+          <h5>Presentations</h5>
+          <li>It is beneficial to have not only one team-member doing the whole presentation.</li>
+          <li>Some small issues are not being attended to if only one is in charge.</li>
+          <li>Improved proficiency in handling animations.</li>
+          <h5>Tests</h5>
+          <li>Systematic approach with literature research and approach adjusted to domain of Information Visualization time intensive.</li>
+          <li>Evaluation of existing and accessible tools for doing remote user testing insightful.</li>
+          <li>Wish do avoid Google Forms was not implemented in the end.</li>
+          <li>Pragmatic discount usability testing and quick-and-dirty approach finally won.</li>
+          <li>Finding and convincing users to test w/o special incentives difficulty.</li>
+          <li>Proper evaluation with original target group (novices, untrained users) failed due to complexity of test tasks and test design.</li>
+          <li>Several adjustments were necessary and end-result not satisfying (many principles violated).</li>
+          <li>Novice users were very critical, esp wrt graphic design.</li>
+          <li>Remote user tests have advantages (time), but disadvantages became also obvious.</li>
+          <h5>Coordination</h5>
+          <li>In the beginning I had a hard time to get familiar with the various online tools used to chat, share calendars, do presentations, track tasks, do polls, follow announcements.</li>
+          <li>Main insight: if there is one accepted project leader that takes care of every team member like Joaquín did in an exemplary way goals can be achieved in a very efficient way.</li>
+          <li>Joaquín represented a very positive role-model compared to past experiences, where often dominant group members took over command just to shine themselves and didn't care about individual team members very much (ego-shooter approach).</li>
+          <li>One main problem that occurs again and again in team projects completed with limited time resources: every team member does what he/she alywas do and there is no learning effect.</li>
+          <li>I would have liked to learn more on development but I would have be a handicap to the group members that already had a certain level of experience, so I concentrated on what I am proficient in doing already.</li> </div>     
+</div>
+</div>
+
+          <div id="Leung" class="tabcontent">
+            <h3>Leung</h3>
+            <i>Role</i>: <b>lead developer</b>
+            <div id="accordion">
+              <h4>Tasks</h4>
+              <div>
+                <h5>Meetings</h5>
+                <li>Introducing slack & trello to the team.</li>
+                <li>Introducing Git branch concept to the team to avoid merge hell.</li>
+                <h5>Development</h5>
+                <h6>Bubble chart prototype</h6>
+                <li>Customizable x, y, z, axis & bubble size.</li>
+                <li>Brush on z-axis.</li>
+                <li>Searchbar.</li>
+                <li>Pan & Zoom.</li>
+                <li>Highlight effects on clicked/hover/searched bubble.</li>
+                <h6>Bubble chart final version</h6>
+                <li>Extending most features of the prototype.</li>
+                <li>Integrate chart update with Martin's category legend action.</li>
+                <li>Integrate chart update with Martin's filter action.</li>
+                <li>Flip x, y axis.</li>
+                <li>Dynamic rescaling base on visible data.</li>
+                <li>Implement animations on: scale update, filter update, legend toggle, searchbar update,  x, y axis flip.</li>
+                <h5>Presentations</h5>
+                <li>Preparing "method & technique" part of first presentation.</li>
+              </div>
+              <h4>Lessons learned</h4>
+              <div>
+                <h5>Meetings</h5>
+                <li>Be specific of what you want to achieve, don't be too greedy (don't serve everyone), be realistic.</li>
+                <li>Should develop a persona from the start, it will help you to clarify who the users are and define features' priority.</li>
+                <h5>Development</h5>
+                <li>Importance of respecting git flow in collaboration.</li>
+                <li>Learn to appreciate the philosophy behind D3 architecture.</li>
+                <li>Confidence of implementing visual structure without heavily relying on existing code samples.</li>
+                <li>Dirty ways of tweating D3 prototype code to extend D3 capability (when fixing bubble layering bug).</li>
+                <li>Learn to appreciate the difficulty behind complex view interactions (unavoidable high coupling code, unpredictable use case).</li>
+                <li>Different ways of modularizing chart component to enable division of labor.</li>
+              </div>
+            </div>
+          </div>
+
+          <div id="Mans" class="tabcontent">
+            <h3>Måns</h3>
+            <i>Role</i>: <b>freerunner</b>
+            <div id="accordion">
+              <h4>Tasks</h4>
+              <div>
+                <h5>Meetings</h5>
+                <li>Group meetings regarding progress in the project, brainstorming ideas, deciding what comes next and handing out tasks for members.</li>
+                <h5>Data handling</h5>
+                <li>Match all items found in Co2 database with nutrition database finding closest match manually.</li>
+                <li>Translating from Swedish to English using the English version of the nutrition database.</li>
+                <li>Data cleaning.</li>
+                <li>Explore automated datacleaning (not much success here).</li>
+                <h5>Development</h5>
+                <li>Made a version-handler for final presentation that was merged with the website we had at the time.</li>
+                <li>Minor tweaks, like adding color.</li>
+                <h5>Research</h5>
+                <li>Looking for datasets/api's that could be of use for the project.</li>
+                <li>Researching the possibility of matching names in two datasets to find closest match.</li>
+                <h5>Video production</h5>
+                <li>Editing the video.</li>
+                <li>Creating animations in the editing software.</li>
+                <li>Recoring voiceover for video.</li>
+                <h5>Tests</h5>
+                <li>Played around with the visualization when I was asked to.</li>
+                <li>Trying to find bugs and such.</li>
+	      </div>
+              <h4>Lessons learned</h4>
+              <div>
+                <h5>Meetings</h5>
+                <li>On a regular basis these meetings keeps the development at a steady pace since there are deadlines all the time for the project. </li>
+                <li>Meeting each other regularly creates a good group dynamic.</li>
+                <h5>Data handling</h5>
+                <li>Tedious process that requires patience when done manually.</li>
+                <li>Errors can be made.</li>
+                <li>The way things are made needs to be consistent.</li>
+                <h5>Development</h5>
+                <li>Don't put a website within the application in the hierarchy.</li>
+                <li>Learnt most about development in the individual projects.</li>
+                <h5>Video production</h5>
+                <li>Animating from scratch in editing software is hard work.</li>
+                <li>In general making everything from scratch is hard work.</li>
+                <li>That means music, video, voice etc.</li>
+                <h5>Tests</h5>
+                <li>Bugs may not always be where you think they will.</li>
+	      </div>
+              <h4>Tasks that did not pass the cut</h4>
+              <div>
+                <h5>Development</h5>
+                <li>The version handler probably.</li>
+                <h5>Research</h5>
+                <li>Automated matching, didn't even get far with that.</li>
+	      </div>
+            </div>
+          </div>
+
+          <div id="Martin" class="tabcontent">
+            <h3>Martin</h3>
+            <i>Role</i>: <b>front-end developer</b>
+            <div id="accordion">
+              <h4>Tasks</h4>
+              <div>
+                <h5>Meetings</h5>
+                <li>Shared some ideas.</li>
+                <h5>Development</h5>
+                <li>Filters.</li>
+                <li>Bug fixes.</li>
+                <li>Legend for bubble chart.</li>
+                <li>Colors for bubble chart.</li>
+                <li>Made the clickable axis labels in the
+bubble chart.</li>
+                <h5>Research</h5>
+                <li>Studied different sources for CO2 data.</li>
+                <h5>Website</h5>
+                <li>Did some layouting of the screen.</li>
+                <h5>Presentation</h5>
+                <li>Made a couple of slides.</li>
+                <h5>Tests</h5>
+                <li>Testing the website when making changes.</li>
+	      </div>
+              <h4>Lessons learned</h4>
+              <div>
+                <h5>Meetings</h5>
+                <li>How to work in a large group.</li>
+                <h5>Development</h5>
+                <li>How to use D3.</li>
+                <li>A lot of JavaScript.</li>
+                <li>How to choose appropriate visual structures for the data you are visualizing.</li>
+                <li>That mac and windows does not have the same styling for scroll bars(thus, testing on both operating systems is necessary).</li>
+                <h5>Research</h5>
+                <li>That there is hard to find an API that suits your needs.</li>
+                <h5>Website</h5>
+                <li>Never copy code from stackoverflow which you don't understand (especially when it comes to CSS).</li>
+                <li>What works for others may not work for you (even if you have the same problem as them).</li>
+                <h5>Tests</h5>
+                <li>Always write down the errors you find before they perish from you mind.</li>
+                <li>When doing exactly the same thing twice you may actually noice different things that is not correct.</li>	
+	      </div>
+              <h4>Tasks that did not pass the cut</h4>
+              <div>
+                <h5>Development</h5>
+                <li>Some style of the different components where changed for the final verison (like the styling of the filters).</li>
+	      </div>
+            </div>
+          </div>
+
+          <div id="Thea" class="tabcontent" style="background-color: solid black">
+            <h3>Thea</h3>
+            <i>Role</i>: <b>graphic and web designer</b>
+            <div id="accordion">
+              <h4>Tasks</h4>
+              <div>
+                <h5>Meetings</h5>
+                  <li>Parttake in discussions.</li>
+                  <li>Concept development.</li>
+                <h5>Research</h5>
+                  <li>Come up with several concepts.</li>
+                  <li>Research existing visualizations, and come up with ideas for this project.</li>
+                  <li>Searching for additional data sources.</li>
+                <h5>Data handling</h5>
+                  <li>Gathering, matching and cleaning the data.</li>
+                  <li>Translating.</li>
+                  <li>Cross-checking sources to get realistic numbers.</li>
+                <h5>Development</h5>
+                  <li>Bug-fixing.</li>
+                <h5>Presentations</h5>
+                  <li>Proofreading.</li>
+                  <li>Research for the first presentation.</li>
+                <h5>Website</h5>
+                  <li>Web design.</li>
+                  <li>Structuring the webpage.</li>
+                <h5>Graphic design</h5>
+                  <li>Creating logo and header.</li>
+                  <li>Colour pallette for the website.</li>
+                  <li>Alternative favicon.</li>
+                <h5>Video production</h5>
+                  <li>Planning and filming the part with the boiling water.</li>
+                  <li>Drawing vector graphics.</li>
+	      </div>
+              <h4>Lessons learned</h4>
+              <div>
+                <h5>Meetings</h5>
+                  <li>Slack and Trello are great tools for this kind of work.</li>
+                  <li>Brainstorming and ducsussion works surprisingly well in this large groups.</li>
+                <h5>Research</h5>
+                  <li>There isn't much available data on the CO2 emissions of specific food items.</li>
+                <h5>Website</h5>
+                  <li>GitHub is hard when you haven't used it before.</li>
+                <h5>Graphic design</h5>
+                  <li>Difficult to find a graphic profile that does not take attention away from the visualization.</li>
+                  <li>When in doubt, keep it simple.</li>
+	      </div>
+              <h4>Tasks that did not pass the cut</h4>
+              <div>
+                <h5>Research</h5>
+                  <li>Researching and cleaning data about the country of origin of different food items.</li>
+	      </div>
+            </div>
+          </div>
+
+          <div id="Victor" class="tabcontent">
+            <h3>Victor</h3>
+            <i>Role</i>: <b>back-end developer</b>
+            <div id="accordion">
+              <h4>Tasks</h4>
+              <div>
+                <h5>Meetings</h5>
+                  <li>Partake in discussions.</li>
+                <h5>Development</h5>
+                  <li>Visualization Models.</li>
+                  <li>The final product.</li>
+                  <li>Donut Chart.</li>
+                  <li>Other general 'programming' things.</li>
+                <h5>Research</h5>
+                  <li>Data sourcing.</li>
+                  <li>Food statistics research.</li>
+                <h5>Tests</h5>
+                  <li>Code testing and debugging.</li>
+                  <li>User testing.</li>
+                <h5>Presentations</h5>
+                  <li>Helped proofread and prepare presentations.</li>
+                <h5>Website</h5>
+                  <li>Website hosting.</li>
+                  <li>Effective HTML/JS/D3 organization and creation.</li>
+                  <li>In charge of secondary detail-on-demand visualization (Donut Chart).</li>
+                  <li>Ensure multi-OS and Software support.</li>
+                <h5>Coordination</h5>
+                  <li>Communicating effectively with other team members.</li>
+                  <li>Effective modular programming and dividing up tasks efficiently.</li>
+                  <li>The use of tools such as Github, Slack and Trello.</li>
+                  <li>Coordinating the backend and frontend programmers.</li>
+                <h5>Data handling</h5>
+                  <li>Data Cleaning.</li>
+                  <li>File Generation.</li>
+                  <li>Script creations.</li>
+	      </div>
+              <h4>Lessons learned</h4>
+              <div>
+                <h5>Meetings</h5>
+                  <li>Lots of clashes with meetings.</li>
+                  <li>Trello and Slack are amazing for catching up and still staying in the loop.</li>
+                <h5>Development</h5>
+                  <li>It takes a long time to find the right visual structure.</li>
+                  <li>D3 is both straightforward and complicated.</li>
+                  <li>Anything is possible.</li>
+                  <li>You will have to scrap a lot of ideas.</li>
+                  <li>Things you spend a lot of time on might not make it in final product.</li>
+                <h5>Research</h5>
+                  <li>Hard to find reliable and consistent data.</li>
+                  <li>Hard to find free-use data.</li>
+                  <li>Hard to find the data you are looking for.</li>
+                  <li>Hard to then adapt and clean the data to your own liking.</li>
+                <h5>Tests</h5>
+                  <li>How to debug D3 code.</li>
+                  <li>How to convert D3.3 to D3.4.</li>
+                <h5>Presentations</h5>
+                  <li>Effective presentation techniques.</li>
+                <h5>Website</h5>
+                  <li>Github coordination.</li>
+                <h5>Coordination</h5>
+                  <li>How to efficiently use Github, Slack and Trello.</li>
+                  <li>Effective modular programming and communication between teams.</li>
+                  <li>Dividing up programming tasks that do not conflict or overlap.</li>
+                  <li>Following a critical path that has side roads, branches and merges.</li>
+                <h5>Data handling</h5>
+                  <li>How to properly deal with large sets of data (loading segments of data, not big datasets).</li>
+                  <li>How to Efficiently generate smaller data sets from larger sets.</li>
+                  <li>Dealing with new file formats and effectively using them to their full potential.</li>
+	      </div>
+              <h4>Tasks that did not pass the cut</h4>
+              <div>
+                <h5>Development</h5>
+                  <li>Explored tons of ideas in terms of Detail-on-Demands visualizations when comparing food items.</li>
+                  <li>Tornado Chart.</li>
+	      </div>
+            </div>
+          </div>
+        </div>
+
+        <div class ="about-team-chart">
+          <script src="http://d3js.org/d3.v3.min.js"></script>
+          <script src="../js/about-team-chart.js"></script>
+        </div>
+
+      </div>
+    </body>
