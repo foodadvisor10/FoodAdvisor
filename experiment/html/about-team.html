@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="../css/about-team.css">
   <script>
   $(function() {
       $( "#accordion:nth-child(1n)" ).accordion({
@@ -16,133 +17,6 @@
     });
   </script>
 </head>
-</head>
-<style>
-
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  width: 960px;
-  height: 500px;
-  position: relative;
-}
-
-svg {
-  width: 50%;
-  height: 50%;
-  padding-left: 20px;
-}
-
-path.slice{
-  stroke-width:2px;
-}
-
-polyline{
-  opacity: .3;
-  stroke: black;
-  stroke-width: 2px;
-  fill: none;
-}
-
-.labelValue
-{
-  font-size: 60%;
-  opacity: .5;
-
-}
-
-.toolTip {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  position: absolute;
-  display: none;
-  width: auto;
-  height: auto;
-  background: none repeat scroll 0 0 white;
-  border: 0 none;
-  border-radius: 8px 8px 8px 8px;
-  box-shadow: -3px 3px 15px #888888;
-  color: black;
-  font: 12px sans-serif;
-  padding: 5px;
-  text-align: center;
-}
-text {
-  font: 12px sans-serif;
-}
-
-/* Style the tab */
-div.tab {
-  overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
-}
-
-/* Style the buttons inside the tab */
-div.tab button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-}
-
-/* Change background color of buttons on hover */
-div.tab button:hover {
-  background-color: #ddd;
-}
-
-/* Create an active/current tablink class */
-div.tab button.active {
-  background-color: #ccc;
-  border-color: #FF9933;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-}
-
-/* Style the tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
-}
-
-/*For animation of the tabs*/
-.tabcontent {
-  -webkit-animation: fadeEffect 1s;
-  animation: fadeEffect 1s; /* Fading effect takes 1 second */
-}
-
-@-webkit-keyframes fadeEffect {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-
-@keyframes fadeEffect {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-
-.about-team-container{
-  width: 100%;
-  vertical-align: top;
-}
-
-.about-team-text {
-  float: right;
-  width: 45%;
-}
-
-.about-team-chart {
-  float: left;
-  width: 45%;
-}
-
-.area {
-  display: none;
-}
-</style>
 <body>
   <div class = "about-team-container">
     <div class="tab">
@@ -192,7 +66,7 @@ div.tab button.active {
         <i>Role</i>: <b>tester</b>
         <div id="accordion">
           <h4>Tasks</h4>
-          <div>            
+          <div>
             <h5>Research</h5>
             <li>Literature search.</li>
             <li>Article retrieval.</li>
@@ -210,7 +84,7 @@ div.tab button.active {
             <li>Debugs the project.</li>
             <li>Create online survey.</li>
             <li>Normal user testing.</li>
-            <li>Collecting and analyzing results.</li> 
+            <li>Collecting and analyzing results.</li>
             <h5>Development</h5>
             <li>Work on to visualize the part of “About the team”</li>
           </div>
@@ -241,7 +115,7 @@ div.tab button.active {
             <h5>Others?</h5>
             <li>I am more patient after this course.</li>
           </div>
-          
+
         </div>
       </div>
 
@@ -269,11 +143,11 @@ div.tab button.active {
             <h5>Coordination</h5>
             <li>Asignation of tasks.</li>
             <li>Follow up of assignations.</li>
-            <h5>Meetings</h5>
             <li>Scheduling of meetings.</li>
-            <li>Creation of an order of the day for each session.</li>
+            <h5>Meetings</h5>
+            <li>Creation of an agenda for each session.</li>
             <li>Role of project manager.</li>
-            <li>Debrief all team with a summary of the team.</li>
+            <li>Debrief all team with a summary of the meeting.</li>
             <h5>Development</h5>
             <li>Creation of the visualization for the 'About the team'.</li>
           </div>
@@ -294,7 +168,7 @@ div.tab button.active {
             <li>Users willl fantasies with functionalities rather than critique the visualization.</li>
             <li>It is necessary to incentivate users with tasks and questions.</li>
             <h5>Development</h5>
-            <li>Basics understanding of the D3 library.</li>
+            <li>Understanding of the basics handling the D3 library.</li>
             <li>Data handling.</li>
             <li>Layout definition with CSS.</li>
           </div>
@@ -356,7 +230,7 @@ div.tab button.active {
           <li>Participate in team polls.</li>
           <li>Find and agree on time-slots for in-person meetings.</li>
           </div>
-          
+
           <h4>Lessons learned</h4>
           <div>
           <h5>Meetings</h5>
@@ -399,7 +273,7 @@ div.tab button.active {
           <li>Main insight: if there is one accepted project leader that takes care of every team member like Joaquín did in an exemplary way goals can be achieved in a very efficient way.</li>
           <li>Joaquín represented a very positive role-model compared to past experiences, where often dominant group members took over command just to shine themselves and didn't care about individual team members very much (ego-shooter approach).</li>
           <li>One main problem that occurs again and again in team projects completed with limited time resources: every team member does what he/she alywas do and there is no learning effect.</li>
-          <li>I would have liked to learn more on development but I would have be a handicap to the group members that already had a certain level of experience, so I concentrated on what I am proficient in doing already.</li> </div>     
+          <li>I would have liked to learn more on development but I would have be a handicap to the group members that already had a certain level of experience, so I concentrated on what I am proficient in doing already.</li> </div>
 </div>
 </div>
 
@@ -541,7 +415,7 @@ bubble chart.</li>
                 <li>What works for others may not work for you (even if you have the same problem as them).</li>
                 <h5>Tests</h5>
                 <li>Always write down the errors you find before they perish from you mind.</li>
-                <li>When doing exactly the same thing twice you may actually noice different things that is not correct.</li>	
+                <li>When doing exactly the same thing twice you may actually noice different things that is not correct.</li>
 	      </div>
               <h4>Tasks that did not pass the cut</h4>
               <div>

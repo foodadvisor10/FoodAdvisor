@@ -62,14 +62,14 @@ var color = d3.scale.ordinal()
 	];
 
   datasetJoaquin = [
-                {label:"Research", value:35},
-		{label:"Website", value:1},
+                {label:"Research", value:30},
+								{label:"Website", value:5},
                 {label:"Data handling", value:15},
-                {label:"Development", value:6},
+                {label:"Development", value:10},
                 {label:"Presentations", value:4},
-                {label:"Coordination", value:35},
+                {label:"Coordination", value:20},
                 {label:"Meetings", value:18},
-		{label:"Tests", value:2}
+								{label:"Tests", value:2}
   ];
 
   datasetJori = [
@@ -196,7 +196,7 @@ document.getElementById("defaultOpen").click();
 	var imgurl = './about-team-files/' + teamMember + '.jpg'
 
 	svg.selectAll("defs").remove();
-	
+
 	var defs = svg.append("defs").attr("id", "imgdefs")
 
 	var picture = defs.append("pattern")
