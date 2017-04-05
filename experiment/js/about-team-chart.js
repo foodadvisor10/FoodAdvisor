@@ -182,6 +182,8 @@ document.getElementById("defaultOpen").click();
 /* The following places a picture inside the donut chart */
 	var imgurl = './about-team-files/' + teamMember + '.jpg'
 
+	svg.selectAll("defs").remove();
+	
 	var defs = svg.append("defs").attr("id", "imgdefs")
 
 	var picture = defs.append("pattern")
@@ -190,12 +192,14 @@ document.getElementById("defaultOpen").click();
 		.attr("width", 1)
 		.attr("x", "0")
 		.attr("y", "0")
+	picture.selectAll("*").remove();
 	picture.append("image")
 		.attr("x", -15)
 		.attr("y", 0)
 		.attr("height", 120)
 		.attr("width", 120)
 		.attr("xlink:href", imgurl)
+	svg.selectAll("circle").remove();
 	svg.append("circle")
 		.attr("r", 45)
 		.attr("cy", 0)
