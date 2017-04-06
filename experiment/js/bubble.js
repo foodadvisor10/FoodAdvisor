@@ -406,7 +406,11 @@ function BubbleChart(el, filterField, filters, groups, colors) {
 
         var dropIcon = '\u25BC';
 
-        xLabel.text(xField + " " + dropIcon);
+        // if(xField.match("CO2 footprint")){
+        //     xField = "CO₂ footprint";
+        // }
+
+        xLabel.html(xField + " " + dropIcon);
         yLabel.text(yField + " " + dropIcon);
         rLabel.text("Bubble size: " + radiusField + " " + dropIcon);
 

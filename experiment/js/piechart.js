@@ -1,4 +1,4 @@
-var currentlySelectedPieChart = 'Apples';
+var currentlySelectedPieChart = '';
 var firstLoad = true;
 //1 == macro
 //2 == micro
@@ -33,7 +33,7 @@ var colorsize = {   "Potassium (mg)" : "silver",//"#5061fb",
                     "Selenium (µg)" : "#cc6699",
                     "Vitamin C (mg)" : "#ffcc00",
                     "Vitamin B-12 (µg)" : "#66ffff",
-                    "Wholegrain total (g)" : "#FC2543"
+                    "Wholegrain total (g)" : "#FC2543",
                     "Folate (µg)" : "#006600",
                     "Calcium (mg)" : "#999966"
                     };
@@ -109,7 +109,10 @@ function pieChart(a) {
 
             //console.log(dataset);
             if (error) {
+                if(!currentlySelectedPieChart == ''){
                 document.getElementById("titlehead").innerHTML = "This is not supposed to happen! No data was found for this food.";
+
+                }
             } else {
                 if(currentlySelectedSizing == 2){
                     document.getElementById("titlehead").innerHTML = "<form><input type=\"radio\" name=\"chart_style\" value=\"macro\" onclick=\"updateChart(2)\" checked> Macro <input type=\"radio\" name=\"chart_style\" value=\"micro\" onclick=\"updateChart(1)\"> Micro \n</form>";
