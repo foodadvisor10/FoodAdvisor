@@ -18,7 +18,7 @@ $(document).ready(function () {
     };
       // Scroll animation
 
-    /*  $(document).ready(function () {
+      $(document).ready(function () {
            $('a[href^="#"]').on('click', function (e) {
                e.preventDefault();
 
@@ -30,7 +30,7 @@ $(document).ready(function () {
                }, 900, 'swing', function () {
                });
            });
-       }); */
+       }); 
 
 // Load the data.
     d3.csv("../data/food.csv", function (data) {

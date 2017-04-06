@@ -22,21 +22,24 @@ li a img {
 
 .paragraph {
   text-align: left;
-  max-width: 70%;
+  max-width: 60%;
   font-size: 1.2em;
   color: #474747;
 
-  font-family: open sans, sans-serif;
+  font-family: 'open sans', sans-serif;
+  font-weight: 300;
   margin-top: 200px ;
-  margin-bottom: 200px;
+  margin-bottom: 0px;
 
-  padding: 50px 15% 50px 15%;
+  padding: 50px 20% 50px 20%;
 
   background-color: #f1f3f4;
 
 
 }
-
+#space {
+  padding-bottom: 200px;
+}
 hr {
   border: 2px solid #ff9933;
 
@@ -85,6 +88,6 @@ footer {
   padding-left: 100px;
   padding-top: 30px;
   padding-bottom: 30px;
-  font-size: 0.4em;
+  font-size: 0.9em;
   font-family: open sans, sans-serif;
 }
