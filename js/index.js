@@ -33,7 +33,7 @@ $(document).ready(function () {
        }); */
 
 // Load the data.
-    d3.csv("../data/food.csv", function (data) {
+    d3.csv("data/food.csv", function (data) {
         // Create filter selection
         var groups = _.uniqBy(data.map(function (datum) {
             return datum[category.field]
