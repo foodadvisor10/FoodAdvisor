@@ -34,6 +34,8 @@ var colorsize = {   "Potassium (mg)" : "silver",//"#5061fb",
                     "Vitamin C (mg)" : "#ffcc00",
                     "Vitamin B-12 (µg)" : "#66ffff",
                     "Wholegrain total (g)" : "#FC2543"
+                    "Folate (µg)" : "#006600",
+                    "Calcium (mg)" : "#999966"
                     };
 
 // var currentFood = "";
