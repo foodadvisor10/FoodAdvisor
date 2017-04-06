@@ -18,7 +18,11 @@ $(document).ready(function () {
     };
       // Scroll animation
 
+<<<<<<< HEAD
       $(document).ready(function () {
+=======
+    /*  $(document).ready(function () {
+>>>>>>> master
            $('a[href^="#"]').on('click', function (e) {
                e.preventDefault();
 
@@ -30,7 +34,11 @@ $(document).ready(function () {
                }, 900, 'swing', function () {
                });
            });
+<<<<<<< HEAD
        }); 
+=======
+       }); */
+>>>>>>> master
 
 // Load the data.
     d3.csv("../data/food.csv", function (data) {

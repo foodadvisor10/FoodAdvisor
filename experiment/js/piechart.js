@@ -5,15 +5,15 @@ var firstLoad = true;
 var currentlySelectedSizing = 2;
 var currentFood;
 
-var colorsize = {   "Potassium (mg)" : "#5061fb",
+var colorsize = {   "Potassium (mg)" : "silver",//"#5061fb",
                     "Phosphorus (mg)" : "#DD1133",
-                    "Fat (g)" : "#FFFF3C",
+                    "Fat (g)" : "GoldenRod",//"#FFFF3C",
                     "Carbohydrate (g)" : "#996633",
                     "Magnesium (mg)" : "#ff66cc",
                     "Water (g)" : "#0099ff",
                     "Protein (g)" : "#ff5050",
                     "Fibre (g)" : "#663300",
-                    "Sodium (mg)" : "#FFFFE0",  //Color very feint. 
+                    "Sodium (mg)" : "BurlyWood",//"#FFFFE0",  //Color very feint. 
                     "Zinc (mg)" : "#778899",
                     "Sugar total (g)" : "#FFEFD5",
                     "Sucrose (g)" : "#2E8B57",
@@ -25,7 +25,7 @@ var colorsize = {   "Potassium (mg)" : "#5061fb",
                     "Sum of saturated fatty acids (g)" : " #e65c00",
                     "Monosaccharides (g)" : "#00cc66",
                     "Salt (g)" : "#DDA0DD",
-                    "Cholesterol (mg)" : "#EEE8AA",
+                    "Cholesterol (mg)" : "Coral", //"#EEE8AA",
                     "Vitamin K (µg)" : "#CD853F",
                     "Iodide (µg)" : "#B0E0E6",
                     "Vitamin E (mg)" : "#800080",

@@ -22,6 +22,7 @@ li a img {
 
 .paragraph {
   text-align: left;
+<<<<<<< HEAD
   max-width: 60%;
   font-size: 1.2em;
   color: #474747;
@@ -32,14 +33,29 @@ li a img {
   margin-bottom: 0px;
 
   padding: 50px 20% 50px 20%;
+=======
+  max-width: 70%;
+  font-size: 1.2em;
+  color: #474747;
+
+  font-family: open sans, sans-serif;
+  margin-top: 200px ;
+  margin-bottom: 200px;
+
+  padding: 50px 15% 50px 15%;
+>>>>>>> master
 
   background-color: #f1f3f4;
 
 
 }
+<<<<<<< HEAD
 #space {
   padding-bottom: 200px;
 }
+=======
+
+>>>>>>> master
 hr {
   border: 2px solid #ff9933;
 
@@ -88,6 +104,10 @@ footer {
   padding-left: 100px;
   padding-top: 30px;
   padding-bottom: 30px;
+<<<<<<< HEAD
   font-size: 0.9em;
+=======
+  font-size: 0.4em;
+>>>>>>> master
   font-family: open sans, sans-serif;
 }
