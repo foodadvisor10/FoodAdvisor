@@ -76,7 +76,7 @@ hr {
 
 
 #control {
-    position: relative;
+    position: absolute;
    /*padding: 20px;*/
     width: 400px;
     display: inline-block;
