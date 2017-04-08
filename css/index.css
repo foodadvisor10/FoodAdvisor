@@ -15,6 +15,14 @@ li a:hover {
     color: #ff9933;
 }
 
+a:link {
+    color: #000000;
+}
+
+a:hover {
+    color: #ff9933;
+}
+
 li a img {
   height: 15px;
   width: 105px;
