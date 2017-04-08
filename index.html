@@ -1,5 +1,4 @@
-﻿?<!DOCTYPE html>
-<html>
+﻿<html>
 <head>
     <title>Food Advisor</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -85,14 +84,14 @@
 
 <a id="charts"></a>
 
-<div class="panel" id="charts" ">
-  <div class="wrapper-row-legend">
-      <div id="bubble-legend-container">
-          <svg id="bubble-legend" width="850" height="70"></svg>
-          <div id="select-all-container"></div>
-      </div>
-  </div>
+<div class="panel" id="charts">
   <div class="wrapper-row">
+      <div class="wrapper-row-legend">
+          <div id="bubble-legend-container">
+              <svg id="bubble-legend" width="900" height="70"></svg>
+              <div id="select-all-container"></div>
+          </div>
+      </div>
 
       <div id="bubble">
           <div id="search">
@@ -146,13 +145,37 @@
 
 <a id="about"></a>
 <p></p>
-<div class="paragraph">
+<div class="team-holder">
 <h2> About the team </h2>
 <hr width="10%">
 <br>
-<iframe src="./iframe/about-team.html" width="150%" height="100%" frameborder="0"></iframe>
+<iframe class="team-iframe-holder" src="./iframe/about-team.html" width="1000px" height="100%" frameborder="0"></iframe>
 </div>
 
+  <footer>
+      <h3> Data sources:</h3>
+      <p>
+      <ul>
+          <li>
+              <a href="https://www.livsmedelsverket.se" target="_blank">The National Food Agency food database, retrieved 2016-02-17</a>
+          </li>
+          <li>
+              <a href="http://lcafdb.org" target="_blank">Life Cycle Assesment of Food Database from The School of Computer Science and Communication, retrieved 2017-02-13</a>
+          </li>
+          <li>
+              <a href="https://ndb.nal.usda.gov/ndb/nutrients/" target="_blank">USDA Food Composition Databases, v.3.7 2017-02-22</a>
+          </li>
+          <li>
+              <a href="http://www.bonpourleclimat.org/calcul-empreinte-carbone/" target="_blank">Bon Pour le Climat, retrieved February 2017</a>
+          </li>
+          <li>
+              <a href="http://www.foodemissions.com/foodemissions/Calculator.aspx" target="_blank">CleanMetrics Corp,, retrieved February 2017</a>
+          </li>
+      </ul>
+      A special thanks to Björn Hedin and LCAFD of KTH for // something about hosting the website, answering questions etc.
+      </p>
+
+  </footer>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
@@ -168,29 +191,6 @@
 <script src="js/index.js"></script>
 </body>
 
-<footer>
-  <h3> Data sources:</h3>
-  <p>
-    <ul>
-      <li>
-         <a href="https://www.livsmedelsverket.se" target="_blank">The National Food Agency food database, retrieved 2016-02-17</a>
-      </li>
-      <li>
-       <a href="http://lcafdb.org" target="_blank">Life Cycle Assesment of Food Database from The School of Computer Science and Communication, retrieved 2017-02-13</a>
-      </li>
-      <li>
-         <a href="https://ndb.nal.usda.gov/ndb/nutrients/" target="_blank">USDA Food Composition Databases, v.3.7 2017-02-22</a>
-      </li>
-      <li>
-         <a href="http://www.bonpourleclimat.org/calcul-empreinte-carbone/" target="_blank">Bon Pour le Climat, retrieved February 2017</a>
-      </li>
-      <li>
-         <a href="http://www.foodemissions.com/foodemissions/Calculator.aspx" target="_blank">CleanMetrics Corp,, retrieved February 2017</a>
-      </li>
-    </ul>
-    A special thanks to Björn Hedin and LCAFD of KTH for // something about hosting the website, answering questions etc.
-  </p>
 
-</footer>
 
 </html>

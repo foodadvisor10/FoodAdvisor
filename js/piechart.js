@@ -104,7 +104,7 @@ function pieChart(a) {
 
         // THis function will be used in future when we differ from Macro file and Micro file.
         // Or we just redo the system and use JSON objects and yeah.. dynamically update.             
-       d3.csv( document.location + '/data/food/'+currentlySelectedSizing+'/' + currentlySelectedPieChart + "_" + currentlySelectedSizing + '.csv', function (error, dataset) {
+       d3.csv('./data/food/'+currentlySelectedSizing+'/' + currentlySelectedPieChart + "_" + currentlySelectedSizing + '.csv', function (error, dataset) {
         // d3.csv('../data/food/' + currentlySelectedPieChart + '.csv', function (error, dataset) {
 
             //console.log(dataset);
