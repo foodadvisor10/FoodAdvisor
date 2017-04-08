@@ -107,3 +107,7 @@ footer {
   font-family: open sans, sans-serif;
 }
 
+.wrapper-row {
+    margin: auto;
+    width: 1200px;
+}
