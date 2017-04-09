@@ -1,8 +1,6 @@
 #bubble-legend-container{
-    position: relative;
-    left: 20%;
     display: inline-block;
-    margin: 0 auto;
+    margin-left: 100px;
 }
 
 .legend-row rect{

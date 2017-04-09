@@ -63,6 +63,24 @@ a.anchor-vis {
   margin-bottom: 200px;
 }
 
+.team-holder {
+    text-align: center;
+    max-width: 100%;
+    font-size: 1.2em;
+    color: #474747;
+
+    font-family: open sans, sans-serif;
+    margin-top: 200px ;
+
+    padding: 50px 0 50px 0;
+
+    background-color: #f1f3f4;
+}
+
+.team-iframe-holder {
+    margin: auto;
+}
+
 hr {
   border: 2px solid #ff9933;
 
@@ -84,8 +102,8 @@ hr {
 
 
 #control {
-    position: relative;
-   /*padding: 20px;*/
+    position: absolute;
+   padding: 20px;
     width: 400px;
     display: inline-block;
     vertical-align: top;
@@ -108,9 +126,16 @@ hr {
 
 footer {
   background-color: #DDDDDD;
+  width: ;
   padding-left: 100px;
   padding-top: 30px;
   padding-bottom: 30px;
   font-size: 0.8em;
   font-family: open sans, sans-serif;
+}
+
+
+.wrapper-row {
+    margin: auto;
+    width: 1200px;
 }
