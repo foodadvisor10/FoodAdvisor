@@ -41,15 +41,15 @@ var color = d3.scale.ordinal()
 
   datasetTeam = [
                 {label:"Data handling", value:91},
-		{label:"Research", value:77},
-                {label:"Graphic design", value:16},
+		{label:"Research", value:79},
+                {label:"Graphic design", value:22},
 		{label:"Presentations", value:14},
 		{label:"Video production", value:15},
 		{label:"Development", value:184},
-		{label:"Website", value:36},
+		{label:"Website", value:40},
 		{label:"Tests", value:69},
-		{label:"Coordination", value:67},
-		{label:"Meetings", value:125}
+		{label:"Coordination", value:71},
+		{label:"Meetings", value:130}
   ];
 
 	datasetHaisheng = [
@@ -73,15 +73,15 @@ var color = d3.scale.ordinal()
   ];
 
   datasetJori = [
-    {label:"Meetings", value:15},
-    {label:"Research", value:12},
+    {label:"Meetings", value:20},
+    {label:"Research", value:14},
     {label:"Data handling", value:10},
-    {label:"Website", value:3},
-    {label:"Graphic design", value:10},
+    {label:"Website", value:6},
+    {label:"Graphic design", value:16},
     {label:"Presentations", value:4},
     {label:"Video production", value:8},
     {label:"Tests", value:24},
-    {label:"Coordination", value:6}
+    {label:"Coordination", value:10}
   ];
 
   datasetLeung = [
