@@ -44,7 +44,7 @@ var color = d3.scale.ordinal()
 		{label:"Research", value:79},
                 {label:"Graphic design", value:22},
 		{label:"Presentations", value:14},
-		{label:"Video production", value:15},
+		{label:"Video production", value:27},
 		{label:"Development", value:184},
 		{label:"Website", value:40},
 		{label:"Tests", value:69},
