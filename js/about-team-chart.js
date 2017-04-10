@@ -92,7 +92,7 @@ var color = d3.scale.ordinal()
 
   datasetMans = [
     {label:"Data handling", value:10},
-    {label:"Video production", value:3},
+    {label:"Video production", value:15},
     {label:"Meetings", value:14},
     {label:"Development", value:5},
     {label:"Research", value:5},
