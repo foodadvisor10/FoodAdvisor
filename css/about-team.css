@@ -2,6 +2,16 @@
   frameborder: 0;
 }
 */
+
+#profile_header {
+    width:70%;
+    float:left;
+}
+.profile_picture {
+    float:left;
+    margin-right:5px;
+}
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   width: 960px;
